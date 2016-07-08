@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Menu from './menu.js';
-import NavBar from './components/navbar.js';
-import Content from './content.js';
+import Menu from './components/Menu.js';
+import NavBar from './components/Navbar.js';
+import Content from './components/Content.js';
 
 
 export default class App extends React.Component{
@@ -18,7 +18,7 @@ export default class App extends React.Component{
       <div>
         <NavBar/>
         <div className="ui container stackable grid" id="mainContainer">
-          <Menu/>
+          <Menu readings={this.props.route.readings}/>
           <Content reading={this.props.children} goToTop={this.goToTop}/>
 
           <div className="ui icon button goTop" onClick={this.goToTop}>
