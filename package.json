@@ -37,12 +37,13 @@
     "webpack-dev-server": "^1.12.1"
   },
   "dependencies": {
+    "json-loader": "^0.5.4",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
     "react-markdown": "^2.3.0",
     "react-redux": "^4.4.5",
     "react-router": "^2.5.2",
     "redux": "^3.5.2",
-    "semantic-ui": "^2.2.1"
+    "semantic-ui": "^2.2.2"
   }
 }

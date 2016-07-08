@@ -18,9 +18,9 @@ const readings =[
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route component={App} reading={readings}>
+      <Route path='/' component={App} readings={readings}>
         {readings.map(function(reading, i){
-          return <Route path={reading.path} component={reading.component} key={reading.id}/>;
+          return <Route path={reading.path} currentReading={reading.component} key={reading.id}/>;
         }, this)}
       </Route>
     </Router>
