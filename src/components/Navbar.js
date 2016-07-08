@@ -15,6 +15,8 @@ export default class NavBar extends React.Component{
         <a className="ui dropdown item">
           <i className="dropdown icon"></i>
           <div className="menu">
+            <div className="item">a</div>
+            <div className="item">b</div>
           </div>
         </a>
       </div>

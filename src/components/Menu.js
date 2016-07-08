@@ -14,7 +14,7 @@ export default class Menu  extends React.Component{
 
   componentDidMount(){
     $('.ui.mymenu').hide();
-
+    
     $('.menubutton').dropdown({
      onChange: function(val) {
        $('.menubutton')

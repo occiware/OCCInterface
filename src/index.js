@@ -20,7 +20,7 @@ ReactDOM.render(
     <Router history={browserHistory}>
       <Route path='/' component={App} readings={readings}>
         {readings.map(function(reading, i){
-          return <Route path={reading.path} currentReading={reading.component} key={reading.id}/>;
+          return <Route path={reading.path} currentReading={reading.component} key={reading+i}/>;
         }, this)}
       </Route>
     </Router>

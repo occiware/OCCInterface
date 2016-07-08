@@ -47,7 +47,6 @@ export default class Content extends React.Component{
 
           {/*pour le moment*/}
           <div className="row ui segment mydatacontainer">
-            {view}
           </div>
 
           {/*<CodeView currentJson={this.props.currentJson} codeView={this.props.codeView} />*/}
