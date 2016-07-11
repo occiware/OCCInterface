@@ -37,13 +37,17 @@
     "webpack-dev-server": "^1.12.1"
   },
   "dependencies": {
+    "html-loader": "^0.4.3",
     "json-loader": "^0.5.4",
+    "raw-loader": "^0.5.1",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
-    "react-markdown": "^2.3.0",
+    "react-markdown": "^2.4.2",
     "react-redux": "^4.4.5",
     "react-router": "^2.5.2",
     "redux": "^3.5.2",
+    "remark": "^5.0.1",
+    "remark-html": "^5.0.0",
     "semantic-ui": "^2.2.2"
   }
 }

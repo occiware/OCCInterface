@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+var ReactMarkdown = require('react-markdown');
 // import * as actions from '../actions/actionIndex.js';
 
 export default class Reading extends React.Component{
@@ -11,12 +12,12 @@ export default class Reading extends React.Component{
       $('.reading').transition('fade right');
     }
   }
+
   render() {
+    // console.log(this.props.reading);
     return (
       <div className="row ui segment reading segmentpadding">
-        {/*we pass the function to children in this particular way because of this.props.reading, wich is waiting for a function as props*/}
-        {/*{React.cloneElement(this.props.reading, { callAPIUpdatePlaygroundOnClick: this.props.callAPIUpdatePlaygroundOnClick, tools: this.props.tools })}*/}
-        {this.props.reading}
+        <ReactMarkdown source={this.props.reading} />
       </div>
     );
   }

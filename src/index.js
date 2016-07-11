@@ -6,7 +6,8 @@ import { Router, Route, Link, browserHistory} from 'react-router';
 
 import reducer from './reducers/index.js';
 import App from './App';
-import GettingStarted from './readings/GettingStarted.md';
+
+var GettingStarted = require('raw!./readings/GettingStarted.md');
 
 let store = createStore(reducer, /*myInitialState*/);
 
@@ -20,7 +21,7 @@ ReactDOM.render(
     <Router history={browserHistory}>
       <Route path='/' component={App} readings={readings}>
         {readings.map(function(reading, i){
-          return <Route path={reading.path} currentReading={reading.component} key={reading+i}/>;
+          return <Route path={reading.path} key={reading+i}/>;
         }, this)}
       </Route>
     </Router>

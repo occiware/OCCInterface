@@ -36,7 +36,7 @@ export default class Content extends React.Component{
           <div className="row ui form">
             <div className="field adresseget">
               <div className="ui label pointing below">
-                <p>Erocci server</p>
+                <p>OCCI server</p>
               </div>
               <InputCurrentPath />
             </div>
@@ -51,9 +51,7 @@ export default class Content extends React.Component{
 
           {/*<CodeView currentJson={this.props.currentJson} codeView={this.props.codeView} />*/}
 
-          <Reading reading={this.props.reading}
-            tools={this.tools} callAPIUpdatePlaygroundOnClick={this.callAPIUpdatePlaygroundOnClick}
-          />
+          <Reading reading={this.props.reading} />
         </div>
       </div>
     );
