@@ -28,7 +28,7 @@ export default class Content extends React.Component{
           <h2 className="ui header">
             <i className="configure icon"></i>
             <div className="content">
-              OCCInterface
+              OCCI playground
             </div>
           </h2>
         </div>
