@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-var ReactMarkdown = require('react-markdown');
+import ReactMarkdown from 'react-markdown';
+import CodeBlock from '../code-block.js';
 // import * as actions from '../actions/actionIndex.js';
 
 export default class Reading extends React.Component{
@@ -9,15 +10,16 @@ export default class Reading extends React.Component{
     //we make the animation only if we have a new reading
     if(nextProps.reading !== this.props.reading){
       $('.reading').transition('hide');
-      $('.reading').transition('fade right');
+      $('.reading').transition('fade');
     }
   }
 
   render() {
     // console.log(this.props.reading);
     return (
-      <div className="row ui segment reading segmentpadding">
-        <ReactMarkdown source={this.props.reading} />
+      <div className="row ui reading segmentpadding">
+        <ReactMarkdown source={this.props.reading} renderers={Object.assign({}, ReactMarkdown.renderers, {
+                            CodeBlock: CodeBlock })}/>
       </div>
     );
   }

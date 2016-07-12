@@ -1,11 +1,24 @@
-An h1 header
-============
+# Mardown title
 
-Paragraphs are separated by a blank line.
+Here is some text
 
-2nd paragraph. *Italic*, **bold**, and `monospace`. Itemized lists
-look like:
+* This is an element of bullet list
+* this is another
 
-  * this one
-  * that one
-  * the other one
+This is a link [myBeautifulLink](www.google.com)
+
+## Mardown subtitle
+
+<blockquote>
+    This is a bloquote
+</blockquote>
+
+## How about some code?
+
+```js
+var React = require('react');
+
+var i = 25;
+
+```
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
