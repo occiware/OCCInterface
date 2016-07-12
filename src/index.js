@@ -7,12 +7,16 @@ import { Router, Route, Link, browserHistory} from 'react-router';
 import reducer from './reducers/index.js';
 import App from './App';
 
-var GettingStarted = require('raw!./readings/GettingStarted.md');
+import GettingStarted from 'raw!./readings/GettingStarted.md';
+import OCCIProject from 'raw!./readings/OCCIProject.md';
+
+
 
 let store = createStore(reducer, /*myInitialState*/);
 
 const readings =[
     {'title':'Getting started', 'path': 'gettingstarted', 'component': GettingStarted},
+    {'title':'The OCCI Project', 'path': 'OCCIProject', 'component': OCCIProject},
   ]
 ;
 

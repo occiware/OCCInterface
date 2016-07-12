@@ -14,14 +14,14 @@ export default class App extends React.Component{
   }
 
   render() {
-    console.log(this.props.route);
     //we retrieve the correct currentReading of the route
-
     //default:
     var currentReading = this.props.route.readings[0].component;
 
-    for(var i=0; i <this.props.route.readings; i++){
-      if(this.props.route.readings[i].path === this.props.route.path){
+    console.log(this.props.route.readings.length)
+
+    for(var i=0; i<this.props.route.readings.length; i++){
+      if(this.props.route.readings[i].path === this.props.location.pathname){
         currentReading = this.props.route.readings[i].component;
         break;
       }

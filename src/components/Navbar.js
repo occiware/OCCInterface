@@ -17,7 +17,6 @@ export default class NavBar extends React.Component{
       <div className="ui inverted menu navbar centered grid blue">
         <div className="ui container wrapNavbar">
           <a className="brand item largefont">OCCInterface</a>
-          <a href="/" className="item largefont">Explore</a>
           <a className="ui dropdown item">
             {currentProject}
             <i className="dropdown icon"></i>

@@ -14,7 +14,7 @@ export default class Menu  extends React.Component{
 
   componentDidMount(){
     $('.ui.mymenu').hide();
-    
+
     $('.menubutton').dropdown({
      onChange: function(val) {
        $('.menubutton')
@@ -28,7 +28,7 @@ export default class Menu  extends React.Component{
     return (
       <div className="ui four wide column centered grid">
         <div className="ui center sticky groupementmenu">
-          <div className="ui center column white dropdown big launch blue basic button menubutton center aligned container">
+          <div className="ui center column white dropdown big launch orange basic button menubutton center aligned container">
             <i className="content icon"></i>
             <span className="text">Menu</span>
             <MenuDepliant readings={this.props.readings}/>

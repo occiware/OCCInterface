@@ -42,7 +42,9 @@ export default class Content extends React.Component{
             </div>
           </div>
           <div className="row ui centered">
-            <p>Boutons</p>
+            <button className="ui green button">GET</button>
+            <button className="ui orange button">EDIT</button>
+            <button className="ui red button">DEL</button>
           </div>
 
           {/*pour le moment*/}
