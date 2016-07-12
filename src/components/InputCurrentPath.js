@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-// import * as actions from '../actions/actionIndex.js';
+import * as actions from '../actions/actionIndex.js';
 
-export default class InputCurrentPath extends React.Component{
+class InputCurrentPath extends React.Component{
   updateCurrentPath = (e) => {
-    // this.props.dispatch(actions.setCurrentQueryPath(e.target.value));
+    this.props.dispatch(actions.setCurrentQueryPath(e.target.value));
   }
   render() {
     return (
@@ -13,7 +13,7 @@ export default class InputCurrentPath extends React.Component{
     );
   }
 }
-// const mapStateToPropsInputCurrentPath = (state/*, props*/) => ({
-//     currentPath: decodeURIComponent(state.currentPath)
-// })
-// export default InputCurrentPath = connect(mapStateToPropsInputCurrentPath)(InputCurrentPath);
+const mapStateToPropsInputCurrentPath = (state/*, props*/) => ({
+    currentPath: decodeURIComponent(state.currentPath)
+})
+export default InputCurrentPath = connect(mapStateToPropsInputCurrentPath)(InputCurrentPath);

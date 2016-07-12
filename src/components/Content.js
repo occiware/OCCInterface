@@ -6,6 +6,9 @@ import MessageErrorPath from './MessageErrorPath.js';
 import InputCurrentPath from './InputCurrentPath.js';
 import Reading from './Reading.js';
 
+import GetButton from '../buttons/GetButton.js';
+import EditButton from '../buttons/EditButton.js';
+import DelButton from '../buttons/DelButton.js';
 
 export default class Content extends React.Component{
   preventClickEffect = () => {
@@ -42,9 +45,9 @@ export default class Content extends React.Component{
             </div>
           </div>
           <div className="row ui centered">
-            <button className="ui green button">GET</button>
-            <button className="ui orange button">EDIT</button>
-            <button className="ui red button">DEL</button>
+            <GetButton />
+            <EditButton />
+            <DelButton />
           </div>
 
           {/*pour le moment*/}

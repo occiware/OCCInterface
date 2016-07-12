@@ -18,8 +18,6 @@ export default class App extends React.Component{
     //default:
     var currentReading = this.props.route.readings[0].component;
 
-    console.log(this.props.route.readings.length)
-
     for(var i=0; i<this.props.route.readings.length; i++){
       if(this.props.route.readings[i].path === this.props.location.pathname){
         currentReading = this.props.route.readings[i].component;

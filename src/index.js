@@ -10,9 +10,15 @@ import App from './App';
 import GettingStarted from 'raw!./readings/GettingStarted.md';
 import OCCIProject from 'raw!./readings/OCCIProject.md';
 
+var initialState =  {
+  'currentPath': '/-/',
+  'currentJSON': 'hello world',
+  'errorMessage': '',
+  'currentScheme': ''
+}
 
 
-let store = createStore(reducer, /*myInitialState*/);
+let store = createStore(reducer, initialState);
 
 const readings =[
     {'title':'Getting started', 'path': 'gettingstarted', 'component': GettingStarted},

@@ -1,9 +1,9 @@
 const reducer = (state, action) => {
     switch (action.type) {
-        case 'ACTION_TYPE':
+        case 'SET_CURRENT_QUERY_PATH':
             return {
                 ...state,
-                item: action.item
+                currentPath: action.currentPath
               }
         default:
             return state

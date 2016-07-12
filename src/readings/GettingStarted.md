@@ -5,7 +5,7 @@ Here is some text
 * This is an element of bullet list
 * this is another
 
-This is a link [myBeautifulLink](www.google.com)
+This is a link [myBeautifulLink](http://www.google.com)
 
 ## Mardown subtitle
 
