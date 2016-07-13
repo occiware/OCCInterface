@@ -6,13 +6,11 @@ class CodeView extends React.Component{
   createMarkup = () => {
     return {__html: this.props.currentJson}
   }
-  updateCurrentJson = (e) => {
-    this.props.dispatch(actions.setEditable(e.target.value));
-  }
 
   render() {
 
-    var view = <pre className="segmentpadding mydata" dangerouslySetInnerHTML={this.createMarkup()}></pre>;
+    // var view = <pre className="segmentpadding mydata" dangerouslySetInnerHTML={this.createMarkup()}></pre>;
+    var view = <pre className="segmentpadding mydata">{JSON.stringify(this.props.currentJson,null,2)}</pre>;
 
     return(
       <div className="row ui segment mydatacontainer">
@@ -22,4 +20,8 @@ class CodeView extends React.Component{
   }
 }
 
-export default CodeView = connect()(CodeView);
+const mapStateToProps = (state) => ({
+  currentJson: state.currentJson
+})
+
+export default CodeView = connect(mapStateToProps)(CodeView);

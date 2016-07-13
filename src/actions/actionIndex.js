@@ -4,3 +4,10 @@ export function setCurrentQueryPath(currentPath) {
     currentPath: currentPath
   }
 }
+
+export function setCurrentJson(currentJson) {
+  return {
+    type: 'SET_CURRENT_JSON',
+    currentJson: currentJson
+  }
+}

@@ -7,6 +7,16 @@ import Content from './components/Content.js';
 
 
 export default class App extends React.Component{
+  componentDidMount = () => {
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 150) {
+              $('.goTop').addClass('show');
+          } else {
+              $('.goTop').removeClass('show');
+          }
+    });
+}
+
   goToTop = () => {
     $('html, body').animate({
         scrollTop: 0

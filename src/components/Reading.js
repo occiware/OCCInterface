@@ -9,7 +9,6 @@ export default class Reading extends React.Component{
   componentWillUpdate = (nextProps) => {
     //we make the animation only if we have a new reading
     if(nextProps.reading !== this.props.reading){
-      console.log('update');
       $('.reading').transition('hide');
       $('.reading').transition('fade');
     }

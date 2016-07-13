@@ -5,6 +5,11 @@ const reducer = (state, action) => {
                 ...state,
                 currentPath: action.currentPath
               }
+        case 'SET_CURRENT_JSON':
+            return {
+                ...state,
+                currentJson: action.currentJson
+              }
         default:
             return state
     }

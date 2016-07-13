@@ -50,11 +50,9 @@ export default class Content extends React.Component{
             <DelButton />
           </div>
 
-          {/*pour le moment*/}
-          <div className="row ui segment mydatacontainer">
-          </div>
 
-          {/*<CodeView currentJson={this.props.currentJson} codeView={this.props.codeView} />*/}
+
+          <CodeView currentJson={this.props.currentJson} codeView={this.props.codeView} />
 
           <Reading reading={this.props.reading} />
         </div>
