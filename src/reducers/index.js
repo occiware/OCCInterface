@@ -4,12 +4,27 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 currentPath: action.currentPath
-              }
+            }
         case 'SET_CURRENT_JSON':
             return {
                 ...state,
                 currentJson: action.currentJson
-              }
+            }
+        case 'SET_EDITABLE':
+            return {
+                ...state,
+                codeRights: 'write'
+            }
+        case 'SET_READABLE':
+            return {
+                ...state,
+                codeRights: 'read'
+            }
+        case 'SET_ERROR_MESSAGE':
+            return {
+                ...state,
+                errorMessage: action.errorMessage
+            }
         default:
             return state
     }

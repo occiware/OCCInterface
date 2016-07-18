@@ -14,13 +14,15 @@ var initialState =  {
   'currentPath': '/-/',
   'currentJSON': 'hello world',
   'errorMessage': '',
-  'currentScheme': ''
+  'currentScheme': '',
+  // lecture (toolifié), ou ecriture (edit)
+  'codeRights': 'read'
 }
 
 
 let store = createStore(reducer, initialState);
 
-const readings =[
+const readings = [
     {'title':'Getting started', 'path': 'gettingstarted', 'component': GettingStarted},
     {'title':'The OCCI Project', 'path': 'OCCIProject', 'component': OCCIProject},
   ]

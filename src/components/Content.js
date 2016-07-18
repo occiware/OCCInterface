@@ -50,9 +50,7 @@ export default class Content extends React.Component{
             <DelButton />
           </div>
 
-
-
-          <CodeView currentJson={this.props.currentJson} codeView={this.props.codeView} />
+          <CodeView/>
 
           <Reading reading={this.props.reading} />
         </div>

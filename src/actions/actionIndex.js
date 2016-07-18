@@ -11,3 +11,22 @@ export function setCurrentJson(currentJson) {
     currentJson: currentJson
   }
 }
+
+export function setEditableCode() {
+  return {
+    type: 'SET_EDITABLE'
+  }
+}
+
+export function setReadableCode() {
+  return {
+    type: 'SET_READABLE'
+  }
+}
+
+export function setErrorMessage(errorMessage) {
+  return {
+    type: 'SET_ERROR_MESSAGE',
+    errorMessage: errorMessage
+  }
+}

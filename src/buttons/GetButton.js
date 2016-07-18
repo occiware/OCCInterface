@@ -10,7 +10,6 @@ class GetButton extends React.Component{
       'GET',
       this.props.currentPath,
       (data) => {
-        console.log(data);
         this.props.dispatch(actions.setCurrentJson(data));
       }
     )
