@@ -99,3 +99,11 @@ blockquote {
     padding-left: 3em;
     border-left: 0.5em #eee solid;
 }
+
+/*Color for highlighting JSON code */
+
+.string { color: green; }
+.number { color: darkorange; }
+.boolean { color: blue; }
+.null { color: magenta; }
+.key { color: red; }

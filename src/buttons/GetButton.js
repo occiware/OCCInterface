@@ -6,6 +6,7 @@ import * as actions from '../actions/actionIndex.js';
 
 class GetButton extends React.Component{
   getResource = () => {
+    this.props.dispatch(actions.setReadableCode());
     callAPI(
       'GET',
       this.props.currentPath,
