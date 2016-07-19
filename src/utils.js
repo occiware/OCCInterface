@@ -1,5 +1,5 @@
 export function callAPI(operation, relativeUrl, currentSuccess, currentError, additionalHeaders, data){
-  var url = 'http://localhost:8080'+relativeUrl;
+  var url = window.rootURL+relativeUrl;
 
   var headers = {
     // 'If-None-Match': -1,

@@ -1,4 +1,4 @@
-# Mardown title
+# Markdown title
 
 Here is some text
 

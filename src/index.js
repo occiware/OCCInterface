@@ -28,6 +28,8 @@ const readings = [
   ]
 ;
 
+window.rootURL = 'http://localhost:8080'
+
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
