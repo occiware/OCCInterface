@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import {syntaxHighlight} from '../utils.js';
+import {toolify} from '../utils.js';
 
 class CodeView extends React.Component{
   createMarkup = (json) => {
@@ -9,16 +9,12 @@ class CodeView extends React.Component{
   }
 
   render() {
-
-
     if(typeof this.props.currentJson !== 'undefined'){
-      var json = syntaxHighlight(JSON.stringify(this.props.currentJson,null,2));
-      console.log('passe');
+      var json = toolify(this.props.currentJson);
     }
     else{
       var json = '';
     }
-
 
     if(this.props.codeRights === 'write'){
       var view = <textarea className="segmentpadding mydata textareamydata" onChange={this.updateCurrentJson} defaultValue={JSON.stringify(this.props.currentJson,null,2)}></textarea>;
