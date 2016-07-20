@@ -8,6 +8,12 @@ import Content from './components/Content.js';
 
 export default class App extends React.Component{
   componentDidMount = () => {
+    $('.ui.sticky')
+      .sticky({
+        context: '#mainContainer'
+      })
+    ;
+    
     $(window).scroll(function () {
       if ($(this).scrollTop() > 150) {
               $('.goTop').addClass('show');
