@@ -8,6 +8,14 @@ class CodeView extends React.Component{
     return {__html: json}
   }
 
+  fullscreen = () => {
+    //to prevent semantic ui from moving the element to the end of the page
+    $('#dataContainerModal').modal({
+      detachable: false
+    });
+    $('#dataContainerModal').modal('show');
+  }
+
   render() {
     if(typeof this.props.currentJson !== 'undefined'){
       var json = toolify(this.props.currentJson);
@@ -20,14 +28,19 @@ class CodeView extends React.Component{
       var view = <textarea className="segmentpadding mydata textareamydata" onChange={this.updateCurrentJson} defaultValue={JSON.stringify(this.props.currentJson,null,2)}></textarea>;
     }
     else{
-      //var view = <pre className="segmentpadding mydata">{json}</pre>;
-
       var view = <pre className="segmentpadding mydata" dangerouslySetInnerHTML={this.createMarkup(json)}></pre>;
     }
 
     return(
-      <div className="row ui segment mydatacontainer">
+      <div className="row ui clearing segment mydatacontainer">
+        <div className="ui right floated myExpand" onClick={this.fullscreen}>
+          <i className="expand disabled link icon"></i>
+        </div>
         {view}
+
+        <div className="ui fullscreen modal" id="dataContainerModal">
+          {view}
+        </div>
       </div>
     );
   }
