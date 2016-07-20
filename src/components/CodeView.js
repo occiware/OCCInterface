@@ -11,6 +11,9 @@ class CodeView extends React.Component{
   fullscreen = () => {
     //to prevent semantic ui from moving the element to the end of the page
     $('#dataContainerModal').modal({
+      selector: {
+        close: '.close, .actions .button.close.icon, .closeIcon'
+      },
       detachable: false
     });
     $('#dataContainerModal').modal('show');
@@ -39,6 +42,9 @@ class CodeView extends React.Component{
         {view}
 
         <div className="ui fullscreen modal" id="dataContainerModal">
+          <div className="ui right floated myExpand closeIcon">
+            <i className="close disabled link icon"></i>
+          </div>
           {view}
         </div>
       </div>
