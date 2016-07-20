@@ -13,12 +13,39 @@ class EditButton extends React.Component{
       relativeUrl,
       (data) => {
         this.props.dispatch(actions.setCurrentQueryPath(relativeUrl));
-        this.props.dispatch(actions.setCurrentJson(data));
         this.props.dispatch(actions.setEditableCode());
+        this.props.dispatch(actions.setCurrentJson(data));
       },
       (xhr) => {
         this.props.dispatch(actions.setErrorMessage(''+xhr.responseText));
       }
+    );
+  }
+
+  postButton = () => {
+    this.editData('POST');
+  }
+
+  putButton = () => {
+    this.editData('PUT');
+  }
+
+  editData = (operationType) => {
+    var relativeUrl = this.props.currentPath;
+
+    callAPI(
+      operationType,
+      relativeUrl,
+      (data) => {
+        this.props.dispatch(actions.setCurrentQueryPath(relativeUrl));
+        this.props.dispatch(actions.setReadableCode());
+        this.props.dispatch(actions.setCurrentJson(data));
+      },
+      (xhr) => {
+        this.props.dispatch(actions.setErrorMessage(''+xhr.responseText));
+      },
+      {'content-type': 'application/json'},
+      this.props.currentJson
     );
   }
 

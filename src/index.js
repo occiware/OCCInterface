@@ -12,7 +12,7 @@ import OCCIProject from 'raw!./readings/OCCIProject.md';
 
 var initialState =  {
   'currentPath': '/categories/compute',
-  'currentJSON': 'hello world',
+  'currentJson': {hello: 'world'},
   'errorMessage': '',
   'currentScheme': '',
   // lecture (toolifié), ou ecriture (edit)
@@ -20,7 +20,8 @@ var initialState =  {
 }
 
 
-let store = createStore(reducer, initialState);
+// let store = createStore(reducer, initialState);
+let store = createStore(reducer, initialState, window.devToolsExtension && window.devToolsExtension());
 
 const readings = [
     {'title':'Getting started', 'path': 'gettingstarted', 'component': GettingStarted},

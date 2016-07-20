@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import * as actions from '../actions/actionIndex.js';
 import {toolify} from '../utils.js';
 
 class CodeView extends React.Component{
@@ -9,33 +10,39 @@ class CodeView extends React.Component{
   }
 
   fullscreen = () => {
-    //to prevent semantic ui from moving the element to the end of the page
     $('#dataContainerModal').modal({
       selector: {
         close: '.close, .actions .button.close.icon, .closeIcon'
       },
+      //to prevent semantic ui from moving the element to the end of the page
       detachable: false
     });
     $('#dataContainerModal').modal('show');
   }
 
-  render() {
-    if(typeof this.props.currentJson !== 'undefined'){
-      var json = toolify(this.props.currentJson);
-    }
-    else{
-      var json = '';
-    }
+  //double data binding with the model
+  updateCurrentJson = (e) => {
+    this.props.dispatch(actions.setCurrentJson(JSON.parse(e.target.value)));
+  }
 
+  render() {
+
+    console.log(this.props.currentJson);
     if(this.props.codeRights === 'write'){
-      var view = <textarea className="segmentpadding mydata textareamydata" onChange={this.updateCurrentJson} defaultValue={JSON.stringify(this.props.currentJson,null,2)}></textarea>;
+      var view = <textarea className="segmentpadding mydata textareamydata" onChange={this.updateCurrentJson} value={JSON.stringify(this.props.currentJson,null,2)}></textarea>;
     }
     else{
+      if(typeof this.props.currentJson !== 'undefined'){
+        var json = toolify(this.props.currentJson);
+      }
+      else{
+        var json = '';
+      }
       var view = <pre className="segmentpadding mydata" dangerouslySetInnerHTML={this.createMarkup(json)}></pre>;
     }
 
     return(
-      <div className="row ui clearing segment mydatacontainer">
+      <div className="row ui segment mydatacontainer">
         <div className="ui right floated myExpand" onClick={this.fullscreen}>
           <i className="expand disabled link icon"></i>
         </div>
