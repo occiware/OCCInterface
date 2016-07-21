@@ -32,7 +32,7 @@ export function syntaxHighlight(json) {
         } else if (/null/.test(match)) {
             cls = 'null';
         }
-        var regexRoot = new RegExp(window.rootURL);
+        var regexRoot = new RegExp(window.backendURL);
         if(regexRoot.test(match)){
           return match;
         }
@@ -66,7 +66,7 @@ export function toolify(json) {
   //the function to apply to all elements on the json
   var linksClickable = function(element){
     // var regexRoot = new RegExp(window.rootURL);
-    var regexRoot = new RegExp(window.rootURL);
+    var regexRoot = new RegExp(window.backendURL);
 
     //we make the link when finding a link of the playground
     if (regexRoot.test(element)){

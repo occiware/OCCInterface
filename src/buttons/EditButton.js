@@ -44,8 +44,8 @@ class EditButton extends React.Component{
       (xhr) => {
         this.props.dispatch(actions.setErrorMessage(''+xhr.responseText));
       },
-      {'content-type': 'application/json'},
-      this.props.currentJson
+      {'Content-Type': 'application/json'},
+      JSON.stringify(this.props.currentJson)
     );
   }
 

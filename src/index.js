@@ -29,7 +29,8 @@ const readings = [
   ]
 ;
 
-window.rootURL = '/proxiedOCCIServer'
+window.rootURL = '/proxiedOCCIServer';
+window.backendURL = 'http://localhost:8080';
 
 ReactDOM.render(
   <Provider store={store}>

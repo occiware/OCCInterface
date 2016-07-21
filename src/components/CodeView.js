@@ -26,8 +26,6 @@ class CodeView extends React.Component{
   }
 
   render() {
-
-    console.log(this.props.currentJson);
     if(this.props.codeRights === 'write'){
       var view = <textarea className="segmentpadding mydata textareamydata" onChange={this.updateCurrentJson} value={JSON.stringify(this.props.currentJson,null,2)}></textarea>;
     }
