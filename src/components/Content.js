@@ -10,7 +10,10 @@ import GetButton from '../buttons/GetButton.js';
 import EditButton from '../buttons/EditButton.js';
 import DelButton from '../buttons/DelButton.js';
 
-export default class Content extends React.Component{
+import {callAPI} from '../utils.js';
+import * as actions from '../actions/actionIndex.js';
+
+class Content extends React.Component{
   preventClickEffect = () => {
     $('.dclink').click((e) => {
       e.preventDefault();
@@ -22,6 +25,29 @@ export default class Content extends React.Component{
 
   componentDidUpdate = () => {
     this.preventClickEffect();
+  }
+
+  clickLinkPlayground = (link) => {
+    //we remove the rootURL of the link
+    link = link.replace(window.backendURL, '');
+
+    this.props.dispatch(actions.setCurrentQueryPath(link));
+
+    this.props.dispatch(actions.setReadableCode());
+    callAPI(
+      'GET',
+      this.props.currentPath,
+      (data) => {
+        this.props.dispatch(actions.setCurrentJson(data));
+      }
+    )
+    // rajouter onError
+  }
+
+  tools = () => {
+    return {
+      clickLinkPlayground: this.clickLinkPlayground
+    }
   }
 
   render() {
@@ -45,12 +71,12 @@ export default class Content extends React.Component{
             </div>
           </div>
           <div className="row ui centered">
-            <GetButton />
+            <GetButton ref="getButton" />
             <EditButton />
             <DelButton />
           </div>
 
-          <CodeView/>
+          <CodeView tools={this.tools}/>
 
           <Reading reading={this.props.reading} />
         </div>
@@ -58,3 +84,7 @@ export default class Content extends React.Component{
     );
   }
 }
+const mapStateToProps = (state) => ({
+  currentPath: state.currentPath
+})
+export default Content = connect(mapStateToProps)(Content);

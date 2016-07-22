@@ -16,6 +16,7 @@ class GetButton extends React.Component{
     )
     // rajouter onError
   }
+
   render() {
     return (
       <button className="ui green button" onClick={() => this.getResource()}>GET</button>

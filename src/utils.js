@@ -33,7 +33,7 @@ function isObject(what) {
     return Object.prototype.toString.call(what) === '[object Object]';
 }
 //iterate through a JS object to access all the right parts, and apply transformation
-function iterateRec(json, depth){
+function iterateRec(json, depth, sharedProps){
   //we push infos into this array
   var jsonElements = [];
   var currentType = 'none';
@@ -47,29 +47,29 @@ function iterateRec(json, depth){
 
   for(var i in json){
     if (isObject(json[i])){
-      var object = iterateRec(json[i], depth+1);
+      var object = iterateRec(json[i], depth+1, sharedProps);
       if(currentType === 'object'){
-        object = <KeyValueJSON value={object} myKey={i} depth={depth+1} firstElement={true}/>
+        object = <KeyValueJSON value={object} myKey={i} depth={depth+1} firstElement={true} tools={sharedProps}/>
       }
       jsonElements.push(object);
     }
     else if(isArray(json[i])){
-      var array = iterateRec(json[i], depth+1);
+      var array = iterateRec(json[i], depth+1, sharedProps);
       if(currentType === 'object'){
-        array = <KeyValueJSON value={array} myKey={i} depth={depth+1} firstElement={true}/>
+        array = <KeyValueJSON value={array} myKey={i} depth={depth+1} firstElement={true} tools={sharedProps}/>
       }
       jsonElements.push(array);
     }
     else{
       if(isNumber(i)){
         //on cree une value car on est dans un tableau
-        var value = <ValueJSON value={json[i]} depth={depth+1}/>
+        var value = <ValueJSON value={json[i]} depth={depth+1} tools={sharedProps}/>
         jsonElements.push(value);
       }
       else{
         //on cree une keyvalue car on est dans un objet
-        var value = <ValueJSON value={json[i]}/>
-        var keyValue = <KeyValueJSON value={value} myKey={i} depth={depth+1}/>
+        var value = <ValueJSON value={json[i]} tools={sharedProps}/>
+        var keyValue = <KeyValueJSON value={value} myKey={i} depth={depth+1} tools={sharedProps}/>
         jsonElements.push(keyValue);
       }
     }
@@ -80,9 +80,12 @@ function iterateRec(json, depth){
   var jsonReact;
 
   //we add a prop lastElement to the last Element so that we don't put a comma after it
-  var lastElement = jsonElements[jsonElements.length-1];
-  jsonElements.pop();
-  jsonElements.push(React.cloneElement(lastElement, {lastElement: true}));
+
+  if (jsonElements.length > 0){
+    var lastElement = jsonElements[jsonElements.length-1];
+    jsonElements.pop();
+    jsonElements.push(React.cloneElement(lastElement, {lastElement: true}));
+  }
 
 
   if (currentType === 'object'){
@@ -95,34 +98,10 @@ function iterateRec(json, depth){
   return jsonReact;
 }
 
-export function toolify(json) {
+export function toolify(json, sharedProps) {
   //toolify the URLS
 
-  //the function to apply to all elements on the json
-  // var linksClickable = function(element){
-  //   // var regexRoot = new RegExp(window.rootURL);
-  //   var regexRoot = new RegExp(window.backendURL);
-  //
-  //   //we make the link when finding a link of the playground
-  //   if (regexRoot.test(element)){
-  //     return '<a href=\''+element+'\' onClick={this.linkClicked}>'+ element +'</a>';
-  //   }
-  //
-  //   //syntax highlighting
-  //   if(element === false || element === true){
-  //     return '<span class=\'boolean\'>'+ element +'</span>';
-  //   }
-  //   else if(isNumber(element)){
-  //     return '<span class=\'number\'>'+ element +'</span>';
-  //   }
-  //   else{
-  //     return '<span class=\'string\'>'+ element +'</span>';
-  //   }
-  // }
-
-  // json = JSON.stringify(iterateRec(json),null,2);
-
-  json = iterateRec(json, 0);
+  json = iterateRec(json, 0, sharedProps);
 
   // json = syntaxHighlight(json);
 

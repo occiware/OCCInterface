@@ -35,7 +35,7 @@ class CodeView extends React.Component{
     }
     else{
       if(typeof this.props.currentJson !== 'undefined'){
-        var json = toolify(this.props.currentJson);
+        var json = toolify(this.props.currentJson, this.props.tools);
       }
       else{
         var json = '';
