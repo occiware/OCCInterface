@@ -9,7 +9,7 @@ export default class KeyValueJSON  extends React.Component{
     }
     return (
       <div className="inline">
-        {whiteSpaces}<span className="key">{'"'+this.props.myKey+'"'}</span> : {this.props.value}
+        {whiteSpaces}<span className="key">{'"'+this.props.myKey+'"'}</span> : {React.cloneElement(this.props.value, {firstElement: this.props.firstElement})}
       </div>
     );
   }
