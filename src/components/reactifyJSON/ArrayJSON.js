@@ -8,12 +8,12 @@ export default class TableauJSON  extends React.Component{
       whiteSpaces += '  ';
     }
     var optionalWhiteSpace = this.props.firstElement === true ? '' : whiteSpaces;
-
+    var optionalComma = this.props.lastElement === true ? '' : ',';
     return (
       <div className="inline">
       {optionalWhiteSpace}{'[ \n'}
       {this.props.elements}
-      {whiteSpaces}{'] \n'}
+      {whiteSpaces}{']'}{optionalComma}{'\n'}
       </div>
     );
   }

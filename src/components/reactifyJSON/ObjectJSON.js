@@ -10,12 +10,12 @@ export default class ObjectJSON  extends React.Component{
     }
 
     var optionalWhiteSpace = this.props.firstElement === true ? '' : whiteSpaces;
-
+    var optionalComma = this.props.lastElement === true ? '' : ',';
     return (
       <div className="inline">
       {optionalWhiteSpace}{'{ \n'}
       {this.props.elements}
-      {whiteSpaces}{'} \n'}
+      {whiteSpaces}{'}'}{optionalComma}{'\n'}
       </div>
     );
   }

@@ -78,6 +78,13 @@ function iterateRec(json, depth){
   //now we take what is in the array to transfer props to the json element,
   //depending on its type
   var jsonReact;
+
+  //we add a prop lastElement to the last Element so that we don't put a comma after it
+  var lastElement = jsonElements[jsonElements.length-1];
+  jsonElements.pop();
+  jsonElements.push(React.cloneElement(lastElement, {lastElement: true}));
+
+
   if (currentType === 'object'){
     jsonReact = <ObjectJSON elements={jsonElements} depth={depth}/>
   }
