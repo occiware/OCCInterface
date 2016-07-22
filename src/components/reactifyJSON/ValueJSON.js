@@ -22,7 +22,7 @@ export default class ValueJSON  extends React.Component{
       whiteSpaces += '  ';
     }
     return (
-      <div className="inline">{whiteSpaces}{value}{'\n'}</div>
+      <div className="inline">{whiteSpaces+'"'}{value}{'"'+'\n'}</div>
     );
   }
 }
