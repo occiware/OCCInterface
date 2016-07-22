@@ -72,7 +72,7 @@ pre{
   overflow: auto;
   outline: none;
   resize: none;
-  
+
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
@@ -123,4 +123,8 @@ blockquote {
 #dataContainerModal .mydata{
   width:100%;
   height:80vh;
+}
+
+.inline{
+  display: inline;
 }

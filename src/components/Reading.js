@@ -14,6 +14,10 @@ export default class Reading extends React.Component{
     }
   }
 
+  poc = () => {
+    console.log('bla');
+  }
+  
   render() {
     // console.log(this.props.reading);
     return (
