@@ -29,7 +29,7 @@ const readings = [
   ]
 ;
 
-window.rootURL = '/proxiedOCCIServer';
+window.rootURL = '/proxiedOCCIServer'; //redirection to make ajax calls
 window.backendURL = 'http://localhost:8080';
 
 ReactDOM.render(

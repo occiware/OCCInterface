@@ -6,9 +6,9 @@ import MessageErrorPath from './MessageErrorPath.js';
 import InputCurrentPath from './InputCurrentPath.js';
 import Reading from './Reading.js';
 
-import GetButton from '../buttons/GetButton.js';
-import EditButton from '../buttons/EditButton.js';
-import DelButton from '../buttons/DelButton.js';
+import GetButton from './buttons/GetButton.js';
+import EditButton from './buttons/EditButton.js';
+import DelButton from './buttons/DelButton.js';
 
 import {callAPI} from '../utils.js';
 import * as actions from '../actions/actionIndex.js';
@@ -36,7 +36,7 @@ class Content extends React.Component{
     this.props.dispatch(actions.setReadableCode());
     callAPI(
       'GET',
-      this.props.currentPath,
+      link,
       (data) => {
         this.props.dispatch(actions.setCurrentJson(data));
       }
@@ -84,7 +84,5 @@ class Content extends React.Component{
     );
   }
 }
-const mapStateToProps = (state) => ({
-  currentPath: state.currentPath
-})
-export default Content = connect(mapStateToProps)(Content);
+
+export default Content = connect()(Content);

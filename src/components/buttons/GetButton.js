@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import {callAPI} from '../utils.js';
-import * as actions from '../actions/actionIndex.js';
+import {callAPI} from '../../utils.js';
+import * as actions from '../../actions/actionIndex.js';
 
 class GetButton extends React.Component{
   getResource = () => {
