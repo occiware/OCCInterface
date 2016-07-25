@@ -17,7 +17,7 @@ class EditButton extends React.Component{
         this.props.dispatch(actions.setCurrentJson(data));
       },
       (xhr) => {
-        this.props.dispatch(actions.setErrorMessage(''+xhr.responseText));
+        this.props.setErrorMessage('Impossible to edit this resource',xhr.status+' '+xhr.responseText);
       }
     );
   }

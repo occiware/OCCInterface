@@ -23,7 +23,10 @@ const reducer = (state, action) => {
         case 'SET_ERROR_MESSAGE':
             return {
                 ...state,
-                errorMessage: action.errorMessage
+                errorMessage: {
+                  simple: action.simple,
+                  detailed: action.detailed
+                }
             }
         default:
             return state

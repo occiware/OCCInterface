@@ -13,7 +13,10 @@ import OCCIProject from 'raw!./readings/OCCIProject.md';
 var initialState =  {
   'currentPath': '/categories/compute',
   'currentJson': {hello: 'world'},
-  'errorMessage': '',
+  'errorMessage': {
+    simple: '',
+    detailed: ''
+  },
   'currentScheme': '',
   // lecture (toolifié), ou ecriture (edit)
   'codeRights': 'read'

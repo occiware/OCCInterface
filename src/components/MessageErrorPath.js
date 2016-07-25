@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import * as actions from '../actions/actionIndex.js';
 
-export default class MessageErrorPath extends React.Component{
+class MessageErrorPath extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
@@ -10,10 +11,6 @@ export default class MessageErrorPath extends React.Component{
     };
   }
 
-  closeMessage = (e) => {
-    this.setState({seeDetails: false});
-    $('.errorPath').transition('fade');
-  }
 
   componentDidMount = () => {
     var component = this;
@@ -23,14 +20,17 @@ export default class MessageErrorPath extends React.Component{
         .closest('.errorPath')
         .transition('fade')
       ;
-      component.props.setParentState({errorMessage: false});
+      //we delete the current message into the store
+      component.props.dispatch(actions.setErrorMessage('',''));
     });
+    // $('.errorPath').transition('fade');
   }
 
   render() {
     if(this.props.messageErrorDetails != undefined){
       var moreDetails = <a onClick={() => {this.setState({seeDetails: true})}}>More details</a>;
     }
+
     if(this.state.seeDetails === false){
       var message = <span>
           {this.props.message}
@@ -45,7 +45,7 @@ export default class MessageErrorPath extends React.Component{
     return(
       <div className="ui icon error message errorPath">
       <i className="close icon"></i>
-      <i className="warning circle icon" onClick={this.closeMessage}></i>
+      <i className="warning circle icon" ></i>
       <p>
         {message}
       </p>
@@ -53,3 +53,5 @@ export default class MessageErrorPath extends React.Component{
     );
   }
 }
+
+export default MessageErrorPath = connect()(MessageErrorPath);

@@ -15,7 +15,7 @@ class DelButton extends React.Component{
         this.props.dispatch(actions.setCurrentJson());
       },
       (xhr) => {
-        this.props.dispatch(actions.setErrorMessage(''+xhr.responseText));
+        this.props.setErrorMessage('Impossible to delete this resource',xhr.status+' '+xhr.responseText);
       },
       {'Content-Type': 'application/json'}
     );

@@ -44,6 +44,10 @@ class Content extends React.Component{
     // rajouter onError
   }
 
+  setErrorMessage = (simple, detailed) => {
+    this.props.dispatch(actions.setErrorMessage(simple,detailed));
+  }
+
   tools = () => {
     return {
       clickLinkPlayground: this.clickLinkPlayground
@@ -51,6 +55,8 @@ class Content extends React.Component{
   }
 
   render() {
+    var errorMessage = this.props.errorMessage.simple ? <MessageErrorPath message={this.props.errorMessage.simple}
+                        messageErrorDetails={this.props.errorMessage.detailed}/> : null;
     return (
       <div className="twelve wide column ui grid">
         <div className="row">
@@ -71,11 +77,12 @@ class Content extends React.Component{
             </div>
           </div>
           <div className="row ui centered">
-            <GetButton ref="getButton" />
-            <EditButton />
-            <DelButton />
+            <GetButton setErrorMessage={this.setErrorMessage} />
+            <EditButton setErrorMessage={this.setErrorMessage}/>
+            <DelButton setErrorMessage={this.setErrorMessage}/>
           </div>
 
+          {errorMessage}
           <CodeView tools={this.tools}/>
 
           <Reading reading={this.props.reading} />
@@ -85,4 +92,8 @@ class Content extends React.Component{
   }
 }
 
-export default Content = connect()(Content);
+const mapStateToProps = (state) => ({
+  errorMessage: state.errorMessage
+})
+
+export default Content = connect(mapStateToProps)(Content);

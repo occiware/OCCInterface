@@ -12,6 +12,9 @@ class GetButton extends React.Component{
       this.props.currentPath,
       (data) => {
         this.props.dispatch(actions.setCurrentJson(data));
+      },
+      (xhr) => {
+        this.props.setErrorMessage('Impossible to access this resource',xhr.status+' '+xhr.responseText);
       }
     )
     // rajouter onError

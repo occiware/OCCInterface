@@ -24,9 +24,10 @@ export function setReadableCode() {
   }
 }
 
-export function setErrorMessage(errorMessage) {
+export function setErrorMessage(simple, detailed) {
   return {
     type: 'SET_ERROR_MESSAGE',
-    errorMessage: errorMessage
+    simple: simple,
+    detailed: detailed
   }
 }
