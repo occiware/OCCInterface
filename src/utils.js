@@ -89,13 +89,18 @@ function iterateRec(json, depth, sharedProps){
 
 
   if (currentType === 'object'){
-    jsonReact = <ObjectJSON elements={jsonElements} depth={depth}/>
+    if(depth === 0){
+      return <ObjectJSON elements={jsonElements} depth={depth} lastElement={true}/>
+    }
+    return <ObjectJSON elements={jsonElements} depth={depth}/>
   }
   else if(currentType === 'array'){
-    jsonReact = <ArrayJSON elements={jsonElements} depth={depth}/>
+    if(depth === 0){
+      return <ArrayJSON elements={jsonElements} depth={depth} lastElement={true}/>
+    }
+    return <ArrayJSON elements={jsonElements} depth={depth}/>
   }
 
-  return jsonReact;
 }
 
 export function toolify(json, sharedProps) {

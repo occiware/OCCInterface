@@ -11,7 +11,6 @@ class MessageErrorPath extends React.Component{
     };
   }
 
-
   componentDidMount = () => {
     var component = this;
     $('.message .close')
