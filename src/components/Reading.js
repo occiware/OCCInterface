@@ -32,13 +32,9 @@ export default class Reading extends React.Component{
   createMarkup = () => {
     marked.setOptions({
       renderer: new marked.Renderer(),
-      gfm: true,
-      tables: true,
-      breaks: false,
-      pedantic: false,
-      sanitize: true,
-      smartLists: true,
-      smartypants: false
+      highlight: function(code){
+        return window.hljs.highlightAuto(code).value;
+      }
     });
     return {__html: marked(this.props.reading)};
   }
