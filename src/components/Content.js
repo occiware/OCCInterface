@@ -27,10 +27,20 @@ class Content extends React.Component{
     this.preventClickEffect();
   }
 
-  clickLinkPlayground = (link) => {
-    //we remove the rootURL of the link
-    link = link.replace(window.backendURL, '');
+  componentDidMount = () => {
+    window.clickLinkPlaygroundEvent = this.clickLinkPlaygroundEvent;
+  }
 
+  clickLinkPlaygroundEvent = (event) => {
+    event.preventDefault();
+    var link = event.target.href.replace(window.rootURL, '');
+    console.log(link);
+    this.clickLinkPlayground(link);
+  }
+
+  clickLinkPlayground = (link) => {
+    //we remove the backendURL of the link
+    link = link.replace(window.backendURL, '');
     this.props.dispatch(actions.setCurrentQueryPath(link));
 
     this.props.dispatch(actions.setReadableCode());

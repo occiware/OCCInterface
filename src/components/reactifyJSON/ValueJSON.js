@@ -31,7 +31,7 @@ export default class ValueJSON  extends React.Component{
         value = <span className="string">{element}</span>;
       }
     }
-    
+
     var whiteSpaces = '';
     for(var i=0; i<this.props.depth; i++){
       whiteSpaces += '  ';

@@ -6,7 +6,7 @@ import ValueJSON from './components/reactifyJSON/ValueJSON.js';
 
 
 export function callAPI(operation, relativeUrl, currentSuccess, currentError, additionalHeaders, data){
-  var url = window.rootURL+relativeUrl;
+  var url = window.proxyURL+relativeUrl;
 
   var headers = {
     // 'If-None-Match': -1,
@@ -32,9 +32,11 @@ function isArray(what) {
 function isObject(what) {
     return Object.prototype.toString.call(what) === '[object Object]';
 }
-//iterate through a JS object to access all the right parts, and apply transformation
+
+//iterate through a JS object to reactify it.
+//In JSON, you can have an array, an object, a key value, or a value
 function iterateRec(json, depth, sharedProps){
-  //we push infos into this array
+  //we push JSON elements reactified into jsonElements
   var jsonElements = [];
   var currentType = 'none';
 
@@ -45,6 +47,7 @@ function iterateRec(json, depth, sharedProps){
     currentType = 'array';
   }
 
+  //we iterate through  the current object, and take a React representation of each constituting element
   for(var i in json){
     if (isObject(json[i])){
       var object = iterateRec(json[i], depth+1, sharedProps);
@@ -105,10 +108,7 @@ function iterateRec(json, depth, sharedProps){
 
 export function toolify(json, sharedProps) {
   //toolify the URLS
-
   json = iterateRec(json, 0, sharedProps);
-
-  // json = syntaxHighlight(json);
 
   return json;
 

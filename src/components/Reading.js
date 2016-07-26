@@ -2,8 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import ReactMarkdown from 'react-markdown';
+import marked from 'marked';
+
 import CodeBlock from '../code-block.js';
 // import * as actions from '../actions/actionIndex.js';
+
+
 
 export default class Reading extends React.Component{
   componentWillUpdate = (nextProps) => {
@@ -12,14 +16,36 @@ export default class Reading extends React.Component{
       $('.reading').transition('hide');
       $('.reading').transition('fade');
     }
+
+  }
+
+  componentDidUpdate = () => {
+    $('.reading a').each(function() {
+      if($(this).attr('href').charAt(0) === '/'){
+        var p = $('<a href="'+$(this).attr('href')+'">'+$(this).text()+'</a>');
+        p.click(window.clickLinkPlaygroundEvent);
+        $(this).replaceWith(p);
+      }
+    });
+  }
+
+  createMarkup = () => {
+    marked.setOptions({
+      renderer: new marked.Renderer(),
+      gfm: true,
+      tables: true,
+      breaks: false,
+      pedantic: false,
+      sanitize: true,
+      smartLists: true,
+      smartypants: false
+    });
+    return {__html: marked(this.props.reading)};
   }
 
   render() {
-    // console.log(this.props.reading);
     return (
-      <div className="row ui reading segmentpadding">
-        <ReactMarkdown source={this.props.reading} renderers={Object.assign({}, ReactMarkdown.renderers, {
-                            CodeBlock: CodeBlock })}/>
+      <div className="reading segmentpadding" dangerouslySetInnerHTML={this.createMarkup()}>
       </div>
     );
   }

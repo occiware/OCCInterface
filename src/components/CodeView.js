@@ -25,10 +25,6 @@ class CodeView extends React.Component{
     this.props.dispatch(actions.setCurrentJson(JSON.parse(e.target.value)));
   }
 
-  linkClicked = () => {
-    console.log('click"');
-  }
-
   render() {
     if(this.props.codeRights === 'write'){
       var view = <textarea className="segmentpadding mydata textareamydata" onChange={this.updateCurrentJson} value={JSON.stringify(this.props.currentJson,null,2)}></textarea>;

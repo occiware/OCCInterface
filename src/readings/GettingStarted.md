@@ -7,6 +7,7 @@ Here is some text
 
 This is a link [myBeautifulLink](http://www.google.com)
 
+This is another one for the playground [secondBeautifulLink](/categories/compute)
 ## Mardown subtitle
 
 <blockquote>
