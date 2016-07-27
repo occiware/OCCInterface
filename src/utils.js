@@ -50,29 +50,31 @@ function iterateRec(json, depth, sharedProps){
   //we iterate through  the current object, and take a React representation of each constituting element
   for(var i in json){
     if (isObject(json[i])){
-      var object = iterateRec(json[i], depth+1, sharedProps);
+      //we clone the element to add a new props : the key
+      var object = React.cloneElement(iterateRec(json[i], depth+1, sharedProps), {key: i});
       if(currentType === 'object'){
-        object = <KeyValueJSON value={object} myKey={i} depth={depth+1} firstElement={true} tools={sharedProps}/>
+        object = <KeyValueJSON value={object} myKey={i} depth={depth+1} firstElement={true} tools={sharedProps} key={i}/>
       }
       jsonElements.push(object);
     }
     else if(isArray(json[i])){
-      var array = iterateRec(json[i], depth+1, sharedProps);
+      var array = React.cloneElement(iterateRec(json[i], depth+1, sharedProps), {key: i});
+
       if(currentType === 'object'){
-        array = <KeyValueJSON value={array} myKey={i} depth={depth+1} firstElement={true} tools={sharedProps}/>
+        array = <KeyValueJSON value={array} myKey={i} depth={depth+1} firstElement={true} tools={sharedProps} key={i}/>
       }
       jsonElements.push(array);
     }
     else{
       if(isNumber(i)){
         //on cree une value car on est dans un tableau
-        var value = <ValueJSON value={json[i]} depth={depth+1} tools={sharedProps}/>
+        var value = <ValueJSON value={json[i]} depth={depth+1} tools={sharedProps} key={i}/>
         jsonElements.push(value);
       }
       else{
         //on cree une keyvalue car on est dans un objet
         var value = <ValueJSON value={json[i]} tools={sharedProps}/>
-        var keyValue = <KeyValueJSON value={value} myKey={i} depth={depth+1} tools={sharedProps}/>
+        var keyValue = <KeyValueJSON value={value} myKey={i} depth={depth+1} tools={sharedProps} key={i}/>
         jsonElements.push(keyValue);
       }
     }
