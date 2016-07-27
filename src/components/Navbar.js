@@ -6,6 +6,10 @@ export default class NavBar extends React.Component{
     $('.ui.dropdown').dropdown();
   }
 
+  updateBackendURL = () => {
+    window.backendURL = $('.backendURL').val();
+  }
+
   render() {
     var currentProject = this.props.currentProject;
 
@@ -21,10 +25,15 @@ export default class NavBar extends React.Component{
             {currentProject}
             <i className="dropdown icon"></i>
             <div className="menu">
-              <div className="item">a</div> 
+              <div className="item">a</div>
               <div className="item">b</div>
             </div>
           </a>
+          <div className="ui labeled input item right">
+            <div className="ui label">URL OCCI server </div>
+            <input type="text" className="backendURL" />
+            <button className="ui button useButton" onClick={this.updateBackendURL}>Use</button>
+          </div>
           <a href="https://github.com/Romathonat/OCCInterface" className="item right">GitHub</a>
         </div>
       </div>

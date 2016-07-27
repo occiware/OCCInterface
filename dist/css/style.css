@@ -128,3 +128,7 @@ blockquote {
 .inline{
   display: inline;
 }
+
+.useButton{
+  margin-left: 20px !important;
+}
