@@ -132,3 +132,7 @@ blockquote {
 .useButton{
   margin-left: 20px !important;
 }
+
+.playgroundButton {
+  width: 70px !important;
+}

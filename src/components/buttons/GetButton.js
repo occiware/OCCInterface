@@ -22,7 +22,7 @@ class GetButton extends React.Component{
 
   render() {
     return (
-      <button className="ui green button" onClick={() => this.getResource()}>GET</button>
+      <button className="ui green button playgroundButton" onClick={() => this.getResource()}>GET</button>
     );
   }
 }

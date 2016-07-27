@@ -5,7 +5,7 @@ import KeyValueJSON from './components/reactifyJSON/KeyValueJSON.js';
 import ValueJSON from './components/reactifyJSON/ValueJSON.js';
 
 
-export function callAPI(operation, relativeUrl, currentSuccess, currentError, additionalHeaders, data){
+export function callAPI(operation, relativeUrl, currentSuccess, currentError, additionalHeaders, data, asynchronous){
   var url = window.proxyURL+relativeUrl;
 
   var headers = {
@@ -14,13 +14,18 @@ export function callAPI(operation, relativeUrl, currentSuccess, currentError, ad
   };
   headers = $.extend(headers, additionalHeaders);
 
+  if(asynchronous === 'undefined'){
+    var asynchronous = true;
+  }
+
   $.ajax({
     url: url,
     type: operation,
     headers: headers,
     data: data,
     success: currentSuccess,
-    error: currentError
+    error: currentError,
+    async: asynchronous
   });
 }
 
@@ -113,5 +118,4 @@ export function toolify(json, sharedProps) {
   json = iterateRec(json, 0, sharedProps);
 
   return json;
-
 }

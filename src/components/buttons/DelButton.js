@@ -23,7 +23,7 @@ class DelButton extends React.Component{
 
   render() {
     return (
-      <button className="ui red button" onClick={this.deleteData}>DEL</button>
+      <button className="ui red button playgroundButton" onClick={this.deleteData}>DEL</button>
     );
   }
 }

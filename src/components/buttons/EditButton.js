@@ -52,12 +52,12 @@ class EditButton extends React.Component{
   render() {
     if(this.props.codeRights === 'write'){
       var itemsPostPut = <div>
-            <button className="ui yellow button" id="postButton" onClick={this.postButton}>POST</button>
-            <button className="ui orange button" id="putButton" onClick={this.putButton}>PUT</button>
+            <button className="ui yellow button playgroundButton" id="postButton" onClick={this.postButton}>POST</button>
+            <button className="ui orange button playgroundButton" id="putButton" onClick={this.putButton}>PUT</button>
           </div>;
     }
     else{
-      var itemEdit = <button className="ui orange button" onClick={this.editButton}>EDIT</button>;
+      var itemEdit = <button className="ui orange button playgroundButton" onClick={this.editButton}>EDIT</button>;
     }
     return (
       <div>
