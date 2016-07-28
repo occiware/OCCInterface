@@ -18,6 +18,16 @@ export default class Reading extends React.Component{
   }
 
   componentDidUpdate = () => {
+    //we transform all link of readings to make them playground-clickable
+    this.replaceLinks();
+  }
+
+  componentDidMount = () => {
+    console.log('lol');
+    this.replaceLinks();
+  }
+
+  replaceLinks = () => {
     $('.reading a').each(function() {
       if($(this).attr('href').charAt(0) === '/'){
         var p = $('<a href="'+$(this).attr('href')+'">'+$(this).text()+'</a>');

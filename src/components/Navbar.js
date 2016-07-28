@@ -37,9 +37,8 @@ export default class NavBar extends React.Component{
               <div className="item">b</div>
             </div>
           </a>
-          <div className="ui labeled input item right">
-            <div className="ui label">URL OCCI server </div>
-            <input type="text" className="backendURL" />
+          <div className="ui input item right">
+            <input type="text" placeholder="OCCI server" className="backendURL" />
             <button className="ui button useButton" onClick={this.updateBackendURL}>Use</button>
           </div>
           <a href="https://github.com/Romathonat/OCCInterface" className="item right">GitHub</a>
