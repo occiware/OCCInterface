@@ -38,6 +38,16 @@ Then, you need to enter the URL of the OCCI server on the input at the top of th
 ## How to integrate it in your own OCCI implementation
 TODO
 
+## FAQ for dev
+
+- What is a playground link and how to create it ?  
+A playground link is a clickable link that make a GET request on the API and displays its content in the codeview.
+To do so, create a classic link in markdown, and make your URL begin with "/"  
+example:
+```
+[/resources/compute](/resources/compute)
+```
+
 ## How to configure your Erocci Server
 (TODO temporarly here, remove later)
 
