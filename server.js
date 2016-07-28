@@ -1,7 +1,7 @@
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var config = require('./webpack.config');
-var httpProxy = require("http-proxy");
+var httpProxy = require('http-proxy');
 var proxy = new httpProxy.createProxyServer({secure: false});
 const querystring = require('querystring');
 
@@ -22,7 +22,7 @@ function setup(app) {
   app.all('/conf', function(req, res) { // TODO only post ?
     proxyOptions[0].target = querystring.parse(req._parsedUrl.query).proxyTarget;
     console.log('updated proxyOptions', proxyOptions);
-    res.setHeader("Content-Type", "application/javascript");
+    res.setHeader('Content-Type', 'application/javascript');
     res.end('{}');
   });
 }

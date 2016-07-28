@@ -15,7 +15,6 @@ export default class Reading extends React.Component{
       $('.reading').transition('hide');
       $('.reading').transition('fade');
     }
-
   }
 
   componentDidUpdate = () => {

@@ -1,13 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import callAPI from '../utils.js';
+
+
 export default class NavBar extends React.Component{
   componentDidMount = () => {
     $('.ui.dropdown').dropdown();
   }
 
   updateBackendURL = () => {
+    //we define this to auto toolify hyperlinks on the code view
     window.backendURL = $('.backendURL').val();
+    $.ajax({
+      url: '/conf?proxyTarget='+window.backendURL,
+      type: 'GET'
+    });
   }
 
   render() {
