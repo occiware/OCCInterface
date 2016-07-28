@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import ReactMarkdown from 'react-markdown';
 import marked from 'marked';
 
 import CodeBlock from '../code-block.js';
