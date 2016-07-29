@@ -5,7 +5,7 @@ import * as actions from '../actions/actionIndex.js';
 
 class InputCurrentPath extends React.Component{
   updateCurrentPath = (e) => {
-    this.props.dispatch(actions.setCurrentQueryPath(encodeURIComponent(e.target.value)));
+    this.props.dispatch(actions.setCurrentQueryPath(e.target.value));
   }
   render() {
     return (
