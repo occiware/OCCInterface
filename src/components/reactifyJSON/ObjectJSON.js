@@ -2,7 +2,10 @@ import React from 'react';
 
 
 export default class ObjectJSON  extends React.Component{
-
+  constructor(props){
+    super(props);
+    this.state = {show: true};
+  }
   render(){
     var whiteSpaces = '';
     for(var i=0; i<this.props.depth; i++){
@@ -11,10 +14,17 @@ export default class ObjectJSON  extends React.Component{
 
     var optionalWhiteSpace = this.props.firstElement === true ? '' : whiteSpaces;
     var optionalComma = this.props.lastElement === true ? '' : ',';
+
+    var iconShow = <i className="plus square outline icon link" onClick={() => {this.setState({show: true})}}></i>;
+    var iconHide = <i className="minus square outline icon link" onClick={() => {this.setState({show: false})}}></i>;
+
+    var icon = this.state.show ? iconHide : iconShow;
+
+    var displayChildren = this.state.show ? this.props.elements : null;
     return (
       <div className="inline">
-      {optionalWhiteSpace}{'{ \n'}
-      {this.props.elements}
+      {optionalWhiteSpace}{'{ '}{icon}{' \n'}
+      {displayChildren}
       {whiteSpaces}{'}'}{optionalComma}{'\n'}
       </div>
     );
