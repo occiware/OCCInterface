@@ -5,6 +5,7 @@ import Menu from './components/Menu.js';
 import NavBar from './components/Navbar.js';
 import Content from './components/Content.js';
 
+import {callAPI} from './utils.js';
 
 export default class App extends React.Component{
   componentDidMount = () => {
@@ -13,15 +14,44 @@ export default class App extends React.Component{
         context: '#mainContainer'
       })
     ;
-    
+
     $(window).scroll(function () {
       if ($(this).scrollTop() > 150) {
-              $('.goTop').addClass('show');
-          } else {
-              $('.goTop').removeClass('show');
-          }
+          $('.goTop').addClass('show');
+      } else {
+          $('.goTop').removeClass('show');
+      }
     });
-}
+  }
+
+  //get the currentScheme to pass down to Navbar
+  getSchemes = () => {
+    var rootDatas;
+    callAPI(
+      'GET',
+      '/-/',
+      (data) => {
+        rootDatas = data;
+      },
+      null,
+      null,
+      null,
+      false
+    );
+
+    var schemes = {};
+
+    for(var i=0; i<rootDatas.kinds.length; i++){
+      if(rootDatas.kinds[i].scheme in schemes){
+        schemes[rootDatas.kinds[i].scheme].push(rootDatas.kinds[i].title);
+      }
+      else{
+        schemes[rootDatas.kinds[i].scheme] = [];
+      }
+    }
+    console.log(schemes);
+    return schemes;
+  }
 
   goToTop = () => {
     $('html, body').animate({
@@ -43,7 +73,7 @@ export default class App extends React.Component{
 
     return (
       <div>
-        <NavBar/>
+        <NavBar schemes={this.getSchemes()}/>
         <div className="ui container stackable grid" id="mainContainer">
           <Menu readings={this.props.route.readings}/>
           <Content reading={currentReading} goToTop={this.goToTop}/>

@@ -23,7 +23,6 @@ export default class Reading extends React.Component{
   }
 
   componentDidMount = () => {
-    console.log('lol');
     this.replaceLinks();
   }
 

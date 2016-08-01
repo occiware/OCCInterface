@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import callAPI from '../utils.js';
+import {callAPI} from '../utils.js';
 
 
 export default class NavBar extends React.Component{
@@ -25,6 +25,19 @@ export default class NavBar extends React.Component{
       currentProject = 'Default scheme';
     }
 
+    var schemes = [];
+    for(var scheme in this.props.schemes){
+      schemes.push(<div className="item" key={scheme}>
+        <i className="dropdown icon"></i>
+        <span className="text">{scheme}</span>
+          <div className="menu">
+            {this.props.schemes[scheme].map((kind, i) => {
+              return <div className="item">{kind}</div>
+            })}
+          </div>
+        </div>);
+    }
+
     return (
       <div className="ui inverted menu navbar centered grid blue">
         <div className="ui container wrapNavbar">
@@ -33,8 +46,7 @@ export default class NavBar extends React.Component{
             {currentProject}
             <i className="dropdown icon"></i>
             <div className="menu">
-              <div className="item">a</div>
-              <div className="item">b</div>
+              {schemes}
             </div>
           </a>
           <div className="ui input item right">

@@ -11,7 +11,7 @@ import GettingStarted from 'raw!./readings/GettingStarted.md';
 import OCCIProject from 'raw!./readings/OCCIProject.md';
 
 var initialState =  {
-  'currentPath': '/categories/compute',
+  'currentPath': '/-/',
   'currentJson': {hello: 'world'},
   'errorMessage': {
     simple: '',
