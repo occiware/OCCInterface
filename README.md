@@ -33,7 +33,7 @@ npm start
 
 You can go to [http://localhost:3000/](http://localhost:3000/).
 
-Then, you need to enter the URL of the OCCI server on the input at the top of the page.
+Then, you need to enter the URL of the OCCI server on the input at the top of the page (without "/" at the end)
 
 ## How to integrate it in your own OCCI implementation
 TODO
