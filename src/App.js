@@ -43,10 +43,10 @@ export default class App extends React.Component{
 
     for(var i=0; i<rootDatas.kinds.length; i++){
       if(rootDatas.kinds[i].scheme in schemes){
-        schemes[rootDatas.kinds[i].scheme].push(rootDatas.kinds[i].title);
+        schemes[rootDatas.kinds[i].scheme].push({title: rootDatas.kinds[i].title, term: rootDatas.kinds[i].term});
       }
       else{
-        schemes[rootDatas.kinds[i].scheme] = [];
+        schemes[rootDatas.kinds[i].scheme] = [{title: rootDatas.kinds[i].title, term: rootDatas.kinds[i].term}];
       }
     }
     console.log(schemes);

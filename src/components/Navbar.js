@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import {callAPI} from '../utils.js';
+import * as actions from '../actions/actionIndex.js';
 
-
-export default class NavBar extends React.Component{
+class NavBar extends React.Component{
   componentDidMount = () => {
     $('.ui.dropdown').dropdown();
   }
@@ -18,12 +18,21 @@ export default class NavBar extends React.Component{
     });
   }
 
-  render() {
-    var currentProject = this.props.currentProject;
+  displayKind = (kind) => {
+    var link = '/categories/'+kind;
+    this.props.dispatch(actions.setCurrentQueryPath(link));
+    this.props.dispatch(actions.setReadableCode());
 
-    if(!currentProject){
-      currentProject = 'Default scheme';
-    }
+    callAPI(
+      'GET',
+      link,
+      (data) => {
+        this.props.dispatch(actions.setCurrentJson(data));
+      }
+    )
+  }
+
+  render() {
 
     var schemes = [];
     for(var scheme in this.props.schemes){
@@ -32,7 +41,7 @@ export default class NavBar extends React.Component{
         <span className="text">{scheme}</span>
           <div className="menu">
             {this.props.schemes[scheme].map((kind, i) => {
-              return <div className="item">{kind}</div>
+              return <div className="item" onClick={() => this.displayKind(kind.term)} key={kind.term}>{kind.title}</div>
             })}
           </div>
         </div>);
@@ -43,7 +52,7 @@ export default class NavBar extends React.Component{
         <div className="ui container wrapNavbar">
           <a className="brand item largefont">OCCInterface</a>
           <a className="ui dropdown item">
-            {currentProject}
+            Select Kind
             <i className="dropdown icon"></i>
             <div className="menu">
               {schemes}
@@ -59,3 +68,5 @@ export default class NavBar extends React.Component{
     );
   }
 }
+
+export default NavBar = connect()(NavBar);
