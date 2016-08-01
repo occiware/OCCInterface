@@ -49,7 +49,6 @@ export default class App extends React.Component{
         schemes[rootDatas.kinds[i].scheme] = [{title: rootDatas.kinds[i].title, term: rootDatas.kinds[i].term}];
       }
     }
-    console.log(schemes);
     return schemes;
   }
 

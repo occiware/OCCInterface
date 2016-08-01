@@ -136,3 +136,11 @@ blockquote {
 .playgroundButton {
   width: 70px !important;
 }
+
+.link{
+  color: black;
+}
+
+.link:hover{
+  color: grey;
+}

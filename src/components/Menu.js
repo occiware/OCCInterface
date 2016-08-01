@@ -7,30 +7,16 @@ export default class Menu  extends React.Component{
   constructor(props){
     super(props);
     this.state= {
-      hidden: true,
+      hidden: false,
       onButton: false
     };
-  }
-
-  componentDidMount(){
-    $('.ui.mymenu').hide();
-
-    $('.menubutton').dropdown({
-     onChange: function(val) {
-       $('.menubutton')
-         .dropdown('set text', 'Menu')
-       ;
-      }
-    });
   }
 
   render(){
     return (
       <div className="ui four wide column centered grid">
         <div className="ui center sticky groupementmenu">
-          <div className="ui center column white dropdown big launch orange basic button menubutton center aligned container">
-            <i className="content icon"></i>
-            <span className="text">Menu</span>
+          <div className="ui center column menubutton center aligned container">
             <MenuDepliant readings={this.props.readings}/>
           </div>
         </div>
@@ -40,11 +26,23 @@ export default class Menu  extends React.Component{
 }
 
 class MenuDepliant extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      active: ''
+    };
+  }
+
+  setActive = (element) => {
+    this.setState({active: element});
+  }
+
   render(){
     return(
-      <div className="ui myCentering hidden vertical compact menu mymenu">
+      <div className="ui myCentering secondary vertical pointing menu mymenu">
         {this.props.readings.map((menuItem, i) => {
-          return <MenuElement ElementMenu={menuItem} key={i}/>;
+          var active = menuItem.path === this.state.active ? 'active' : '';
+          return <MenuElement ElementMenu={menuItem} key={menuItem.path} active={active} setActive={this.setActive} />;
         }, this)}
       </div>
     );
@@ -52,9 +50,15 @@ class MenuDepliant extends React.Component{
 }
 
 class MenuElement extends React.Component{
+  clickReading = (e) => {
+    this.props.setActive(this.props.ElementMenu.path);
+  }
+
   render(){
     return(
-      <Link className="item" to={this.props.ElementMenu.path}>{this.props.ElementMenu.title}</Link>
+      <div className={this.props.active+' item'} onClick={this.clickReading}>
+        <Link className="link" to={this.props.ElementMenu.path}>{this.props.ElementMenu.title}</Link>
+      </div>
     );
   }
 }
