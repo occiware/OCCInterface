@@ -36,6 +36,7 @@ if (isProduction) { // prod :
   // Init express server
   var app = new express();
 
+  app.use('/static/', express.static(__dirname + '/dist/')); // TODO webpack conf, rather '/public/'
   app.use(express.static(__dirname + '/')); // TODO webpack conf, rather '/public/'
   app.use('/proxiedOCCIServer', proxy(proxyOptions.target));
 
