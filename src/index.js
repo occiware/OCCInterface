@@ -11,16 +11,15 @@ import GettingStarted from 'raw!./readings/GettingStarted.md';
 import OCCIProject from 'raw!./readings/OCCIProject.md';
 
 var initialState =  {
-  'currentPath': '/-/',
-  'currentJson': {hello: 'world'},
-  'errorMessage': {
+  currentPath: '/-/',
+  currentJson: {},
+  errorMessage: {
     simple: '',
     detailed: ''
   },
   okMessage: '',
-  'currentScheme': '',
   // lecture (toolifié), ou ecriture (edit)
-  'codeRights': 'read'
+  codeRights: 'read'
 }
 
 

@@ -24,7 +24,7 @@ export default class App extends React.Component{
     });
   }
 
-  //get the currentScheme to pass down to Navbar
+  //get the the schemes and kind to pass down to Navbar
   getSchemes = () => {
     var rootDatas;
     callAPI(
