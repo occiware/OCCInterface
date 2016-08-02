@@ -19,6 +19,7 @@ class NavBar extends React.Component{
       success: function(data){
         window.backendURL = $('.backendURL').val();
         navbar.props.dispatch(actions.setOkMessage('You are now using '+window.backendURL));
+        navbar.forceUpdate();
       },
       error: function(xhr){
         navbar.props.dispatch(actions.setErrorMessage('Error connecting to '+window.backendURL));
@@ -41,14 +42,14 @@ class NavBar extends React.Component{
   }
 
   render() {
-
+    var existingSchemes = this.props.getSchemes();
     var schemes = [];
-    for(var scheme in this.props.schemes){
+    for(var scheme in existingSchemes){
       schemes.push(<div className="item" key={scheme}>
         <i className="dropdown icon"></i>
         <span className="text">{scheme}</span>
           <div className="menu">
-            {this.props.schemes[scheme].map((kind, i) => {
+            {existingSchemes[scheme].map((kind, i) => {
               return <div className="item" onClick={() => this.displayKind(kind.term)} key={kind.term}>{kind.title}</div>
             })}
           </div>

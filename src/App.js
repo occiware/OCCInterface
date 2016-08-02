@@ -72,7 +72,7 @@ export default class App extends React.Component{
 
     return (
       <div>
-        <NavBar schemes={this.getSchemes()}/>
+        <NavBar getSchemes={this.getSchemes} schemes={this.getSchemes()}/>
         <div className="ui container stackable grid" id="mainContainer">
           <Menu readings={this.props.route.readings}/>
           <Content reading={currentReading} goToTop={this.goToTop}/>
