@@ -56,8 +56,8 @@ class MenuElement extends React.Component{
 
   render(){
     return(
-      <div className={this.props.active+' item'} onClick={this.clickReading}>
-        <Link className="link" to={this.props.ElementMenu.path}>{this.props.ElementMenu.title}</Link>
+      <div className={this.props.active+' item'} >
+        <Link className="link" onClick={this.clickReading} to={this.props.ElementMenu.path}>{this.props.ElementMenu.title}</Link>
       </div>
     );
   }
