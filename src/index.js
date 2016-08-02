@@ -17,6 +17,7 @@ var initialState =  {
     simple: '',
     detailed: ''
   },
+  okMessage: '',
   'currentScheme': '',
   // lecture (toolifié), ou ecriture (edit)
   'codeRights': 'read'

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import {callAPI} from '../utils.js';
+
 import * as actions from '../actions/actionIndex.js';
 
 class NavBar extends React.Component{
@@ -11,10 +12,17 @@ class NavBar extends React.Component{
 
   updateBackendURL = () => {
     //we define this to auto toolify hyperlinks on the code view
-    window.backendURL = $('.backendURL').val();
+    var navbar = this;
     $.ajax({
-      url: '/conf?proxyTarget='+window.backendURL,
-      type: 'GET'
+      url: '/conf?proxyTarget='+$('.backendURL').val(),
+      type: 'GET',
+      success: function(data){
+        window.backendURL = $('.backendURL').val();
+        navbar.props.dispatch(actions.setOkMessage('You are now using '+window.backendURL));
+      },
+      error: function(xhr){
+        navbar.props.dispatch(actions.setErrorMessage('Error connecting to '+window.backendURL));
+      }
     });
   }
 

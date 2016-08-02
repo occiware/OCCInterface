@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import CodeView from './CodeView.js';
-import MessageErrorPath from './MessageErrorPath.js';
+import MessageError from './MessageError.js';
+import MessageOk from './MessageOk.js';
 import InputCurrentPath from './InputCurrentPath.js';
 import Reading from './Reading.js';
 
@@ -68,8 +69,11 @@ class Content extends React.Component{
   }
 
   render() {
-    var errorMessage = this.props.errorMessage.simple ? <MessageErrorPath message={this.props.errorMessage.simple}
+    var errorMessage = this.props.errorMessage.simple ? <MessageError message={this.props.errorMessage.simple}
                         messageErrorDetails={this.props.errorMessage.detailed}/> : null;
+
+    var okMessage = this.props.okMessage ? <MessageOk message={this.props.okMessage}/> : null;
+
     return (
       <div className="twelve wide column ui grid">
         <div className="row">
@@ -96,7 +100,9 @@ class Content extends React.Component{
             <ModelButton setErrorMessage={this.setErrorMessage} />
           </div>
 
+          {okMessage}
           {errorMessage}
+          
           <CodeView tools={this.tools}/>
 
           <Reading reading={this.props.reading} />
@@ -107,7 +113,8 @@ class Content extends React.Component{
 }
 
 const mapStateToProps = (state) => ({
-  errorMessage: state.errorMessage
+  errorMessage: state.errorMessage,
+  okMessage: state.okMessage
 })
 
 export default Content = connect(mapStateToProps)(Content);

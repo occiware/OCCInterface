@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import * as actions from '../actions/actionIndex.js';
 
-class MessageErrorPath extends React.Component{
+class MessageError extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
@@ -53,4 +53,4 @@ class MessageErrorPath extends React.Component{
   }
 }
 
-export default MessageErrorPath = connect()(MessageErrorPath);
+export default MessageError = connect()(MessageError);

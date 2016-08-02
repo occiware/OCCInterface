@@ -31,3 +31,10 @@ export function setErrorMessage(simple, detailed) {
     detailed: detailed
   }
 }
+
+export function setOkMessage(message) {
+  return {
+    type: 'SET_OK_MESSAGE',
+    message: message
+  }
+}

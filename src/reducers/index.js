@@ -28,6 +28,11 @@ const reducer = (state, action) => {
                   detailed: action.detailed
                 }
             }
+        case 'SET_OK_MESSAGE':
+            return {
+                ...state,
+                okMessage: action.message
+            }
         default:
             return state
     }
