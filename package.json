@@ -1,7 +1,7 @@
 {
-  "name": "react-hot-boilerplate",
+  "name": "OCCInterface",
   "version": "1.0.0",
-  "description": "Boilerplate for ReactJS project with hot code reloading",
+  "description": "OCCI client app",
   "scripts": {
     "build": "webpack --config ./webpack.prod.config.js --progress --colors",
     "start": "node server.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gaearon/react-hot-boilerplate.git"
+    "url": "https://github.com/occiware/OCCInterface.git"
   },
   "keywords": [
     "react",
@@ -22,7 +22,7 @@
     "edit",
     "webpack"
   ],
-  "author": "Dan Abramov <dan.abramov@me.com> (http://github.com/gaearon), modified by Romain Mathonat <romain.mathonat@gmail.com>",
+  "author": "Romain Mathonat <romain.mathonat@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.0.20",
@@ -38,6 +38,7 @@
     "webpack-dev-server": "^1.12.1"
   },
   "dependencies": {
+    "express": "^4.14.0",
     "express-http-proxy": "^0.9.0",
     "html-loader": "^0.4.3",
     "marked": "^0.3.5",
