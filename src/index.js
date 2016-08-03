@@ -18,6 +18,8 @@ var initialState =  {
     detailed: ''
   },
   okMessage: '',
+  currentURLServer: '',
+
   // lecture (toolifié), ou ecriture (edit)
   codeRights: 'read'
 }

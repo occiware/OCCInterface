@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 import marked from 'marked';
 
-import CodeBlock from '../code-block.js';
 // import * as actions from '../actions/actionIndex.js';
 
 

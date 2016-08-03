@@ -41,6 +41,10 @@ class NavBar extends React.Component{
     )
   }
 
+  updateCurrentBackendURL = (e) => {
+    this.props.dispatch(actions.setCurrentURLServer(e.target.value));
+  }
+
   render() {
     var existingSchemes = this.props.getSchemes();
     var schemes = [];
@@ -68,7 +72,8 @@ class NavBar extends React.Component{
             </div>
           </a>
           <div className="ui input item right">
-            <input type="text" placeholder="OCCI server" className="backendURL" />
+
+            <input type="text" placeholder="server URL" className="backendURL" value={this.props.currentURLServer} onChange={this.updateCurrentBackendURL} />
             <button className="ui button useButton" onClick={this.updateBackendURL}>Use</button>
           </div>
           <a href="https://github.com/Romathonat/OCCInterface" className="item right">GitHub</a>
@@ -78,4 +83,9 @@ class NavBar extends React.Component{
   }
 }
 
-export default NavBar = connect()(NavBar);
+
+const mapStateToProps = (state) => ({
+  currentURLServer: state.currentURLServer
+})
+
+export default NavBar = connect(mapStateToProps)(NavBar);

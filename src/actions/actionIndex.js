@@ -38,3 +38,10 @@ export function setOkMessage(message) {
     message: message
   }
 }
+
+export function setCurrentURLServer(currentURLServer) {
+  return {
+    type: 'SET_CURRENT_URL_SERVER',
+    currentURLServer: currentURLServer
+  }
+}

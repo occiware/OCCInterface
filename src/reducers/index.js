@@ -33,6 +33,11 @@ const reducer = (state, action) => {
                 ...state,
                 okMessage: action.message
             }
+        case 'SET_CURRENT_URL_SERVER':
+            return {
+                ...state,
+                currentURLServer: action.currentURLServer
+            }
         default:
             return state
     }
