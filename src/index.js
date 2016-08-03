@@ -25,9 +25,10 @@ var initialState =  {
 }
 
 
-// let store = createStore(reducer, initialState);
-let store = createStore(reducer, initialState, window.devToolsExtension && window.devToolsExtension());
+let store = createStore(reducer, initialState);
+// let store = createStore(reducer, initialState, window.devToolsExtension && window.devToolsExtension());
 
+//the first reading is the default
 const readings = [
     {'title':'Getting started', 'path': 'gettingstarted', 'component': GettingStarted},
     {'title':'The OCCI Project', 'path': 'OCCIProject', 'component': OCCIProject},

@@ -102,7 +102,7 @@ class Content extends React.Component{
 
           {okMessage}
           {errorMessage}
-          
+
           <CodeView tools={this.tools}/>
 
           <Reading reading={this.props.reading} />

@@ -28,9 +28,11 @@ export default class Menu  extends React.Component{
 class MenuDepliant extends React.Component{
   constructor(props) {
     super(props);
+
     this.state = {
-      active: ''
+      active: this.props.readings[0].path
     };
+
   }
 
   setActive = (element) => {
