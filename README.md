@@ -43,10 +43,24 @@ TODO
 - What is a playground link and how to create it ?  
 A playground link is a clickable link that make a GET request on the API and displays its content in the codeview.
 To do so, create a classic link in markdown, and make your URL begin with "/"  
-example:
+example:  
 ```
 [/resources/compute](/resources/compute)
 ```
+- How to deploy on Heroku ?  
+
+``` bash
+npm run build
+```
+``` bash
+git commit -am "deployment message"
+```
+``` bash
+git push heroku master
+```
+
+
+
 
 ## How to configure your Erocci Server
 (TODO temporarly here, remove later)
