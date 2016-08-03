@@ -51,7 +51,7 @@ if (isProduction) { // prod :
 
   //for react router, we redirect on index.html
   app.get('*', function (request, response){
-    response.sendFile(__dirname +'index.html');
+    response.sendFile(__dirname+'/index.html');
   })
 
   setup(app);
