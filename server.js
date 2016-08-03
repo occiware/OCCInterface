@@ -12,11 +12,11 @@ var proxyOptions = {
   changeOrigin: true
 };
 
-// additional conf of express or webpack dev server : let the user update the proxy target
+// additional conf of express or webpack dev server :
 function setup(app) {
   // update the proxied target URL :
   // test using ex. http://localhost:3000/conf?proxyTarget=http://malmo.lizenn.net:8080 then http://localhost:3000/proxiedOCCIServer/-/
-  app.all('/conf', function(req, res) {
+  app.all('/conf', function(req, res) { // TODO only post ?
     proxyOptions.target = querystring.parse(req._parsedUrl.query).proxyTarget;
     console.log('updated proxyOptions', proxyOptions);
     res.setHeader('Content-Type', 'application/javascript');
@@ -25,26 +25,34 @@ function setup(app) {
 }
 
 var isProduction = process.env.NODE_ENV === 'production';
-console.log('In production :', isProduction);
+console.log('env is prod =', isProduction);
 
 if (isProduction) { // prod :
-
   var express = require('express');
   var http = require('http');
-  var proxy = require('express-http-proxy');
+  var httpProxy = require('http-proxy');
+  var proxy = new httpProxy.createProxyServer({secure: false});
 
   // Init express server
-  var app = new express();
+  var app = this.app = new express();
 
-  app.use('/static/', express.static(__dirname + '/dist/')); // TODO webpack conf, rather '/public/'
   app.use(express.static(__dirname + '/')); // TODO webpack conf, rather '/public/'
-  app.use('/proxiedOCCIServer', proxy(proxyOptions.target));
+
+  app.all(proxyOptions.path, function (req, res, next) {
+    proxyOptions.rewrite(req, proxyOptions);
+
+    proxy.web(req, res, proxyOptions, function(err){
+      var msg = 'cannot proxy to ' + proxyOptions.target + '('+ err.message + ')';
+      this.sockWrite(this.sockets, 'proxy-error', [msg]);
+      res.statusCode = 502;
+      res.end();
+    }.bind(this));
+  }.bind(this));
 
   setup(app);
-  var listeningApp = http.createServer(app);
-  app.listen(port);
 
-  console.log('Listening at http://localhost:' + port + '/');
+  app.listen(port);
+  console.log(`Listening at http://localhost:${port}`)
 
 } else { // dev :
 
