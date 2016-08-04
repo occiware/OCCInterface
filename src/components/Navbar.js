@@ -5,24 +5,35 @@ import {callAPI} from '../utils.js';
 
 import * as actions from '../actions/actionIndex.js';
 
+import conf from '../../conf.js';
+
 class NavBar extends React.Component{
   componentDidMount = () => {
     $('.ui.dropdown').dropdown();
+
+    $('.ui.backendURL')
+    .dropdown({
+      allowAdditions: true
+    })
+  ;
   }
 
   updateBackendURL = () => {
     //we define this to auto toolify hyperlinks on the code view
     var navbar = this;
+
+    var backendURL = $('.backendURL .text').text();
+
     $.ajax({
-      url: '/conf?proxyTarget='+$('.backendURL').val(),
+      url: '/conf?proxyTarget='+backendURL,
       type: 'GET',
       success: function(data){
-        window.backendURL = $('.backendURL').val();
-        navbar.props.dispatch(actions.setOkMessage('You are now using '+window.backendURL));
+        window.backendURL = backendURL;
+        navbar.props.dispatch(actions.setOkMessage('You are now using '+backendURL));
         navbar.forceUpdate();
       },
       error: function(xhr){
-        navbar.props.dispatch(actions.setErrorMessage('Error connecting to '+window.backendURL));
+        navbar.props.dispatch(actions.setErrorMessage('Error connecting to '+backendURL));
       }
     });
   }
@@ -41,11 +52,10 @@ class NavBar extends React.Component{
     )
   }
 
-  updateCurrentBackendURL = (e) => {
-    this.props.dispatch(actions.setCurrentURLServer(e.target.value));
-  }
+
 
   render() {
+    //we manage kinds
     var existingSchemes = this.props.getSchemes();
     var schemes = [];
     for(var scheme in existingSchemes){
@@ -60,6 +70,13 @@ class NavBar extends React.Component{
         </div>);
     }
 
+    //we set the options of the backendURL
+    var options = conf.serverPaths.map((path,i) => {
+      return (
+        <option value={path} key={i+path}>{path}</option>
+      );
+    })
+
     return (
       <div className="ui inverted menu navbar centered grid blue">
         <div className="ui container wrapNavbar">
@@ -72,8 +89,10 @@ class NavBar extends React.Component{
             </div>
           </a>
           <div className="ui input item right">
-
-            <input type="text" placeholder="server URL" className="backendURL" value={this.props.currentURLServer} onChange={this.updateCurrentBackendURL} />
+              <select className="ui fluid search dropdown backendURL" name="backendURL" value={this.props.currentURLServer} onChange={() => {}}>
+                {/*<input type="text" className="ui input backendURL" value={this.props.currentURLServer} onChange={this.updateCurrentBackendURL} />*/}
+                {options}
+              </select>
             <button className="ui button useButton" onClick={this.updateBackendURL}>Use</button>
           </div>
           <a href="https://github.com/Romathonat/OCCInterface" className="item right">GitHub</a>
