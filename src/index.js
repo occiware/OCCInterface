@@ -10,22 +10,10 @@ import App from './App';
 import GettingStarted from 'raw!./readings/GettingStarted.md';
 import OCCIProject from 'raw!./readings/OCCIProject.md';
 
-var initialState =  {
-  currentPath: '/-/',
-  currentJson: {},
-  errorMessage: {
-    simple: '',
-    detailed: ''
-  },
-  okMessage: '',
-  currentURLServer: '',
-
-  // lecture (toolifié), ou ecriture (edit)
-  codeRights: 'read'
-}
+import conf from '../conf.js';
 
 
-let store = createStore(reducer, initialState);
+let store = createStore(reducer, conf.initialState);
 // let store = createStore(reducer, initialState, window.devToolsExtension && window.devToolsExtension());
 
 //the first reading is the default
@@ -35,9 +23,10 @@ const readings = [
   ]
 ;
 
-window.proxyURL = '/proxiedOCCIServer'; //redirection to make ajax calls
+window.proxyURL = conf.proxyURL; //redirection to make ajax calls
+window.backendURL = conf.backendURL;
 window.rootURL = window.location.host;
-window.backendURL = 'nothing';
+
 
 ReactDOM.render(
   <Provider store={store}>

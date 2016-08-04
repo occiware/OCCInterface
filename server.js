@@ -1,8 +1,13 @@
 const querystring = require('querystring');
+const conf = require('./conf.js');
 
 ///var host = 'occinterface.herokuapp.com'
 var port = process.env.PORT || 3000;
-var proxyDefaultTarget = 'http://malmo.lizenn.net:8080';
+var proxyDefaultTarget = conf.backendURL;
+
+//we define the backendURL as a gloabl variable
+// window.backendURL = proxyDefaultTarget;
+
 var proxyOptions = {
   path : '/proxiedOCCIServer/**',
   target: proxyDefaultTarget,
