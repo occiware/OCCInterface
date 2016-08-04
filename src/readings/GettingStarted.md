@@ -1,25 +1,20 @@
-# Markdown title
+# What is the OCCI playground ?
 
-Here is some text
+The OCCI playground is a tool to help you discover, learn and test the OCCI API and manage OCCI resources.  
 
-* This is an element of bullet list
-* this is another
+## And what is OCCI ?
 
-This is a link [myBeautifulLink](http://www.google.com)
+OCCI is a set of specifications which standardize and unify the management of the Cloud. In this standard, everything is a *Resource* or
+a *Link*.
 
-This is another one for the playground [secondBeautifulLink](/categories/compute)
-## Mardown subtitle
+# Getting started
 
-<blockquote>
-    This is a bloquote
-</blockquote>
+The first URL you should know is [/-/](/-/)  
+It gives you the configuration of the OCCI server, list the **actions** you can do, and the **kinds** of resources you can interact with.
+You can also discover the **kinds** of the current OCCI server by clicking on "Select Kind" at the top of the page.
 
-## How about some code?
+### 
 
-```js
-var React = require('react');
 
-var i = 25;
-
-```
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+### Switching server
+You can swith the current OCCI server you are working on with the editable dropdown at the top of the page.

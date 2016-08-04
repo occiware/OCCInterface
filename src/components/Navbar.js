@@ -25,7 +25,7 @@ class NavBar extends React.Component{
     var backendURL = $('.backendURL .text').text();
 
     if(!backendURL.match(/^http:\/\//) && !backendURL.match(/^https:\/\//)){
-      navbar.props.dispatch(actions.setErrorMessage('The URL needs to begin with http:// or https://'));
+      navbar.props.dispatch(actions.setErrorMessage('The URL needs to begin with http:// or https://  '));
     }
     else{
       $.ajax({
