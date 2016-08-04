@@ -23,28 +23,31 @@ class NavBar extends React.Component{
     var navbar = this;
 
     var backendURL = $('.backendURL .text').text();
-    $.ajax({
-      url: '/conf?proxyTarget='+backendURL,
-      type: 'GET',
-      success: function(data){
-        //we now make a test request to make sure the target is accessible
-        $.ajax({
-          url: backendURL+'/-/',
-          type: 'GET',
-          success: (data) => {
-            window.backendURL = backendURL;
-            navbar.props.dispatch(actions.setOkMessage('You are now using '+backendURL));
-            navbar.forceUpdate();
-          },
-          error: (xhr) => {
-            navbar.props.dispatch(actions.setErrorMessage('Error connecting to '+backendURL));
-          }
-        })
-      },
-      error: function(xhr){
-        navbar.props.dispatch(actions.setErrorMessage('Error connecting to '+backendURL));
-      }
-    });
+
+    if(!backendURL.match(/^http:\/\//) && !backendURL.match(/^https:\/\//)){
+      navbar.props.dispatch(actions.setErrorMessage('The URL needs to begin with http:// or https://'));
+    }
+    else{
+      $.ajax({
+        url: '/conf?proxyTarget='+backendURL,
+        type: 'GET',
+        success: function(data){
+          //we now make a test request to make sure the target is accessible
+          $.ajax({
+            url: backendURL+'/-/',
+            type: 'GET',
+            success: (data) => {
+              window.backendURL = backendURL;
+              navbar.props.dispatch(actions.setOkMessage('You are now using '+backendURL));
+              navbar.forceUpdate();
+            },
+            error: (xhr) => {
+              navbar.props.dispatch(actions.setErrorMessage('Error connecting to '+backendURL));
+            }
+          })
+        }
+      });
+    }
   }
 
   displayKind = (kind) => {
