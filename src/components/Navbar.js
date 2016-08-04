@@ -23,14 +23,23 @@ class NavBar extends React.Component{
     var navbar = this;
 
     var backendURL = $('.backendURL .text').text();
-
     $.ajax({
       url: '/conf?proxyTarget='+backendURL,
       type: 'GET',
       success: function(data){
-        window.backendURL = backendURL;
-        navbar.props.dispatch(actions.setOkMessage('You are now using '+backendURL));
-        navbar.forceUpdate();
+        //we now make a test request to make sure the target is accessible
+        $.ajax({
+          url: backendURL+'/-/',
+          type: 'GET',
+          success: (data) => {
+            window.backendURL = backendURL;
+            navbar.props.dispatch(actions.setOkMessage('You are now using '+backendURL));
+            navbar.forceUpdate();
+          },
+          error: (xhr) => {
+            navbar.props.dispatch(actions.setErrorMessage('Error connecting to '+backendURL));
+          }
+        })
       },
       error: function(xhr){
         navbar.props.dispatch(actions.setErrorMessage('Error connecting to '+backendURL));
@@ -88,14 +97,15 @@ class NavBar extends React.Component{
               {schemes}
             </div>
           </a>
-          <div className="ui input item right">
-              <select className="ui fluid search dropdown backendURL" name="backendURL" value={this.props.currentURLServer} onChange={() => {}}>
-                {/*<input type="text" className="ui input backendURL" value={this.props.currentURLServer} onChange={this.updateCurrentBackendURL} />*/}
-                {options}
-              </select>
-            <button className="ui button useButton" onClick={this.updateBackendURL}>Use</button>
+          <div className="ui item right navBarRight">
+            <div className="ui item">
+                <select className="ui fluid search dropdown backendURL" name="backendURL"onChange={() => {}}>
+                  {options}
+                </select>
+              <button className="ui button useButton" onClick={this.updateBackendURL}>Use</button>
+            </div>
+            <a href="https://github.com/Romathonat/OCCInterface" className="item">GitHub</a>
           </div>
-          <a href="https://github.com/Romathonat/OCCInterface" className="item right">GitHub</a>
         </div>
       </div>
     );

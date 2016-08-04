@@ -144,3 +144,11 @@ blockquote {
 .link:hover{
   color: grey;
 }
+
+.navBarRight{
+  padding: 0px !important;
+}
+
+.backendURL{
+  min-width: 250px !important;
+}

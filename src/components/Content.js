@@ -88,7 +88,7 @@ class Content extends React.Component{
           <div className="row ui form">
             <div className="field adresseget">
               <div className="ui label pointing below">
-                <p>OCCI server</p>
+                <p>Target URL</p>
               </div>
               <InputCurrentPath />
             </div>
