@@ -19,7 +19,7 @@ let store = createStore(reducer, conf.initialState);
 //the first reading is the default
 const readings = [
     {'title':'Getting started', 'path': 'gettingstarted', 'component': GettingStarted},
-    {'title':'The OCCI Project', 'path': 'OCCIProject', 'component': OCCIProject},
+    {'title':'The OCCIware Project', 'path': 'OCCIProject', 'component': OCCIProject},
   ]
 ;
 
