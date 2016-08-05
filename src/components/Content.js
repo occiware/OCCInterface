@@ -38,6 +38,7 @@ class Content extends React.Component{
     event.preventDefault();
     var link = event.target.href.replace(window.rootURL, '');
     link = link.replace('http://', '');
+    link = link.replace('https://', '');
 
     this.clickLinkPlayground(link);
   }
