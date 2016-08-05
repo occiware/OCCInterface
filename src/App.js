@@ -7,7 +7,9 @@ import Content from './components/Content.js';
 
 import {callAPI} from './utils.js';
 
-export default class App extends React.Component{
+import * as actions from './actions/actionIndex.js';
+
+class App extends React.Component{
   componentDidMount = () => {
     $('.ui.sticky')
       .sticky({
@@ -33,23 +35,30 @@ export default class App extends React.Component{
       (data) => {
         rootDatas = data;
       },
+      (xhr) =>  {
+        this.props.dispatch(actions.setErrorMessage('The target server is inaccessible'));
+        rootDatas = false;
+      },
       null,
       null,
-      null,
-      false
+      false,
+      5000
     );
 
-    var schemes = {};
+    if(rootDatas){
+      var schemes = {};
 
-    for(var i=0; i<rootDatas.kinds.length; i++){
-      if(rootDatas.kinds[i].scheme in schemes){
-        schemes[rootDatas.kinds[i].scheme].push({title: rootDatas.kinds[i].title, term: rootDatas.kinds[i].term});
+      for(var i=0; i<rootDatas.kinds.length; i++){
+        if(rootDatas.kinds[i].scheme in schemes){
+          schemes[rootDatas.kinds[i].scheme].push({title: rootDatas.kinds[i].title, term: rootDatas.kinds[i].term});
+        }
+        else{
+          schemes[rootDatas.kinds[i].scheme] = [{title: rootDatas.kinds[i].title, term: rootDatas.kinds[i].term}];
+        }
       }
-      else{
-        schemes[rootDatas.kinds[i].scheme] = [{title: rootDatas.kinds[i].title, term: rootDatas.kinds[i].term}];
-      }
+      return schemes;
     }
-    return schemes;
+    return {};
   }
 
   goToTop = () => {
@@ -72,7 +81,7 @@ export default class App extends React.Component{
 
     return (
       <div>
-        <NavBar getSchemes={this.getSchemes} schemes={this.getSchemes()}/>
+        <NavBar getSchemes={this.getSchemes}/>
         <div className="ui container stackable grid" id="mainContainer">
           <Menu readings={this.props.route.readings}/>
           <Content reading={currentReading} goToTop={this.goToTop}/>
@@ -85,3 +94,5 @@ export default class App extends React.Component{
     );
   }
 }
+
+export default App = connect()(App);

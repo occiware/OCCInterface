@@ -9,7 +9,7 @@ a *Link*. More informations [here](http://occi-wg.org/about/specification/)
 
 ## Getting started
 
-You can explore the API by clicking on the [links](/categories/compute), in the JSON or in this text, or by entering a target URL and clicking on the GEt button.
+You can explore the API by clicking on the [links](/categories/compute), in the JSON or in this text, or by entering a target URL and clicking on the GET button.
 
 * The first URL you should know is [/-/](/-/)  
 It gives you the configuration of the OCCI server, list the **actions** you can do, and the **kinds** of resources you can interact with.

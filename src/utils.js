@@ -5,7 +5,7 @@ import KeyValueJSON from './components/reactifyJSON/KeyValueJSON.js';
 import ValueJSON from './components/reactifyJSON/ValueJSON.js';
 
 
-export function callAPI(operation, relativeUrl, currentSuccess, currentError, additionalHeaders, data, asynchronous){
+export function callAPI(operation, relativeUrl, currentSuccess, currentError, additionalHeaders, data, asynchronous, timeout){
   var url = window.proxyURL+relativeUrl;
 
   var headers = {
