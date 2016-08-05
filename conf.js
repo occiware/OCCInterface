@@ -1,6 +1,6 @@
 //the list of servers we can access
 const serverPaths = [
-  'http://malmo.lizenn.net:808',
+  'http://malmo.lizenn.net:8080',
   'http://localhost:8080'
 ]
 

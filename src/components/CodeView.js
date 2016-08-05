@@ -22,12 +22,22 @@ class CodeView extends React.Component{
 
   //double data binding with the model
   updateCurrentJson = (e) => {
-    this.props.dispatch(actions.setCurrentJson(JSON.parse(e.target.value)));
+    this.props.dispatch(actions.setCurrentJson(e.target.value));
   }
 
   render() {
     if(this.props.codeRights === 'write'){
-      var view = <textarea className="segmentpadding mydata textareamydata" onChange={this.updateCurrentJson} value={JSON.stringify(this.props.currentJson,null,2)}></textarea>;
+      var value;
+      if (typeof this.props.currentJson === 'string' || this.props.currentJson instanceof String){
+        value = this.props.currentJson;
+      }
+      else{
+        value = JSON.stringify(this.props.currentJson,null,2);
+        //to avoid a particular case
+        this.props.dispatch(actions.setCurrentJson(value));
+      }
+
+      var view = <textarea className="segmentpadding mydata textareamydata" onChange={this.updateCurrentJson} value={value}></textarea>;
     }
     else{
       if(typeof this.props.currentJson !== 'undefined'){
