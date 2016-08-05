@@ -25,7 +25,8 @@ export function callAPI(operation, relativeUrl, currentSuccess, currentError, ad
     data: data,
     success: currentSuccess,
     error: currentError,
-    async: asynchronous
+    async: asynchronous,
+    timeout: timeout
   });
 }
 

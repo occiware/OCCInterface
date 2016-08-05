@@ -24,4 +24,4 @@ const initialState =  {
 };
 
 
-module.exports = {initialState, proxyURL, backendURL, serverPaths};
+module.exports = {initialState: initialState, proxyURL: proxyURL, backendURL: backendURL, serverPaths: serverPaths};
