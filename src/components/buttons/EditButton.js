@@ -33,6 +33,9 @@ class EditButton extends React.Component{
   editData = (operationType) => {
     var relativeUrl = this.props.currentPath;
 
+    //we need to send a string
+    var json = (typeof this.props.currentJson === 'string' || this.props.currentJson instanceof String) ? this.props.currentJson : JSON.stringify(this.props.currentJson);
+
     callAPI(
       operationType,
       relativeUrl,
@@ -45,7 +48,7 @@ class EditButton extends React.Component{
         this.props.dispatch(actions.setErrorMessage(''+xhr.responseText));
       },
       {'Content-Type': 'application/json'},
-      this.props.currentJson
+      json
     );
   }
 

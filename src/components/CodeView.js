@@ -33,8 +33,6 @@ class CodeView extends React.Component{
       }
       else{
         value = JSON.stringify(this.props.currentJson,null,2);
-        //to avoid a particular case
-        this.props.dispatch(actions.setCurrentJson(value));
       }
 
       var view = <textarea className="segmentpadding mydata textareamydata" onChange={this.updateCurrentJson} value={value}></textarea>;
