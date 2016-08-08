@@ -152,3 +152,15 @@ blockquote {
 .backendURL{
   min-width: 250px !important;
 }
+
+.playgroundLink{
+  color: #1B7CCC;
+}
+
+.playgroundLink:hover{
+  color: #5EB0F2;
+}
+
+a{
+  color: #2BBD22;
+}

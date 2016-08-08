@@ -29,21 +29,28 @@ class App extends React.Component{
   //get the the schemes and kind to pass down to Navbar
   getSchemes = () => {
     var rootDatas;
+
+    //we stop the script in an infinite loop as long as we don't have a response
+    var go = false;
     callAPI(
       'GET',
       '/-/',
       (data) => {
         rootDatas = data;
+        go = true;
       },
       (xhr) =>  {
         this.props.dispatch(actions.setErrorMessage('The target server is inaccessible'));
         rootDatas = false;
+        go = true;
       },
       null,
       null,
       false,
       5000
     );
+
+    while(!go){};
 
     if(rootDatas){
       var schemes = {};

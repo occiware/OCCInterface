@@ -18,6 +18,7 @@ export function callAPI(operation, relativeUrl, currentSuccess, currentError, ad
     var asynchronous = true;
   }
 
+  console.log(timeout);
   $.ajax({
     url: url,
     type: operation,

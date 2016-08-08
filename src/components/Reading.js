@@ -28,7 +28,7 @@ export default class Reading extends React.Component{
   replaceLinks = () => {
     $('.reading a').each(function() {
       if($(this).attr('href').charAt(0) === '/'){
-        var p = $('<a href="'+$(this).attr('href')+'">'+$(this).text()+'</a>');
+        var p = $('<a class="playgroundLink" href="'+$(this).attr('href')+'">'+$(this).text()+'</a>');
         p.click(window.clickLinkPlaygroundEvent);
         $(this).replaceWith(p);
       }
