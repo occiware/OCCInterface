@@ -4,7 +4,7 @@ The aim of the OCCI project is to normalize and unify the Cloud.
 If you use the cloud today and want to change your Cloud provider, it is really painful because the way of managing the Cloud is
 different depending on the provider you use.    
 
-OCCIware is an organization working on an implementation of the OCCI specifications. It created an OCCI compliant server, named Erocci,
+OCCIware is an organization working on an implementation of the [OCCI specifications](http://occi-wg.org/about/specification/). It created an OCCI compliant server, named Erocci,
 wich you can deploy on your Cloud, and wich exposes the REST API you are currently using through this playground.
 
 ## As a user

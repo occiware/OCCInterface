@@ -32,6 +32,10 @@ export default class Reading extends React.Component{
         p.click(window.clickLinkPlaygroundEvent);
         $(this).replaceWith(p);
       }
+      else{
+        var p = $('<a class="classicLink" href="'+$(this).attr('href')+'">'+$(this).text()+'</a>');
+        $(this).replaceWith(p);
+      }
     });
   }
 

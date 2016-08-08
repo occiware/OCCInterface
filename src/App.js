@@ -50,6 +50,7 @@ class App extends React.Component{
       5000
     );
 
+    //we wait while we don't have a response (max 5 secs because we set a timeout)
     while(!go){};
 
     if(rootDatas){

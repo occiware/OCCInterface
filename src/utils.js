@@ -18,7 +18,6 @@ export function callAPI(operation, relativeUrl, currentSuccess, currentError, ad
     var asynchronous = true;
   }
 
-  console.log(timeout);
   $.ajax({
     url: url,
     type: operation,
@@ -92,13 +91,11 @@ function iterateRec(json, depth, sharedProps){
   var jsonReact;
 
   //we add a prop lastElement to the last Element so that we don't put a comma after it
-
   if (jsonElements.length > 0){
     var lastElement = jsonElements[jsonElements.length-1];
     jsonElements.pop();
     jsonElements.push(React.cloneElement(lastElement, {lastElement: true}));
   }
-
 
   if (currentType === 'object'){
     if(depth === 0){

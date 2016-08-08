@@ -161,6 +161,10 @@ blockquote {
   color: #5EB0F2;
 }
 
-a{
-  color: #2BBD22;
+.classicLink{
+  color: #F58300;
+}
+
+.classicLink:hover{
+  color: #F0AF65;
 }

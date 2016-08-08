@@ -40,7 +40,6 @@ class ModelButton extends React.Component{
         var kinds = data.kinds;
         var model;
         for(var i=0; i<kinds.length; i++){
-          console.log(currentKind+' '+kinds[i].term);
           if(kinds[i].term === currentKind){
             model = kinds[i];
           }

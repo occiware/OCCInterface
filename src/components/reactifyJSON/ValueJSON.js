@@ -25,7 +25,7 @@ export default class ValueJSON  extends React.Component{
 
       //we make the link when finding a link of the playground
       if (regexRoot.test(element)){
-        value = <a href={element} onClick={this.clickLinkPlayground}>{element}</a>;
+        value = <a className="playgroundLink" href={element} onClick={this.clickLinkPlayground}>{element}</a>;
       }
       else{
         value = <span className="string">{element}</span>;
