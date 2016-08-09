@@ -5,7 +5,7 @@ OCCInterface
 
 
 OCCInterface is a generic application which let you explore and modify the resources of an OCCI server.
-Its aims are multiples:
+Its aims are multiple:
 - give a productivity tool to developers calling the OCCI API
 - manage and explore resources of an OCCI server easily
 - vulgarize, explain OCCI to newcomers, diffuse the OCCI way of thinking
