@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import marked from 'marked';
 
 // import * as actions from '../actions/actionIndex.js';
+import {compute} from '../../samples/occi-infra.js';
 
-
+import {callAPI} from '../utils.js';
 
 export default class Reading extends React.Component{
   componentWillUpdate = (nextProps) => {
@@ -49,9 +50,33 @@ export default class Reading extends React.Component{
     return {__html: marked(this.props.reading)};
   }
 
+  initSample = () => {
+    var relativeUrl = '/categories/compute';
+
+    //we need to send a string
+    var json = JSON.stringify(compute);
+
+    callAPI(
+      'POST',
+      relativeUrl,
+      (data) => {
+        this.props.dispatch(actions.setCurrentQueryPath(relativeUrl));
+        this.props.dispatch(actions.setReadableCode());
+        this.props.dispatch(actions.setCurrentJson(data));
+      },
+      (xhr) => {
+        this.props.dispatch(actions.setErrorMessage(''+xhr.responseText));
+      },
+      {'Content-Type': 'application/json'},
+      json
+    );
+  }
+
   render() {
     return (
-      <div className="reading segmentpadding" dangerouslySetInnerHTML={this.createMarkup()}>
+      <div>
+        {/*<button className="ui button" onClick={() => this.initSample()}>Init Sample</button>*/}
+        <div className="reading segmentpadding" dangerouslySetInnerHTML={this.createMarkup()}></div>
       </div>
     );
   }

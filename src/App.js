@@ -26,32 +26,39 @@ class App extends React.Component{
     });
   }
 
+
+
   //get the the schemes and kind to pass down to Navbar
   getSchemes = () => {
     var rootDatas;
 
     //we stop the script in an infinite loop as long as we don't have a response
-    var go = false;
-    callAPI(
+    var success = false;
+
+    var ajaxCall = callAPI(
       'GET',
       '/-/',
       (data) => {
         rootDatas = data;
-        go = true;
+        success = true;
       },
       (xhr) =>  {
         this.props.dispatch(actions.setErrorMessage('The target server is inaccessible'));
         rootDatas = false;
-        go = true;
+        console.log('fail');
+        success = false;
       },
       null,
       null,
-      false,
-      5000
+      false
     );
 
-    //we wait while we don't have a response (max 5 secs because we set a timeout)
-    while(!go){};
+    // var start = Date.now();
+    // while(Date.now() - start < 1000 && !success){}
+    //
+    // if(!success){
+    //   ajaxCall.abort();
+    // }
 
     if(rootDatas){
       var schemes = {};

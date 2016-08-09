@@ -14,19 +14,18 @@ export function callAPI(operation, relativeUrl, currentSuccess, currentError, ad
   };
   headers = $.extend(headers, additionalHeaders);
 
-  if(asynchronous === 'undefined'){
+  if(asynchronous === 'undefined' || asynchronous === null){
     var asynchronous = true;
   }
 
-  $.ajax({
+  return $.ajax({
     url: url,
     type: operation,
     headers: headers,
     data: data,
     success: currentSuccess,
     error: currentError,
-    async: asynchronous,
-    timeout: timeout
+    async: asynchronous
   });
 }
 
