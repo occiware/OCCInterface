@@ -40,6 +40,8 @@ class Content extends React.Component{
     link = link.replace('http://', '');
     link = link.replace('https://', '');
 
+    //we go to the top when clicking on a playground link
+    this.props.goToTop();
     this.clickLinkPlayground(link);
   }
 
@@ -55,6 +57,9 @@ class Content extends React.Component{
       link,
       (data) => {
         this.props.dispatch(actions.setCurrentJson(data));
+      },
+      (xhr) => {
+        this.setErrorMessage('Impossible to access this resource',xhr.status+' '+xhr.responseText);
       }
     )
   }
@@ -106,7 +111,7 @@ class Content extends React.Component{
 
           <CodeView tools={this.tools}/>
 
-          <Reading reading={this.props.reading} />
+          <Reading reading={this.props.reading}/>
         </div>
       </div>
     );
