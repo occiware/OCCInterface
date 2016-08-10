@@ -58,7 +58,8 @@ git commit -am "deployment message"
 ``` bash
 git push heroku master
 ```
-
+- I have an issue "(mixed active content)", ho to fix it ?
+You need to have the same domain policy between your OCCI server and your OCCInterface server. For instance http with http, or https with https.
 
 
 
