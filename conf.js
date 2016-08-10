@@ -19,7 +19,7 @@ const initialState =  {
   },
   okMessage: '',
   currentURLServer: backendURL,
-  // lecture (toolifié), ou ecriture (edit)
+  // readings (toolified), or write (edit)
   codeRights: 'read'
 };
 

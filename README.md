@@ -5,7 +5,7 @@ OCCInterface
 
 
 OCCInterface is a generic application which let you explore and modify the resources of an OCCI server.
-Its aims are multiples:
+Its aims are multiple:
 - give a productivity tool to developers calling the OCCI API
 - manage and explore resources of an OCCI server easily
 - vulgarize, explain OCCI to newcomers, diffuse the OCCI way of thinking
@@ -58,7 +58,8 @@ git commit -am "deployment message"
 ``` bash
 git push heroku master
 ```
-
+- I have an issue "(mixed active content)", ho to fix it ?
+You need to have the same domain policy between your OCCI server and your OCCInterface server. For instance http with http, or https with https.
 
 
 
