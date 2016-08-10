@@ -15,7 +15,7 @@ export default class ValueJSON  extends React.Component{
     var element = this.props.value;
 
     if(element === false || element === true){
-      value = <span className="boolean">{element}</span>;
+      value = <span className="boolean">{element.toString()}</span>;
     }
     else if(this.isNumber(element)){
       value = <span className="number">{element}</span>;
