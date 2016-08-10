@@ -19,6 +19,12 @@
   text-align: center;
 }
 
+.myCentering {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
 .menubutton{
   width: auto;
   height: auto;

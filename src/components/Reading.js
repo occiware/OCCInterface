@@ -4,11 +4,12 @@ import { connect } from 'react-redux';
 import marked from 'marked';
 
 // import * as actions from '../actions/actionIndex.js';
-import {compute} from '../../samples/occi-infra.js';
+import {compute, storage, storagelink} from '../../samples/occi-infra.js';
 
 import {callAPI} from '../utils.js';
+import * as actions from '../actions/actionIndex.js';
 
-export default class Reading extends React.Component{
+class Reading extends React.Component{
   componentWillUpdate = (nextProps) => {
     //we make the animation only if we have a new reading
     if(nextProps.reading !== this.props.reading){
@@ -51,11 +52,21 @@ export default class Reading extends React.Component{
   }
 
   initSample = () => {
-    var relativeUrl = '/categories/compute';
+    var urlCompute = '/categories/compute';
+    var urlStorage = '/categories/storage';
+    var urlStorageLink = '/categories/storagelink';
 
     //we need to send a string
-    var json = JSON.stringify(compute);
+    var jsonCompute = JSON.stringify(compute);
+    var jsonStorage = JSON.stringify(storage);
+    var jsonStorageLink = JSON.stringify(storagelink);
 
+    this.postResource(urlCompute, jsonCompute);
+    this.postResource(urlStorage, jsonStorage);
+    this.postResource(urlStorageLink, jsonStorageLink);
+  }
+
+  postResource = (relativeUrl, json) => {
     callAPI(
       'POST',
       relativeUrl,
@@ -71,13 +82,16 @@ export default class Reading extends React.Component{
       json
     );
   }
-
   render() {
     return (
       <div>
-        {/*<button className="ui button" onClick={() => this.initSample()}>Init Sample</button>*/}
+        <div className="myCentering">
+          {/*<button className="ui button" onClick={() => this.initSample()}>Init Sample</button> (work only if your server has occi-infra.xml !)*/}
+        </div>
         <div className="reading segmentpadding" dangerouslySetInnerHTML={this.createMarkup()}></div>
       </div>
     );
   }
 }
+
+export default Reading = connect()(Reading);
