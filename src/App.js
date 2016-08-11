@@ -26,56 +26,6 @@ class App extends React.Component{
     });
   }
 
-
-
-  //get the the schemes and kind to pass down to Navbar
-  getSchemes = () => {
-    var rootDatas;
-
-    //we stop the script in an infinite loop as long as we don't have a response
-    var success = false;
-
-    var ajaxCall = callAPI(
-      'GET',
-      '/-/',
-      (data) => {
-        rootDatas = data;
-        success = true;
-      },
-      (xhr) =>  {
-        this.props.dispatch(actions.setErrorMessage('The target server is inaccessible'));
-        rootDatas = false;
-        console.log('fail');
-        success = false;
-      },
-      null,
-      null,
-      false
-    );
-
-    // var start = Date.now();
-    // while(Date.now() - start < 1000 && !success){}
-    //
-    // if(!success){
-    //   ajaxCall.abort();
-    // }
-
-    if(rootDatas){
-      var schemes = {};
-
-      for(var i=0; i<rootDatas.kinds.length; i++){
-        if(rootDatas.kinds[i].scheme in schemes){
-          schemes[rootDatas.kinds[i].scheme].push({title: rootDatas.kinds[i].title, term: rootDatas.kinds[i].term});
-        }
-        else{
-          schemes[rootDatas.kinds[i].scheme] = [{title: rootDatas.kinds[i].title, term: rootDatas.kinds[i].term}];
-        }
-      }
-      return schemes;
-    }
-    return {};
-  }
-
   goToTop = () => {
     $('html, body').animate({
         scrollTop: 0
@@ -96,7 +46,7 @@ class App extends React.Component{
 
     return (
       <div>
-        <NavBar getSchemes={this.getSchemes}/>
+        <NavBar />
         <div className="ui container stackable grid" id="mainContainer">
           <Menu readings={this.props.route.readings}/>
           <Content reading={currentReading} goToTop={this.goToTop}/>

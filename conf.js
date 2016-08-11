@@ -20,7 +20,8 @@ const initialState =  {
   okMessage: '',
   currentURLServer: backendURL,
   // readings (toolified), or write (edit)
-  codeRights: 'read'
+  codeRights: 'read',
+  schemes: {schemeName: [{title: '', term: ''}]}
 };
 
 

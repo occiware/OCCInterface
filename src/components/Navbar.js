@@ -18,6 +18,20 @@ class NavBar extends React.Component{
   ;
   }
 
+  /*look for schemes and their corresponding kinds, and dispatch to the store the correct datas*/
+  getSchemes = (data) => {
+    var schemes = {};
+    for(var i=0; i<data.kinds.length; i++){
+      if(data.kinds[i].scheme in schemes){
+        schemes[data.kinds[i].scheme].push({title: data.kinds[i].title, term: data.kinds[i].term});
+      }
+      else{
+        schemes[data.kinds[i].scheme] = [{title: data.kinds[i].title, term: data.kinds[i].term}];
+      }
+    }
+    this.props.dispatch(actions.setCurrentSchemes(schemes));
+  }
+
   updateBackendURL = () => {
     //we define this to auto toolify hyperlinks on the code view
     var navbar = this;
@@ -28,23 +42,28 @@ class NavBar extends React.Component{
       navbar.props.dispatch(actions.setErrorMessage('The URL needs to begin with http:// or https://  '));
     }
     else{
+      var getSchemes = this.getSchemes;
       $.ajax({
         url: '/conf?proxyTarget='+backendURL,
         type: 'GET',
         success: function(data){
           //we now make a test request to make sure the target is accessible
-          $.ajax({
-            url: backendURL+'/-/',
-            type: 'GET',
-            success: (data) => {
+          callAPI(
+            'GET',
+            '/-/',
+            (data) => {
               window.backendURL = backendURL;
               navbar.props.dispatch(actions.setOkMessage('You are now using '+backendURL));
-              navbar.forceUpdate();
+              navbar.props.dispatch(actions.setCurrentQueryPath('/-/'));
+              navbar.props.dispatch(actions.setCurrentJson(data));
+
+              //we use that datas to extract the schemes and their kinds
+              getSchemes(data);
             },
-            error: (xhr) => {
+            (xhr) => {
               navbar.props.dispatch(actions.setErrorMessage('Error connecting to '+backendURL));
             }
-          })
+          );
         }
       });
     }
@@ -64,18 +83,15 @@ class NavBar extends React.Component{
     )
   }
 
-
-
   render() {
-    //we manage kinds
-    var existingSchemes = this.props.getSchemes();
+    //we retrieve the kinds of each one of the scheme
     var schemes = [];
-    for(var scheme in existingSchemes){
+    for(var scheme in this.props.schemes){
       schemes.push(<div className="item" key={scheme}>
         <i className="dropdown icon"></i>
         <span className="text">{scheme}</span>
           <div className="menu">
-            {existingSchemes[scheme].map((kind, i) => {
+            {this.props.schemes[scheme].map((kind, i) => {
               return <div className="item" onClick={() => this.displayKind(kind.term)} key={kind.term}>{kind.title}</div>
             })}
           </div>
@@ -117,7 +133,8 @@ class NavBar extends React.Component{
 
 
 const mapStateToProps = (state) => ({
-  currentURLServer: state.currentURLServer
+  currentURLServer: state.currentURLServer,
+  schemes: state.currentSchemes
 })
 
 export default NavBar = connect(mapStateToProps)(NavBar);

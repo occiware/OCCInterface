@@ -38,6 +38,11 @@ const reducer = (state, action) => {
                 ...state,
                 currentURLServer: action.currentURLServer
             }
+        case 'SET_CURRENT_SCHEMES':
+            return {
+                ...state,
+                currentSchemes: action.currentSchemes
+            }
         default:
             return state
     }

@@ -45,3 +45,10 @@ export function setCurrentURLServer(currentURLServer) {
     currentURLServer: currentURLServer
   }
 }
+
+export function setCurrentSchemes(currentSchemes) {
+  return {
+    type: 'SET_CURRENT_SCHEMES',
+    currentSchemes: currentSchemes
+  }
+}
