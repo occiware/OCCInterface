@@ -65,15 +65,56 @@ class Reading extends React.Component{
     var reactElement = this;
     //we parse the %{}%
     $('.reading p').each(function() {
-      //we find the first occurence of % 
-      var content = $(this).text();
-      if(content.substring(0,2) === '%{' || content.substring(0,2) === '%['){
+      //we extract %{ or %[
+
+      var beforeString = '';
+      var afterString = '';
+
+      var fillBefore = true;
+      var fillAfter = false;
+
+      var fullText = $(this).text();
+
+      var indexBeginContent = 0;
+
+      var content = '';
+
+      for(var i=0; i<fullText.length-2; i++){
+        if(fullText[i] === '%' && (fullText[i+1] === '{' || fullText[i+1] === '[')){
+          indexBeginContent = i;
+          fillBefore = false;
+        }
+        if((fullText[i] === '}' || fullText[i] === ']') && fullText[i+1] === '%'){
+          content = fullText.slice(indexBeginContent,i+2);
+          fillAfter = true;
+        }
+
+        if(fillBefore){
+          beforeString += fullText[i];
+        }
+        if(fillAfter){
+          afterString += fullText[i];
+        }
+      }
+
+      //we replace only if there is a % into the current <p>
+      if(content !== ''){
+        afterString = afterString.slice(2);
+
         content = JSON.parse(content.slice(1, -1));
 
-        //we replace with a green link + icon, and make
+        //we replace with a green link + icon
 
-        var p = $('<a class="sampleLink">'+content.label+'</a>');
-        p.click(function(){ reactElement.postSample(content.post)});
+        var link = $('<a class="sampleLink">'+content.label+'</a>');
+        var p = $('<p></p>');
+        // var before = $('<span>'+ beforeString +' </span>');
+        // var after = $('<span> '+ afterString +'</span>');
+
+        link.click(function(){ reactElement.postSample(content.post)});
+        p.append(beforeString+' ');
+        p.append(link);
+        p.append(' '+afterString);
+
         $(this).replaceWith(p);
       }
     });

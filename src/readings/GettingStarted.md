@@ -33,7 +33,7 @@ Morevover, the use of the four buttons are quite simple :
 ### Switching server
 You can switch the current OCCI server you are working on with the editable dropdown at the top of the page.
 
-%{
+test a%{
   "label": "sampleLink",
   "post": {
     "adress": "/categories/compute",
@@ -45,4 +45,4 @@ You can switch the current OCCI server you are working on with the editable drop
       "id": "6df690d2-3158-40c4-88fb-d1c41584d6e5"
     }
   }
-}%
+}%test b
