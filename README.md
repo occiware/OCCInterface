@@ -38,15 +38,79 @@ Then, you need to enter the URL of the OCCI server on the input at the top of th
 ## How to integrate it in your own OCCI implementation
 TODO
 
-## FAQ for dev
+## FAQ 
 
-- What is a playground link and how to create it ?  
+- What is a **playground link** and how to create it ?  
 A playground link is a clickable link that make a GET request on the API and displays its content in the codeview.
 To do so, create a classic link in markdown, and make your URL begin with "/"  
 example:  
 ```
 [/resources/compute](/resources/compute)
 ```
+
+- What is a **sample link** and how to create it ? 
+A sample link is a link that post datas onto the current server when clicking on it. The formating is as follow (in markdown):
+
+``` JSON
+text before %{
+  "label": "sampleLink",
+  "post": {
+    "adress": "/categories/compute",
+    "datas": {
+      "attributes": {
+        "occi.compute.hostname" : "test",
+        "occi.compute.state" : "inactive"
+      },
+      "id": "6df690d2-3158-40c4-88fb-d1c41584d6e5"
+    }
+  }
+}% text after
+```
+
+It will result into a clickable link, which post datas on click:
+
+``` HTML
+<p>text before <a>sampleLink</a> text after</p>
+```
+You can post an array instead of an object (in the "datas" attribute).
+If you want your sample link to post to different categories, just put an array instead of an object inside the "post" attribute. Example :
+
+``` JSON
+%{
+  "label": "sampleLink",
+  "post": [
+    {
+        "adress": "/categories/compute",
+        "datas": {
+          "attributes": {
+            "occi.compute.hostname" : "test",
+            "occi.compute.state" : "inactive"
+          },
+          "id": "6df690d2-3158-40c4-88fb-d1c41584d6e5"
+        }
+    },
+    {
+        "adress": "/categories/storage",
+        "datas": [
+            {
+              "attributes": {
+                "occi.storage.size" : 1000
+              },
+              "id": "6df690d2-3158-40c4-88fb-d1c41584d6e6"
+            },
+            {
+              "attributes": {
+                "occi.storage.size" : 500
+              },
+              "id": "6df690d2-3158-40c4-88fb-d1c41584d689"
+            }
+        ]
+    }
+  ]
+}% 
+```
+
+
 - How to deploy on Heroku ?  
 
 ``` bash
