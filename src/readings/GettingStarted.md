@@ -33,16 +33,35 @@ Morevover, the use of the four buttons are quite simple :
 ### Switching server
 You can switch the current OCCI server you are working on with the editable dropdown at the top of the page.
 
-test a%{
+%{
   "label": "sampleLink",
-  "post": {
-    "adress": "/categories/compute",
-    "datas": {
-      "attributes": {
-        "occi.compute.hostname" : "test",
-        "occi.compute.state" : "inactive"
-      },
-      "id": "6df690d2-3158-40c4-88fb-d1c41584d6e5"
+  "post": [
+    {
+        "adress": "/categories/compute",
+        "datas": {
+          "attributes": {
+            "occi.compute.hostname" : "test",
+            "occi.compute.state" : "inactive"
+          },
+          "id": "6df690d2-3158-40c4-88fb-d1c41584d6e5"
+        }
+    },
+    {
+        "adress": "/categories/storage",
+        "datas": [
+            {
+              "attributes": {
+                "occi.storage.size" : 1000
+              },
+              "id": "6df690d2-3158-40c4-88fb-d1c41584d6e6"
+            },
+            {
+              "attributes": {
+                "occi.storage.size" : 500
+              },
+              "id": "6df690d2-3158-40c4-88fb-d1c41584d689"
+            }
+        ]
     }
-  }
-}%test b
+  ]
+}% 

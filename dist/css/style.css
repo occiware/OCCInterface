@@ -178,3 +178,7 @@ blockquote {
 .sampleLink{
   color: green;
 }
+
+.sampleLink:hover{
+  color: #4BC44D;
+}

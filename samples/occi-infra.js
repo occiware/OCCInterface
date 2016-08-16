@@ -8,8 +8,7 @@ const compute = {
 
 const storage = {
   "atributes": {
-    "occi.storage.size" : 1000,
-    "occi.storage.state": []
+    "occi.storage.size" : 1000
   },
   "id": "6df690d2-3158-40c4-88fb-d1c41584d6e6"
 }

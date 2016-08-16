@@ -21,6 +21,7 @@ class Reading extends React.Component{
   componentDidUpdate = () => {
     //we transform all link of readings to make them playground-clickable
     this.replaceLinks();
+    this.replaceSampleElements();
   }
 
   componentDidMount = () => {
@@ -44,7 +45,18 @@ class Reading extends React.Component{
 
   postSample = (datas) => {
     if(datas instanceof Array){
-      // TODO faire des post atome par atome
+      for(var data of datas){
+        callAPI(
+          'POST',
+          data.adress,
+          null,
+          (xhr) => {
+            this.props.setErrorMessage('Impossible to access this resource', xhr.status+' '+xhr.responseText);
+          },
+          {'Content-Type': 'application/json'},
+          JSON.stringify(data.datas)
+        );
+      }
     }else{
       callAPI(
         'POST',
@@ -57,7 +69,7 @@ class Reading extends React.Component{
         },
         {'Content-Type': 'application/json'},
         JSON.stringify(datas.datas)
-      )
+      );
     }
   }
 
@@ -105,15 +117,15 @@ class Reading extends React.Component{
 
         //we replace with a green link + icon
 
-        var link = $('<a class="sampleLink">'+content.label+'</a>');
+        var link = $('<a class="sampleLink" href="">'+content.label+'</a>');
         var p = $('<p></p>');
         // var before = $('<span>'+ beforeString +' </span>');
         // var after = $('<span> '+ afterString +'</span>');
 
-        link.click(function(){ reactElement.postSample(content.post)});
-        p.append(beforeString+' ');
+        link.click(function(event){ event.preventDefault(); reactElement.postSample(content.post);});
+        p.append(beforeString);
         p.append(link);
-        p.append(' '+afterString);
+        p.append(afterString);
 
         $(this).replaceWith(p);
       }
