@@ -103,7 +103,7 @@ If you want your sample link to post to different categories, just put an array 
                 "occi.storage.size" : 500
               },
               "id": "6df690d2-3158-40c4-88fb-d1c41584d689"
-            },
+            }
         ]
     }
   ]
