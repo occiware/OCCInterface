@@ -25,6 +25,7 @@ class Reading extends React.Component{
 
   componentDidMount = () => {
     this.replaceLinks();
+    this.replaceSampleElements();
   }
 
   replaceLinks = () => {
@@ -36,6 +37,43 @@ class Reading extends React.Component{
       }
       else{
         var p = $('<a class="classicLink" href="'+$(this).attr('href')+'">'+$(this).text()+'</a>');
+        $(this).replaceWith(p);
+      }
+    });
+  }
+
+  postSample = (datas) => {
+    if(datas instanceof Array){
+      // TODO faire des post atome par atome
+    }else{
+      callAPI(
+        'POST',
+        datas.adress,
+        (data) => {
+          this.props.dispatch(actions.setCurrentJson(data));
+        },
+        (xhr) => {
+          this.props.setErrorMessage('Impossible to access this resource', xhr.status+' '+xhr.responseText);
+        },
+        {'Content-Type': 'application/json'},
+        JSON.stringify(datas.datas)
+      )
+    }
+  }
+
+  replaceSampleElements = () => {
+    var reactElement = this;
+    //we parse the %{}%
+    $('.reading p').each(function() {
+      //we find the first occurence of % 
+      var content = $(this).text();
+      if(content.substring(0,2) === '%{' || content.substring(0,2) === '%['){
+        content = JSON.parse(content.slice(1, -1));
+
+        //we replace with a green link + icon, and make
+
+        var p = $('<a class="sampleLink">'+content.label+'</a>');
+        p.click(function(){ reactElement.postSample(content.post)});
         $(this).replaceWith(p);
       }
     });

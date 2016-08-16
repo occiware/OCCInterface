@@ -50,7 +50,6 @@ class Content extends React.Component{
     link = link.replace(window.backendURL, '');
 
     this.props.dispatch(actions.setCurrentQueryPath(link));
-
     this.props.dispatch(actions.setReadableCode());
     callAPI(
       'GET',
@@ -111,7 +110,7 @@ class Content extends React.Component{
 
           <CodeView tools={this.tools}/>
 
-          <Reading reading={this.props.reading}/>
+          <Reading reading={this.props.reading} setErrorMessage={this.setErrorMessage}/>
         </div>
       </div>
     );
