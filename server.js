@@ -1,4 +1,5 @@
 const querystring = require('querystring');
+const http = require('http');
 const conf = require('./conf.js');
 
 ///var host = 'occinterface.herokuapp.com'
@@ -61,9 +62,13 @@ if (isProduction) { // prod :
 
   setup(app);
 
-  app.listen(port);
-  console.log(`Listening at http://localhost:${port}`)
-
+  var listeningApp = http.createServer(app);
+  listeningApp.listen(port, function (err, result) {
+    if(err) {
+      return console.log(err);
+    }
+  });
+  console.log(`Listening at http://localhost:${port}`);
 } else { // dev :
 
   var webpack = require('webpack');
