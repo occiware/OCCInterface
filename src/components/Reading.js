@@ -20,8 +20,9 @@ class Reading extends React.Component{
 
   componentDidUpdate = () => {
     //we transform all link of readings to make them playground-clickable
-    this.replaceLinks();
+
     this.replaceLinkSample();
+    this.replaceLinks();
   }
 
   componentWillMount = () => {
@@ -31,8 +32,9 @@ class Reading extends React.Component{
   }
 
   componentDidMount = () => {
-    this.replaceLinks();
+    //this order is very important !
     this.replaceLinkSample();
+    this.replaceLinks();
   }
 
   replaceLinks = () => {
@@ -43,8 +45,11 @@ class Reading extends React.Component{
         $(this).replaceWith(p);
       }
       else{
-        var p = $('<a class="classicLink" href="'+$(this).attr('href')+'">'+$(this).text()+'</a>');
-        $(this).replaceWith(p);
+        //we do not touch it if it is a sample link
+        if($(this).attr('class') !== 'sampleLink'){
+          var p = $('<a class="classicLink" href="'+$(this).attr('href')+'">'+$(this).text()+'</a>');
+          $(this).replaceWith(p);
+        }
       }
     });
   }
@@ -83,25 +88,34 @@ class Reading extends React.Component{
     var reactElement = this;
     var approve = false;
 
-    //we first ask for confirmation
-
     //we parse the %{}%
     $('.reading p').each(function() {
-      //we extract %{ or %[
+      var cache = reactElement.replaceLinkSampleParagraph($(this).html());
+      var parsedText = cache.element;
 
-      var beforeString = '';
-      var afterString = '';
+      //we keep formating until there is no %{}% in the current text
+      while(cache.finish !== true){
+        parsedText = cache.element;
+        cache = reactElement.replaceLinkSampleParagraph(parsedText.html());
+      }
+      $(this).replaceWith(parsedText);
+    });
+  }
 
-      var fillBefore = true;
-      var fillAfter = false;
+  //replace the first ocurence of %{}% in a paragraph
+  replaceLinkSampleParagraph = (fullText) => {
+    var beforeString = '';
+    var afterString = '';
 
-      var fullText = $(this).text();
+    var fillBefore = true;
+    var fillAfter = false;
 
-      var indexBeginContent = 0;
+    var indexBeginContent = 0;
 
-      var content = '';
+    var content = '';
 
-      for(var i=0; i<fullText.length-2; i++){
+    for(var i=0; i<fullText.length; i++){
+      if(i !== fullText.length-1){
         if(fullText[i] === '%' && (fullText[i+1] === '{' || fullText[i+1] === '[')){
           indexBeginContent = i;
           fillBefore = false;
@@ -110,37 +124,47 @@ class Reading extends React.Component{
           content = fullText.slice(indexBeginContent,i+2);
           fillAfter = true;
         }
-
-        if(fillBefore){
-          beforeString += fullText[i];
-        }
-        if(fillAfter){
-          afterString += fullText[i];
-        }
       }
 
-      //we replace only if there is a % into the current <p>
-      if(content !== ''){
-        afterString = afterString.slice(2);
-
-        content = JSON.parse(content.slice(1, -1));
-
-        //we replace with a green link + icon
-
-        var link = $('<a class="sampleLink" href="">'+content.label+'</a>');
-        var p = $('<p></p>');
-        // var before = $('<span>'+ beforeString +' </span>');
-        // var after = $('<span> '+ afterString +'</span>');
-
-        link.click(function(event){ event.preventDefault(); reactElement.clickLinkSample(content);});
-        p.append(beforeString);
-        p.append(link);
-        p.append('<i class="disk outline icon"></i>');
-        p.append(afterString);
-
-        $(this).replaceWith(p);
+      if(fillBefore){
+        beforeString += fullText[i];
       }
-    });
+      if(fillAfter){
+        afterString += fullText[i];
+      }
+    }
+
+    //we replace only if there is a % into the current <p>
+    if(content !== ''){
+      afterString = afterString.slice(2);
+
+      content = JSON.parse(content.slice(1, -1));
+
+      //we replace with a green link + icon
+
+      var link = $('<a class="sampleLink" href="">'+content.label+'</a>');
+      var p = $('<p></p>');
+
+
+      // var before = $('<span>'+ beforeString +' </span>');
+      // var after = $('<span> '+ afterString +'</span>');
+      var reactElement = this;
+
+      link.click(function(event){ event.preventDefault(); reactElement.clickLinkSample(content);});
+
+      //we convert our string to a jquery object
+      p.append($.parseHTML(beforeString));
+      p.append(link);
+      p.append('<i class="disk outline icon"></i>');
+      p.append($.parseHTML(afterString));
+
+      return {element: p, finish: false};
+    }
+    else{
+      var p = $('<p></p>');
+      p.append($.parseHTML(beforeString));
+      return {element: p, finish: true};
+    }
   }
 
   clickLinkSample = (content) => {

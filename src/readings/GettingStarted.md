@@ -43,16 +43,13 @@ You can post a sample of data by clicking %{
         ]
     }
   ]
-}%
+}%(you need to have occi-infra on your server)
 
-* The first URL you should know is [/-/](/-/)  
+* The first URL you should know is [/-/](/-/).
 It gives you the configuration of the OCCI server, list the **actions** you can do, and the **kinds** of resources you can interact with.
-You can also discover the **kinds** of the current OCCI server by clicking on "Select Kind" at the top of the page.
-<br><br>
+You can also discover the **kinds** of the current OCCI server by clicking on "Select Kind" at the top of the page.      
 
-
-* To access a categorie, use URLs of this type : [/categories/storagelink](/categories/storagelink)
-<br><br>
+* To access a categorie, use URLs of this type : [/categories/storagelink](/categories/storagelink)  
 
 * Each resource has an unique id. To access a resource, click on a link pointing to it, or use an URL of this type :
 [/6df690d2-3158-40c4-88fb-d1c41584d6e5](/6df690d2-3158-40c4-88fb-d1c41584d6e5)<br><br>
