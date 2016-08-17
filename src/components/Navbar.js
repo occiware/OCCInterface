@@ -116,6 +116,7 @@ class NavBar extends React.Component{
               {schemes}
             </div>
           </a>
+
           <div className="ui item right navBarRight">
             <div className="ui item">
                 <select className="ui fluid search dropdown backendURL" name="backendURL"onChange={() => {}}>
@@ -123,7 +124,10 @@ class NavBar extends React.Component{
                 </select>
               <button className="ui button useButton" onClick={this.updateBackendURL}>Use</button>
             </div>
-            <a href="https://github.com/Romathonat/OCCInterface" className="item">GitHub</a>
+          </div>
+
+          <div className="ui item">
+            <a href="https://github.com/Romathonat/OCCInterface" ><i className="big github icon"></i></a>
           </div>
         </div>
       </div>
