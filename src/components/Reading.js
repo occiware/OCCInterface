@@ -169,24 +169,21 @@ class Reading extends React.Component{
         <div className="reading segmentpadding" dangerouslySetInnerHTML={this.createMarkup()}></div>
 
         <div className="ui basic modal confirmationPost">
-          <i className="close icon"></i>
-          <div className="image content">
-            <div className="description">
+            <div className="description myCentering">
               <p>You are going to post datas into the current server, are you sure?</p>
             </div>
-          </div>
+
           <div className="actions">
-            <div className="two fluid ui inverted buttons">
-              <div className="ui ok green basic inverted button">
+              <div className="ui ok green basic right inverted button">
                 <i className="checkmark icon"></i>
                 Yes
               </div>
-              <div className="ui cancel red basic inverted button">
+              <div className="ui cancel red basic right inverted button">
                 <i className="remove icon"></i>
                 No
               </div>
-            </div>
           </div>
+
         </div>
       </div>
     );
