@@ -21,12 +21,18 @@ class Reading extends React.Component{
   componentDidUpdate = () => {
     //we transform all link of readings to make them playground-clickable
     this.replaceLinks();
-    this.replaceSampleElements();
+    this.replaceLinkSample();
+  }
+
+  componentWillMount = () => {
+    $('.confirmationPost')
+      .modal('hide')
+    ;
   }
 
   componentDidMount = () => {
     this.replaceLinks();
-    this.replaceSampleElements();
+    this.replaceLinkSample();
   }
 
   replaceLinks = () => {
@@ -73,8 +79,12 @@ class Reading extends React.Component{
     }
   }
 
-  replaceSampleElements = () => {
+  replaceLinkSample = () => {
     var reactElement = this;
+    var approve = false;
+
+    //we first ask for confirmation
+
     //we parse the %{}%
     $('.reading p').each(function() {
       //we extract %{ or %[
@@ -122,14 +132,25 @@ class Reading extends React.Component{
         // var before = $('<span>'+ beforeString +' </span>');
         // var after = $('<span> '+ afterString +'</span>');
 
-        link.click(function(event){ event.preventDefault(); reactElement.postSample(content.post);});
+        link.click(function(event){ event.preventDefault(); reactElement.clickLinkSample(content);});
         p.append(beforeString);
         p.append(link);
+        p.append('<i class="disk outline icon"></i>');
         p.append(afterString);
 
         $(this).replaceWith(p);
       }
     });
+  }
+
+  clickLinkSample = (content) => {
+    var reactElement = this;
+    //before posting we ask for confirmation
+    $('.confirmationPost').modal({
+        onApprove: function() {
+          reactElement.postSample(content.post);
+        }
+    }).modal('show');
   }
 
   createMarkup = () => {
@@ -142,44 +163,31 @@ class Reading extends React.Component{
     return {__html: marked(this.props.reading)};
   }
 
-  initSample = () => {
-    var urlCompute = '/categories/compute';
-    var urlStorage = '/categories/storage';
-    var urlStorageLink = '/categories/storagelink';
-
-    //we need to send a string
-    var jsonCompute = JSON.stringify(compute);
-    var jsonStorage = JSON.stringify(storage);
-    var jsonStorageLink = JSON.stringify(storagelink);
-
-    this.postResource(urlCompute, jsonCompute);
-    this.postResource(urlStorage, jsonStorage);
-    this.postResource(urlStorageLink, jsonStorageLink);
-  }
-
-  postResource = (relativeUrl, json) => {
-    callAPI(
-      'POST',
-      relativeUrl,
-      (data) => {
-        this.props.dispatch(actions.setCurrentQueryPath(relativeUrl));
-        this.props.dispatch(actions.setReadableCode());
-        this.props.dispatch(actions.setCurrentJson(data));
-      },
-      (xhr) => {
-        this.props.dispatch(actions.setErrorMessage(''+xhr.responseText));
-      },
-      {'Content-Type': 'application/json'},
-      json
-    );
-  }
   render() {
     return (
       <div>
-        <div className="myCentering">
-          {/*<button className="ui button" onClick={() => this.initSample()}>Init Sample</button> (work only if your server has occi-infra.xml !)*/}
-        </div>
         <div className="reading segmentpadding" dangerouslySetInnerHTML={this.createMarkup()}></div>
+
+        <div className="ui basic modal confirmationPost">
+          <i className="close icon"></i>
+          <div className="image content">
+            <div className="description">
+              <p>You are going to post datas into the current server, are you sure?</p>
+            </div>
+          </div>
+          <div className="actions">
+            <div className="two fluid ui inverted buttons">
+              <div className="ui ok green basic inverted button">
+                <i className="checkmark icon"></i>
+                Yes
+              </div>
+              <div className="ui cancel red basic inverted button">
+                <i className="remove icon"></i>
+                No
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
