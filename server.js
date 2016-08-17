@@ -1,5 +1,4 @@
 const querystring = require('querystring');
-const http = require('http');
 const conf = require('./conf.js');
 
 ///var host = 'occinterface.herokuapp.com'
