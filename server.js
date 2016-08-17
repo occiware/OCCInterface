@@ -41,23 +41,23 @@ if (isProduction) { // prod :
   // Init express server
   var app = this.app = new express();
 
-  app.use(express.static(__dirname + '/')); // TODO webpack conf, rather '/public/'
+  app.use(express.static(__dirname + '/'));
 
   app.all(proxyOptions.path, function (req, res, next) {
     proxyOptions.rewrite(req, proxyOptions);
 
     proxy.web(req, res, proxyOptions, function(err){
       var msg = 'cannot proxy to ' + proxyOptions.target + '('+ err.message + ')';
-      this.sockWrite(this.sockets, 'proxy-error', [msg]);
+      console.log('proxy-error', msg);
       res.statusCode = 502;
       res.end();
     }.bind(this));
   }.bind(this));
 
   //when getting /conf request
-  app.all('/conf', function(req, res) { // TODO only post ?
+  app.use('/conf', function(req, res) {
     proxyOptions.target = querystring.parse(req._parsedUrl.query).proxyTarget;
-    console.log('updated proxyOptions', proxyOptions);
+    console.log('updated proxyOptions', proxyOptions.target);
     res.setHeader('Content-Type', 'application/javascript');
     res.end('{}');
   });
