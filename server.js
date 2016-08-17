@@ -54,12 +54,19 @@ if (isProduction) { // prod :
     }.bind(this));
   }.bind(this));
 
+  //when getting /conf request
+  app.all('/conf', function(req, res) { // TODO only post ?
+    proxyOptions.target = querystring.parse(req._parsedUrl.query).proxyTarget;
+    console.log('updated proxyOptions', proxyOptions);
+    res.setHeader('Content-Type', 'application/javascript');
+    res.end('{}');
+  });
+
   //for react router, we redirect on index.html
   app.get('*', function (request, response){
     response.sendFile(__dirname+'/index.html');
   })
 
-  setup(app);
 
   var listeningApp = http.createServer(app);
   listeningApp.listen(port, function (err, result) {
