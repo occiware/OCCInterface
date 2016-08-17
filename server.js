@@ -48,19 +48,14 @@ if (isProduction) { // prod :
 
     proxy.web(req, res, proxyOptions, function(err){
       var msg = 'cannot proxy to ' + proxyOptions.target + '('+ err.message + ')';
-      console.log('proxy-error', msg);
+      console.log('proxy-error'+msg);
       res.statusCode = 502;
       res.end();
     }.bind(this));
   }.bind(this));
 
   //when getting /conf request
-  app.use('/conf', function(req, res) {
-    proxyOptions.target = querystring.parse(req._parsedUrl.query).proxyTarget;
-    console.log('updated proxyOptions', proxyOptions.target);
-    res.setHeader('Content-Type', 'application/javascript');
-    res.end('{}');
-  });
+  setup(app);
 
   //for react router, we redirect on index.html
   app.get('*', function (request, response){
