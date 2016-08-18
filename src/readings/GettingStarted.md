@@ -27,20 +27,28 @@ You can post a sample of data by clicking %{
     },
     {
         "adress": "/categories/storage",
-        "datas": [
-            {
-              "attributes": {
-                "occi.storage.size" : 1000
-              },
-              "id": "6df690d2-3158-40c4-88fb-d1c41584d6e6"
-            },
-            {
-              "attributes": {
-                "occi.storage.size" : 500
-              },
-              "id": "6df690d2-3158-40c4-88fb-d1c41584d689"
-            }
-        ]
+        "datas": {
+          "attributes": {
+            "occi.storage.size" : 1000
+          },
+          "id": "6df690d2-3158-40c4-88fb-d1c41584d6e6"
+        }
+    },
+    {
+      "adress": "/categories/storagelink",
+      "datas": {
+         "kind":"www.schemas.ogf.org/occi/infrastructure#storagelink",
+         "attributes": {
+           "occi.core.id":"6df690d2-3158-40c4-88fb-d1c41584d6e7",
+           "occi.storagelink.deviceid":"/dev/vdc"
+         },
+         "target": {
+           "location": "6df690d2-3158-40c4-88fb-d1c41584d6e6"
+         },
+         "source": {
+           "location": "6df690d2-3158-40c4-88fb-d1c41584d6e5"
+         }
+      }
     }
   ]
 }%(you need to have occi-infra on your server)
