@@ -84,6 +84,34 @@ class Reading extends React.Component{
     }
   }
 
+  deleteResources = (datas) => {
+    console.log(datas);
+    if(datas instanceof Array){
+      for(var data of datas){
+        callAPI(
+          'DELETE',
+          data,
+          null,
+          (xhr) => {
+            this.props.setErrorMessage('Impossible to access this resource', xhr.status+' '+xhr.responseText);
+          }
+        );
+      }
+    }else{
+      callAPI(
+        'DELETE',
+        datas,
+        (data) => {
+          this.props.dispatch(actions.setCurrentJson(''));
+        },
+        (xhr) => {
+          this.props.setErrorMessage('Impossible to access this resource', xhr.status+' '+xhr.responseText);
+        }
+      );
+    }
+  }
+
+
   replaceLinkSample = () => {
     var reactElement = this;
     var approve = false;
@@ -172,7 +200,12 @@ class Reading extends React.Component{
     //before posting we ask for confirmation
     $('.confirmationPost').modal({
         onApprove: function() {
-          reactElement.postSample(content.post);
+          if('post' in content){
+            reactElement.postSample(content.post);
+          }
+          if('del' in content){
+            reactElement.deleteResources(content.del);
+          }
         }
     }).modal('show');
   }
@@ -194,7 +227,7 @@ class Reading extends React.Component{
 
         <div className="ui basic modal confirmationPost">
             <div className="description myCentering">
-              <p>You are going to post datas into the current server, are you sure?</p>
+              <p>You are going create or delete datas into the current server, are you sure?</p>
             </div>
 
           <div className="actions">
