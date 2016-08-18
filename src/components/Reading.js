@@ -183,7 +183,7 @@ class Reading extends React.Component{
       //we convert our string to a jquery object
       p.append($.parseHTML(beforeString));
       p.append(link);
-      p.append('<i class="disk outline icon"></i>');
+      // p.append(' <i class="upload icon"></i>');
       p.append($.parseHTML(afterString));
 
       return {element: p, finish: false};
@@ -227,7 +227,7 @@ class Reading extends React.Component{
 
         <div className="ui basic modal confirmationPost">
             <div className="description myCentering">
-              <p>You are going create or delete datas into the current server, are you sure?</p>
+              <p>You are going to create or delete datas into the current server, are you sure?</p>
             </div>
 
           <div className="actions">

@@ -111,6 +111,7 @@ class Content extends React.Component{
           <CodeView tools={this.tools}/>
 
           <Reading reading={this.props.reading} setErrorMessage={this.setErrorMessage}/>
+          
         </div>
       </div>
     );

@@ -60,6 +60,7 @@ class CodeView extends React.Component{
           </div>
           {view}
         </div>
+
       </div>
     );
   }
