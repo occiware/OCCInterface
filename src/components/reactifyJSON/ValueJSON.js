@@ -28,7 +28,13 @@ export default class ValueJSON  extends React.Component{
         value = <a className="playgroundLink" href={element} onClick={this.clickLinkPlayground}>{element}</a>;
       }
       else{
-        value = <span className="string">{element}</span>;
+        //we should need to make a value "bold" only in this case (a string)
+        if(this.props.bold === true){
+          value = <span className="string"><strong>{element}</strong></span>;
+        }
+        else{
+          value = <span className="string">{element}</span>;
+        }
       }
     }
 
