@@ -125,7 +125,9 @@ git push heroku master
 - I have an issue "(mixed active content)", ho to fix it ?
 You need to have the same domain policy between your OCCI server and your OCCInterface server. For instance http with http, or https with https.
 
+## Warning
 
+If your application is deployed into a server which several people can access to, you could experiment some issues if another person switch the OCCIserver you are working on. OCCInterface was originally made with the aim to be client side, and the online versions only exist in order to demonstrate.
 
 ## How to configure your Erocci Server
 (TODO temporarly here, remove later)
