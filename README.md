@@ -48,7 +48,7 @@ example:
 [/resources/compute](/resources/compute)
 ```
 
-- What is a **sample link** and how to create it ? 
+- What is a **sample link** and how to create it ?  
 A sample link is a link that post datas onto the current server when clicking on it. The formating is as follow (in markdown):
 
 ``` JSON
@@ -109,7 +109,15 @@ If you want your sample link to post to different categories, just put an array 
   ]
 }% 
 ```
+- Can I delete datas with a sample link ?  
+Yes, you can, with the followin format :
 
+``` JSON
+%{
+  "label": "my sample link",
+  "del": "/6df690d2-3158-40c4-88fb-d1c41584d6e7"
+}%
+```
 
 - How to deploy on Heroku ?  
 
