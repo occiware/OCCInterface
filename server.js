@@ -34,6 +34,7 @@ function setup(app) {
 
     req.session.proxyOptions.target = querystring.parse(req._parsedUrl.query).proxyTarget;
     console.log('updated proxyOptions via current session', req.session.proxyOptions);
+    console.log('id of session: '+req.sessions.id);
     res.setHeader('Content-Type', 'application/javascript');
     res.end('{}');
   });
