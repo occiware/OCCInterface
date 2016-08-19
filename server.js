@@ -60,10 +60,10 @@ if (isProduction) { // prod :
   }));
 
   app.all(proxyOptions.path, function (req, res, next) {
-    proxyOptions.rewrite(req, proxyOptions);
+    proxyOptions.rewrite(req, req.session.proxyOptions);
 
-    proxy.web(req, res, proxyOptions, function(err){
-      var msg = 'cannot proxy to ' + proxyOptions.target + '('+ err.message + ')';
+    proxy.web(req, res, req.session.proxyOptions, function(err){
+      var msg = 'cannot proxy to ' + req.session.proxyOptions.target + '('+ err.message + ')';
       console.log('proxy-error'+msg);
       res.statusCode = 502;
       res.end();
