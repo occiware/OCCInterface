@@ -16,6 +16,7 @@ export default class ValueJSON  extends React.Component{
 
     if(element === false || element === true){
       value = <span className="boolean">{element.toString()}</span>;
+      var boolean = true;
     }
     else if(this.isNumber(element)){
       value = <span className="number">{element}</span>;
@@ -43,9 +44,20 @@ export default class ValueJSON  extends React.Component{
       whiteSpaces += '  ';
     }
 
+
     var optionalComma = this.props.lastElement === true ? '' : ',';
+
+    if(boolean){
+      console.log(value);
+    }
+
+    var valueDisplay = boolean ? <div className="inline">{whiteSpaces}{value}{optionalComma+'\n'}</div> :
+      <div className="inline">{whiteSpaces+'"'}{value}{'"'+optionalComma+'\n'}</div>;
+
     return (
-      <div className="inline">{whiteSpaces+'"'}{value}{'"'+optionalComma+'\n'}</div>
+      <div className="inline">
+        {valueDisplay}
+      </div>
     );
   }
 }

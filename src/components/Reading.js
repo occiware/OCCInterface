@@ -183,7 +183,7 @@ class Reading extends React.Component{
       //we convert our string to a jquery object
       p.append($.parseHTML(beforeString));
       p.append(link);
-      // p.append(' <i class="upload icon"></i>');
+      p.append(' <i class="upload icon"></i>');
       p.append($.parseHTML(afterString));
 
       return {element: p, finish: false};
