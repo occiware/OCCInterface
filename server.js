@@ -1,5 +1,7 @@
 const querystring = require('querystring');
 const conf = require('./conf.js');
+var session = require('express-session');
+var RedisStore = require('connect-redis')(session);
 
 ///var host = 'occinterface.herokuapp.com'
 var port = process.env.PORT || 3000;
@@ -17,13 +19,21 @@ var proxyOptions = {
   changeOrigin: true
 };
 
-// additional conf of express or webpack dev server :
 function setup(app) {
   // update the proxied target URL :
   // test using ex. http://localhost:3000/conf?proxyTarget=http://malmo.lizenn.net:8080 then http://localhost:3000/proxiedOCCIServer/-/
-  app.all('/conf', function(req, res) { // TODO only post ?
-    proxyOptions.target = querystring.parse(req._parsedUrl.query).proxyTarget;
-    console.log('updated proxyOptions', proxyOptions);
+  app.all('/conf', function(req, res) {
+    var target = querystring.parse(req._parsedUrl.query).proxyTarget;
+
+    //if the proxyOptions does not exist yet, we create it
+    if(!req.session.proxyOptions){
+      req.session.proxyOptions = proxyOptions;
+    }
+    req.session.proxyOptions.target = target;
+
+
+    req.session.proxyOptions.target = querystring.parse(req._parsedUrl.query).proxyTarget;
+    console.log('updated proxyOptions via current session', req.session.proxyOptions);
     res.setHeader('Content-Type', 'application/javascript');
     res.end('{}');
   });
@@ -42,6 +52,12 @@ if (isProduction) { // prod :
   var app = this.app = new express();
 
   app.use(express.static(__dirname + '/'));
+
+  //we make a session for each new user
+  app.use(session({
+      store: new RedisStore(options),
+      secret: 'keyboard cat'
+  }));
 
   app.all(proxyOptions.path, function (req, res, next) {
     proxyOptions.rewrite(req, proxyOptions);
