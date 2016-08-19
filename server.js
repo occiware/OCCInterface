@@ -1,7 +1,8 @@
 const querystring = require('querystring');
-const conf = require('./conf.js');
 var session = require('express-session');
-var RedisStore = require('connect-redis')(session);
+
+const conf = require('./conf.js');
+
 
 ///var host = 'occinterface.herokuapp.com'
 var port = process.env.PORT || 3000;
@@ -31,7 +32,6 @@ function setup(app) {
     }
     req.session.proxyOptions.target = target;
 
-
     req.session.proxyOptions.target = querystring.parse(req._parsedUrl.query).proxyTarget;
     console.log('updated proxyOptions via current session', req.session.proxyOptions);
     res.setHeader('Content-Type', 'application/javascript');
@@ -55,7 +55,6 @@ if (isProduction) { // prod :
 
   //we make a session for each new user
   app.use(session({
-      store: new RedisStore(options),
       secret: 'keyboard cat'
   }));
 
