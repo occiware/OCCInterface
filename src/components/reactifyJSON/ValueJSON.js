@@ -47,10 +47,6 @@ export default class ValueJSON  extends React.Component{
 
     var optionalComma = this.props.lastElement === true ? '' : ',';
 
-    if(boolean){
-      console.log(value);
-    }
-
     var valueDisplay = boolean ? <div className="inline">{whiteSpaces}{value}{optionalComma+'\n'}</div> :
       <div className="inline">{whiteSpaces+'"'}{value}{'"'+optionalComma+'\n'}</div>;
 

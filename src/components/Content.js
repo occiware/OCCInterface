@@ -31,7 +31,6 @@ class Content extends React.Component{
 
   constructor(props){
     super(props);
-    window.clickLinkPlaygroundEvent = this.clickLinkPlaygroundEvent;
   }
 
   clickLinkPlaygroundEvent = (event) => {
@@ -110,8 +109,8 @@ class Content extends React.Component{
 
           <CodeView tools={this.tools}/>
 
-          <Reading reading={this.props.reading} setErrorMessage={this.setErrorMessage}/>
-          
+          <Reading reading={this.props.reading} setErrorMessage={this.setErrorMessage} clickLinkPlaygroundEvent={this.clickLinkPlaygroundEvent}/>
+
         </div>
       </div>
     );

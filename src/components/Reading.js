@@ -38,10 +38,11 @@ class Reading extends React.Component{
   }
 
   replaceLinks = () => {
+    var reactComponent = this;
     $('.reading a').each(function() {
       if($(this).attr('href').charAt(0) === '/'){
         var p = $('<a class="playgroundLink" href="'+$(this).attr('href')+'">'+$(this).text()+'</a>');
-        p.click(window.clickLinkPlaygroundEvent);
+        p.click(reactComponent.props.clickLinkPlaygroundEvent);
         $(this).replaceWith(p);
       }
       else{
@@ -85,7 +86,6 @@ class Reading extends React.Component{
   }
 
   deleteResources = (datas) => {
-    console.log(datas);
     if(datas instanceof Array){
       for(var data of datas){
         callAPI(
