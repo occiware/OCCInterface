@@ -10,6 +10,7 @@ Its aims are multiple:
 - manage and explore resources of an OCCI server easily
 - vulgarize, explain OCCI to newcomers, diffuse the OCCI way of thinking
 
+A demo is avalaible here : http://occinterface.herokuapp.com/
 
 ## How to use it 
 
