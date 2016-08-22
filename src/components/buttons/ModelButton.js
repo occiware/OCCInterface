@@ -18,13 +18,19 @@ class ModelButton extends React.Component{
       this.props.currentPath,
       (data) => {
         var copy = false;
-        for(var i=0;i<data.kind.length;i++){
-          if(copy){
-            currentKind += data.kind[i];
+        //is there is no kind (for instance with /-/), we can't access the model
+        if(data.kind !== undefined){
+          for(var i=0;i<data.kind.length;i++){
+            if(copy){
+              currentKind += data.kind[i];
+            }
+            if(data.kind[i] === '#'){
+              copy = true;
+            }
           }
-          if(data.kind[i] === '#'){
-            copy = true;
-          }
+        }
+        else{
+          this.props.setErrorMessage('Impossible to go to the model of this resource');
         }
       },
       (xhr) => {
