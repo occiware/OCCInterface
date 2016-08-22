@@ -29,10 +29,6 @@ class Content extends React.Component{
     this.preventClickEffect();
   }
 
-  constructor(props){
-    super(props);
-  }
-
   clickLinkPlaygroundEvent = (event) => {
     event.preventDefault();
     var link = event.target.href.replace(window.rootURL, '');
@@ -45,11 +41,15 @@ class Content extends React.Component{
   }
 
   clickLinkPlayground = (link) => {
+    //we delete the error message
+    this.setErrorMessage('', '');
+
     //we remove the backendURL of the link
     link = link.replace(window.backendURL, '');
 
     this.props.dispatch(actions.setCurrentQueryPath(link));
     this.props.dispatch(actions.setReadableCode());
+
     callAPI(
       'GET',
       link,
@@ -57,7 +57,7 @@ class Content extends React.Component{
         this.props.dispatch(actions.setCurrentJson(data));
       },
       (xhr) => {
-        this.setErrorMessage('Impossible to access this resource',xhr.status+' '+xhr.responseText);
+        this.setErrorMessage('Impossible to access this resource', xhr.status+' '+xhr.responseText);
       }
     )
   }

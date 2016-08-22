@@ -6,6 +6,9 @@ import * as actions from '../../actions/actionIndex.js';
 
 class DelButton extends React.Component{
   deleteData = () => {
+    //we delete the error message
+    this.props.setErrorMessage('', '');
+    
     var reactElement = this;
 
     $('.confirmationDelete').modal({

@@ -8,9 +8,11 @@ import * as actions from '../../actions/actionIndex.js';
 class ModelButton extends React.Component{
 
   getModel = () => {
+    //we delete the error message
+    this.props.setErrorMessage('', '');
+
     //first we get the kind of the requested resource
     var currentKind = '';
-
     callAPI(
       'GET',
       this.props.currentPath,

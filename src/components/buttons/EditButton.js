@@ -6,6 +6,9 @@ import * as actions from '../../actions/actionIndex.js';
 
 class EditButton extends React.Component{
   editButton = () => {
+    //we delete the error message
+    this.props.setErrorMessage('', '');
+    
     var relativeUrl = this.props.currentPath;
     //we make a call in order to get the datas without the html formating
     callAPI(

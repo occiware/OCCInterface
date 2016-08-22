@@ -20,7 +20,7 @@ var proxyOptions = {
   changeOrigin: true
 };
 
-function setup(app) {
+function setupProd(app) {
   // update the proxied target URL :
   // test using ex. http://localhost:3000/conf?proxyTarget=http://malmo.lizenn.net:8080 then http://localhost:3000/proxiedOCCIServer/-/
   app.all('/conf', function(req, res) {
@@ -39,6 +39,18 @@ function setup(app) {
     res.end('{}');
   });
 }
+
+function setupDev(app) {
+  // update the proxied target URL :
+  // test using ex. http://localhost:3000/conf?proxyTarget=http://malmo.lizenn.net:8080 then http://localhost:3000/proxiedOCCIServer/-/
+  app.all('/conf', function(req, res) { // TODO only post ?
+    proxyOptions.target = querystring.parse(req._parsedUrl.query).proxyTarget;
+    console.log('updated proxyOptions', proxyOptions);
+    res.setHeader('Content-Type', 'application/javascript');
+    res.end('{}');
+  });
+}
+
 
 var isProduction = process.env.NODE_ENV === 'production';
 console.log('env is prod =', isProduction);
@@ -71,7 +83,7 @@ if (isProduction) { // prod :
   }.bind(this));
 
   //when getting /conf request
-  setup(app);
+  setupProd(app);
 
   //for react router, we redirect on index.html
   app.get('*', function (request, response){
@@ -97,7 +109,7 @@ if (isProduction) { // prod :
     hot: true,
     historyApiFallback: true,
     proxy: [proxyOptions],
-    setup: setup
+    setup: setupDev
   }).listen(port, function (err, result) {
     if (err) {
       return console.log(err);
