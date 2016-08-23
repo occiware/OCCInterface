@@ -21,14 +21,10 @@ before_install:
 #we use travis to generate the build, then to add the dist/ (the build) to heroku
 script: ./travis_script.sh
 
-#we deploy onto heroku, with the marc dutoo's acount
-#the secure is the hash of the api key of the herokuapp of the account of marc.dutoo@smile.fr 
+#we deploy onto heroku
+#the secure is the hash of the api key of the herokuapp
 deploy:
   provider: heroku
   api_key:
     secure: "F6ZCC1YSc1Yhizx18X/RRVZ8cY0egMeZY79lnVCpJiVpESQwOwkQQKTQVK1/S75FtUMAhHvcOtHH+2x/FAkLswCRLuL9JBUipt1agcaoLFOAnON6eStzB/yBVN0btWNZxm++Qi0mUnWo5htGrXsGfOaCVb1vrnLGdEWMMxZPQ0YqhhEXiaQ0cMYiBpTX6KRYyjSId7K4gCFgJdiHZQOu1OXCEGLdD4MlKcbKWv6ehlNmKBuuNUwFKSKn0A0SWEGt3QOOvicXS2HSO50gCp3gNyUZp6ne+NVylPu2CKntWDYV1G0TLwcHPLc4dJwGV6qBeAOg1BqG1aheWasX707hSm5iFlETFhrn6OpZrP/mwKsL3X6CIndJ8MO+kTh6+BI4KRK8vUHDn15hVQQBSwwXzHPB3++WhQbZ6C8k1qa+2ARMTLs9ksof1oloaw60oZfVHxgXQ69AX9VDyS3SfFYWnd2UiYk7fLez5PwgQxESzbVKt5WeIiIJuTSXQVxU/YYqbc3GYUAXRXxpqskzm7bCJbGOBzYehvrAYx5B4w++zd5RgvBQWNeuWiOgOL7LSpMj+ru5CDH6ryBJbXQuov3VzNsfQfH61K17TtKNm6K9YdysDrAY2As+L/So+4AtMwA1Gwr6JgjyhlbF9SNCsFpzW5gXq6IwEZwRgA5u8DmvWkU="
   app: occinterface
-
-# env:
-#   global:
-#     - NODE_ENV=production
