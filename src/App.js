@@ -35,20 +35,20 @@ class App extends React.Component{
   render() {
     //we retrieve the correct currentReading of the route
     //default:
-    var currentReading = this.props.route.readings[0].component;
+    var currentReading = '';
 
-    for(var i=0; i<this.props.route.readings.length; i++){
-      if(this.props.route.readings[i].path === this.props.location.pathname){
-        currentReading = this.props.route.readings[i].component;
-        break;
-      }
-    }
+    // for(var i=0; i<this.props.route.readings.length; i++){
+    //   if(this.props.route.readings[i].path === this.props.location.pathname){
+    //     currentReading = this.props.route.readings[i].component;
+    //     break;
+    //   }
+    // }
 
     return (
       <div>
         <NavBar />
         <div className="ui container stackable grid" id="mainContainer">
-          <Menu readings={this.props.route.readings}/>
+          <Menu/>
           <Content reading={currentReading} goToTop={this.goToTop}/>
 
           <div className="ui icon button goTop" onClick={this.goToTop}>

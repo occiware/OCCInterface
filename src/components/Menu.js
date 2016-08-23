@@ -17,7 +17,7 @@ export default class Menu  extends React.Component{
       <div className="ui four wide column centered grid">
         <div className="ui center sticky groupementmenu">
           <div className="ui center column menubutton center aligned container">
-            <MenuDepliant readings={this.props.readings}/>
+            <MenuDepliant/>
           </div>
         </div>
       </div>
@@ -30,7 +30,7 @@ class MenuDepliant extends React.Component{
     super(props);
 
     this.state = {
-      active: this.props.readings[0].path
+      active: 'path'
     };
 
   }
@@ -42,10 +42,10 @@ class MenuDepliant extends React.Component{
   render(){
     return(
       <div className="ui myCentering secondary vertical pointing menu mymenu">
-        {this.props.readings.map((menuItem, i) => {
+        {/*{this.props.readings.map((menuItem, i) => {
           var active = menuItem.path === this.state.active ? 'active' : '';
           return <MenuElement ElementMenu={menuItem} key={menuItem.path} active={active} setActive={this.setActive} />;
-        }, this)}
+        }, this)}*/}
       </div>
     );
   }

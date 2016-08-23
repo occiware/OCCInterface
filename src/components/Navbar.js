@@ -33,9 +33,6 @@ class NavBar extends React.Component{
   }
 
   updateBackendURL = () => {
-    //we first reset the eventual previous message
-    this.props.dispatch(actions.setOkMessage(''));
-
     //we define this to auto toolify hyperlinks on the code view
     var navbar = this;
 

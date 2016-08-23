@@ -6,10 +6,7 @@ import * as actions from '../../actions/actionIndex.js';
 
 class GetButton extends React.Component{
   getResource = () => {
-    //we delete the error message
-    this.props.setErrorMessage('', '');
     this.props.dispatch(actions.setReadableCode());
-
     callAPI(
       'GET',
       this.props.currentPath,
@@ -20,6 +17,7 @@ class GetButton extends React.Component{
         this.props.setErrorMessage('Impossible to access this resource',xhr.status+' '+xhr.responseText);
       }
     )
+    // rajouter onError
   }
 
   render() {

@@ -1,22 +1,26 @@
 var path = require('path');
 var webpack = require('webpack');
-var DashboardPlugin = require('webpack-dashboard/plugin');
 
 module.exports = {
-  devtool: 'eval',
   entry: [
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
     './src/index'
   ],
+
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: './public/built',
     filename: 'bundle.js',
-    publicPath: '/dist/'
+    publicPath: 'http://localhost:3000/built/'
+  },
+
+  devServer: {
+    port: 3000,
+    contentBase: './public',
+    publicPath: 'http://localhost:3000/built/'
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new DashboardPlugin()
+    new webpack.HotModuleReplacementPlugin()
   ],
   module: {
     loaders: [{
@@ -28,5 +32,5 @@ module.exports = {
       loader: 'json'
     }
   ]
-  }
+}
 };

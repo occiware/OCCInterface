@@ -6,7 +6,7 @@ import * as actions from '../actions/actionIndex.js';
 class MessageOk extends React.Component{
   componentDidMount = () => {
     var component = this;
-    $('.okMessage .close')
+    $('.message .close')
     .on('click', function() {
       $(this)
         .closest('.okMessage')

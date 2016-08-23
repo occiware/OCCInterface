@@ -10,12 +10,11 @@ Its aims are multiple:
 - manage and explore resources of an OCCI server easily
 - vulgarize, explain OCCI to newcomers, diffuse the OCCI way of thinking
 
-A demo is avalaible here : http://occinterface.herokuapp.com/
 
-## How to use it
+## How to use it 
 
 Requirement :
-(some versions bellow should work too but have not been tested)
+(some versions bellow should work too but have not been tested) 
 - nodeJS: >=6.2.0
 - npm: >=3.8.9
 
@@ -29,7 +28,7 @@ npm install
 ```
 
 ``` bash
-npm run dev
+npm start
 ```
 
 You can go to [http://localhost:3000/](http://localhost:3000/).
@@ -39,7 +38,7 @@ Then, you need to enter the URL of the OCCI server on the input at the top of th
 ## How to integrate it in your own OCCI implementation
 TODO
 
-## FAQ
+## FAQ 
 
 - What is a **playground link** and how to create it ?  
 A playground link is a clickable link that make a GET request on the API and displays its content in the codeview.
@@ -49,7 +48,7 @@ example:
 [/resources/compute](/resources/compute)
 ```
 
-- What is a **sample link** and how to create it ?  
+- What is a **sample link** and how to create it ? 
 A sample link is a link that post datas onto the current server when clicking on it. The formating is as follow (in markdown):
 
 ``` JSON
@@ -108,17 +107,9 @@ If you want your sample link to post to different categories, just put an array 
         ]
     }
   ]
-}%
+}% 
 ```
-- Can I delete datas with a sample link ?  
-Yes, you can, with the followin format :
 
-``` JSON
-%{
-  "label": "my sample link",
-  "del": "/6df690d2-3158-40c4-88fb-d1c41584d6e7"
-}%
-```
 
 - How to deploy on Heroku ?  
 
@@ -144,7 +135,7 @@ If your application is deployed into a server which several people can access to
 Follow the instructions of [erocci](https://github.com/erocci/erocci/blob/master/doc/README.md)
 
 Then, you need to edit the config/sys.config file.
-Find the "backend" section, and modify it that way :
+Find the "backend" section, and modify it that way : 
 
 ``` erlang
 {backends,
@@ -158,7 +149,7 @@ Find the "backend" section, and modify it that way :
 
 Copy locally and use [this file](https://github.com/occiware/occi-schemas/blob/master/schemas/http%253A%252F%252Fschemas.ogf.org%252Focci%252Finfrastructure%2523.xml) as the config.xml file.
 
-Then, you can start the server with
+Then, you can start the server with 
 
 ``` bash
 ./start.sh

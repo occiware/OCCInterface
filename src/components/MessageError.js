@@ -13,9 +13,12 @@ class MessageError extends React.Component{
 
   componentDidMount = () => {
     var component = this;
-    $('.errorPath .close')
+    $('.message .close')
     .on('click', function() {
-
+      $(this)
+        .closest('.errorPath')
+        .transition('fade')
+      ;
       //we delete the current message into the store
       component.props.dispatch(actions.setErrorMessage('',''));
     });

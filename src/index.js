@@ -31,14 +31,17 @@ window.rootURL = window.location.host;
 
 
 ReactDOM.render(
+  // <Provider store={store}>
+  //   <Router history={browserHistory}>
+  //     <Route path='/' component={App} readings={readings}>
+  //       {readings.map(function(reading, i){
+  //         return <Route path={reading.path} key={reading+i}/>;
+  //       }, this)}
+  //     </Route>
+  //   </Router>
+  // </Provider>,
   <Provider store={store}>
-    <Router history={browserHistory}>
-      <Route path='/' component={App} readings={readings}>
-        {readings.map(function(reading, i){
-          return <Route path={reading.path} key={reading+i}/>;
-        }, this)}
-      </Route>
-    </Router>
+    <App/>
   </Provider>,
   document.getElementById('root')
 );

@@ -8,29 +8,21 @@ import * as actions from '../../actions/actionIndex.js';
 class ModelButton extends React.Component{
 
   getModel = () => {
-    //we delete the error message
-    this.props.setErrorMessage('', '');
-
     //first we get the kind of the requested resource
     var currentKind = '';
+
     callAPI(
       'GET',
       this.props.currentPath,
       (data) => {
         var copy = false;
-        //is there is no kind (for instance with /-/), we can't access the model
-        if(data.kind !== undefined){
-          for(var i=0;i<data.kind.length;i++){
-            if(copy){
-              currentKind += data.kind[i];
-            }
-            if(data.kind[i] === '#'){
-              copy = true;
-            }
+        for(var i=0;i<data.kind.length;i++){
+          if(copy){
+            currentKind += data.kind[i];
           }
-        }
-        else{
-          this.props.setErrorMessage('Impossible to go to the model of this resource');
+          if(data.kind[i] === '#'){
+            copy = true;
+          }
         }
       },
       (xhr) => {
