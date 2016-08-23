@@ -70,4 +70,5 @@ Morevover, the use of the four buttons are quite simple :
 * M: Go to the kind (the Model) of a resource. You need to have a target URL pointing to a resource.  
 
 ### Switching server
+
 You can switch the current OCCI server you are working on with the editable dropdown at the top of the page.
