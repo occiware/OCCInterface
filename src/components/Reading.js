@@ -22,6 +22,7 @@ class Reading extends React.Component{
   componentDidUpdate = () => {
     //we transform all link of readings to make them playground-clickable
     this.replaceLinks();
+    this.replaceLinkSample();
   }
 
   componentWillMount = () => {
@@ -32,12 +33,17 @@ class Reading extends React.Component{
 
   componentDidMount = () => {
     this.replaceLinks();
-    var reactComponent = this;
+    this.replaceLinkSample();
+  }
 
+  replaceLinkSample = () => {
+    var reactComponent = this;
     $('.sampleLink').each(function() {
       $(this).click((e) => {e.preventDefault();reactComponent.clickLinkSample($(this).text());});
     });
   }
+
+
 
   //replace the playgrounLink
   replaceLinks = () => {
