@@ -8,6 +8,7 @@ import {compute, storage, storagelink} from '../../samples/occi-infra.js';
 
 import {callAPI} from '../utils.js';
 import * as actions from '../actions/actionIndex.js';
+import {getRenderer} from '../createRendererMarked.js';
 
 class Reading extends React.Component{
   componentWillUpdate = (nextProps) => {
@@ -20,7 +21,6 @@ class Reading extends React.Component{
 
   componentDidUpdate = () => {
     //we transform all link of readings to make them playground-clickable
-    this.replaceLinkSample();
     this.replaceLinks();
   }
 
@@ -31,11 +31,15 @@ class Reading extends React.Component{
   }
 
   componentDidMount = () => {
-    //this order is very important !
-    this.replaceLinkSample();
     this.replaceLinks();
+    var reactComponent = this;
+
+    $('.sampleLink').each(function() {
+      $(this).click((e) => {e.preventDefault();reactComponent.clickLinkSample($(this).text());});
+    });
   }
 
+  //replace the playgrounLink
   replaceLinks = () => {
     var reactComponent = this;
     $('.reading a').each(function() {
@@ -111,107 +115,38 @@ class Reading extends React.Component{
   }
 
 
-  replaceLinkSample = () => {
-    var reactElement = this;
-    var approve = false;
-
-    //we parse the %{}%
-    $('.reading p').each(function() {
-      var cache = reactElement.replaceLinkSampleParagraph($(this).html());
-      var parsedText = cache.element;
-
-      //we keep formating until there is no %{}% in the current text
-      while(cache.finish !== true){
-        parsedText = cache.element;
-        cache = reactElement.replaceLinkSampleParagraph(parsedText.html());
-      }
-      $(this).replaceWith(parsedText);
-    });
-  }
-
-  //replace the first ocurence of %{}% in a paragraph
-  replaceLinkSampleParagraph = (fullText) => {
-    var beforeString = '';
-    var afterString = '';
-
-    var fillBefore = true;
-    var fillAfter = false;
-
-    var indexBeginContent = 0;
-
-    var content = '';
-
-    for(var i=0; i<fullText.length; i++){
-      if(i !== fullText.length-1){
-        if(fullText[i] === '%' && (fullText[i+1] === '{' || fullText[i+1] === '[')){
-          indexBeginContent = i;
-          fillBefore = false;
-        }
-        if((fullText[i] === '}' || fullText[i] === ']') && fullText[i+1] === '%'){
-          content = fullText.slice(indexBeginContent,i+2);
-          fillAfter = true;
-        }
-      }
-
-      if(fillBefore){
-        beforeString += fullText[i];
-      }
-      if(fillAfter){
-        afterString += fullText[i];
+  clickLinkSample = (label) => {
+    //we search into the current window.sampleDatas the correct json
+    var content = '' ;
+    for(var i=0; i<window.sampleDatas.length; i++){
+      if(window.sampleDatas[i].label === label){
+        content = window.sampleDatas[i];
+        break;
       }
     }
 
-    //we replace only if there is a % into the current <p>
     if(content !== ''){
-      afterString = afterString.slice(2);
-
-      content = JSON.parse(content.slice(1, -1));
-
-      //we replace with a green link + icon
-
-      var link = $('<a class="sampleLink" href="">'+content.label+'</a>');
-      var p = $('<p></p>');
-
-
-      // var before = $('<span>'+ beforeString +' </span>');
-      // var after = $('<span> '+ afterString +'</span>');
       var reactElement = this;
-
-      link.click(function(event){ event.preventDefault(); reactElement.clickLinkSample(content);});
-
-      //we convert our string to a jquery object
-      p.append($.parseHTML(beforeString));
-      p.append(link);
-      p.append(' <i class="upload icon"></i>');
-      p.append($.parseHTML(afterString));
-
-      return {element: p, finish: false};
+      //before posting we ask for confirmation
+      $('.confirmationPost').modal({
+          onApprove: function() {
+            if('post' in content){
+              reactElement.postSample(content.post);
+            }
+            if('del' in content){
+              reactElement.deleteResources(content.del);
+            }
+          }
+      }).modal('show');
     }
     else{
-      var p = $('<p></p>');
-      p.append($.parseHTML(beforeString));
-      return {element: p, finish: true};
+      this.props.setErrorMessage('Error posting resource', '');
     }
-  }
-
-  clickLinkSample = (content) => {
-    var reactElement = this;
-    //before posting we ask for confirmation
-    $('.confirmationPost').modal({
-        onApprove: function() {
-          if('post' in content){
-            reactElement.postSample(content.post);
-          }
-          if('del' in content){
-            reactElement.deleteResources(content.del);
-          }
-        }
-    }).modal('show');
   }
 
   createMarkup = () => {
     marked.setOptions({
-      renderer: new marked.Renderer(),
+      renderer: getRenderer(),
       highlight: function(code){
         return window.hljs.highlightAuto(code).value;
       }
