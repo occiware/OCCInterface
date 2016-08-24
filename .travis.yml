@@ -22,7 +22,7 @@ before_install:
 script: ./travis_script.sh
 
 #we deploy onto heroku
-#the secure is the hash of the api key of the herokuapp
+#the secure is the hash of the api key of the herokuapp (owner is Marc)
 deploy:
   provider: heroku
   api_key:
