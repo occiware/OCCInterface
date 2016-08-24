@@ -20,7 +20,6 @@ class Reading extends React.Component{
 
   componentDidUpdate = () => {
     //we transform all link of readings to make them playground-clickable
-
     this.replaceLinkSample();
     this.replaceLinks();
   }
