@@ -31,7 +31,7 @@ window.rootURL = window.location.host;
 
 //by default, the playground is an integrated version. If it is served by node,
 //it will be changed to false
-window.integratedVersion = false;
+window.integratedVersion = true;
 
 ReactDOM.render(
   <Provider store={store}>
