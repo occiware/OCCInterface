@@ -51,6 +51,17 @@ function setupDev(app) {
   });
 }
 
+//we change the index.js file so that window.integratedVersion is set to false
+var fs = require('fs')
+fs.readFile('./src/index.js', 'utf8', function (err,data) {
+  if (err) {
+    return console.log(err);
+  }
+  var result = data.replace(/window.integratedVersion = true;/g, 'window.integratedVersion = false;');
+  fs.writeFile('./src/index.js', result, 'utf8', function (err) {
+     if (err) return console.log(err);
+  });
+});
 
 var isProduction = process.env.NODE_ENV === 'production';
 console.log('env is prod =', isProduction);
@@ -119,5 +130,3 @@ if (isProduction) { // prod :
   });
 
 }
-
-// http://localhost:3000/proxiedOCCIServer/sd

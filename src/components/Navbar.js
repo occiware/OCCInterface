@@ -108,6 +108,20 @@ class NavBar extends React.Component{
       );
     })
 
+    if(window.integratedVersion === false){
+      var serverSelection = <div className="ui item right navBarRight">
+          <div className="ui item">
+              <select className="ui fluid search dropdown backendURL" name="backendURL"onChange={() => {}}>
+                {options}
+              </select>
+            <button className="ui button useButton" onClick={this.updateBackendURL}>Use</button>
+          </div>
+        </div>;
+    }
+    else{
+      var serverSelection = null;
+    }
+
     return (
       <div className="ui inverted menu navbar centered grid blue">
         <div className="ui container wrapNavbar">
@@ -120,14 +134,7 @@ class NavBar extends React.Component{
             </div>
           </a>
 
-          <div className="ui item right navBarRight">
-            <div className="ui item">
-                <select className="ui fluid search dropdown backendURL" name="backendURL"onChange={() => {}}>
-                  {options}
-                </select>
-              <button className="ui button useButton" onClick={this.updateBackendURL}>Use</button>
-            </div>
-          </div>
+          {serverSelection}
 
           <div className="ui item">
             <a href="https://github.com/Romathonat/OCCInterface" ><i className="big github icon"></i></a>

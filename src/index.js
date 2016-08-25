@@ -29,6 +29,9 @@ window.proxyURL = conf.proxyURL; //redirection to make ajax calls
 window.backendURL = conf.backendURL;
 window.rootURL = window.location.host;
 
+//by default, the playground is an integrated version. If it is served by node,
+//it will be changed to false
+window.integratedVersion = false;
 
 ReactDOM.render(
   <Provider store={store}>

@@ -6,7 +6,12 @@ import ValueJSON from './components/reactifyJSON/ValueJSON.js';
 
 
 export function callAPI(operation, relativeUrl, currentSuccess, currentError, additionalHeaders, data, asynchronous, timeout){
-  var url = window.proxyURL+relativeUrl;
+  if(window.integratedVersion){
+    var url = 'http://localhost:8080'+relativeUrl;
+  }
+  else{
+    var url = window.proxyURL+relativeUrl;
+  }
 
   var headers = {
     // 'If-None-Match': -1,
