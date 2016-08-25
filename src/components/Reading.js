@@ -43,8 +43,6 @@ class Reading extends React.Component{
     });
   }
 
-
-
   //replace the playgrounLink
   replaceLinks = () => {
     var reactComponent = this;

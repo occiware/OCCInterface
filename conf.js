@@ -1,7 +1,8 @@
 //the list of servers we can access
 const serverPaths = [
   'http://malmo.lizenn.net:8080',
-  'http://localhost:8080'
+  'http://localhost:8080',
+  'http://malmo.lizenn.net:8082',
 ]
 
 //the adress used internally in the application to proxy

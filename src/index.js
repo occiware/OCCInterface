@@ -38,6 +38,7 @@ ReactDOM.render(
           return <Route path={reading.path} key={reading+i}/>;
         }, this)}
       </Route>
+      <Route path='*' component={App} readings={readings}/>
     </Router>
   </Provider>,
   document.getElementById('root')
