@@ -109,14 +109,12 @@ class NavBar extends React.Component{
     })
 
     if(window.integratedVersion === false){
-      var serverSelection = <div className="ui item right navBarRight">
-          <div className="ui item">
+      var serverSelection = <div className="ui item">
               <select className="ui fluid search dropdown backendURL" name="backendURL"onChange={() => {}}>
                 {options}
               </select>
             <button className="ui button useButton" onClick={this.updateBackendURL}>Use</button>
-          </div>
-        </div>;
+          </div>;
     }
     else{
       var serverSelection = null;
@@ -133,9 +131,9 @@ class NavBar extends React.Component{
               {schemes}
             </div>
           </a>
-
-          {serverSelection}
-
+          <div className="ui item right navBarRight">
+            {serverSelection}
+          </div>
           <div className="ui item">
             <a href="https://github.com/Romathonat/OCCInterface" ><i className="big github icon"></i></a>
           </div>

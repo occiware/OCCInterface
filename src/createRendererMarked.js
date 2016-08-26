@@ -7,6 +7,10 @@ export function getRenderer(){
     var parsedText = replaceLinkSample(text).html();
     return '<p>'+parsedText+'</p>';
   }
+  renderer.listitem = function(text) {
+    var parsedText = replaceLinkSample(text).html();
+    return '<li><p>'+parsedText+'</p></li>';
+  }
   return renderer;
 }
 
