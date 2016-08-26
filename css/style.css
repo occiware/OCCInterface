@@ -14,7 +14,6 @@
   padding-top: 10px;
 }
 
-
 .myCentering{
   text-align: center;
 }
@@ -160,25 +159,26 @@ blockquote {
 }
 
 .playgroundLink{
-  color: #1B7CCC;
-}
-
-.playgroundLink:hover{
-  color: #5EB0F2;
-}
-
-.classicLink{
-  color: #F58300;
-}
-
-.classicLink:hover{
-  color: #F0AF65;
-}
-
-.sampleLink{
   color: green;
 }
 
-.sampleLink:hover{
+.playgroundLink:hover{
   color: #4BC44D;
+}
+
+.classicLink{
+  color: #1B7CCC;
+}
+
+.classicLink:hover{
+  color: #5EB0F2;
+}
+
+.sampleLink{
+  color: #F58300;
+}
+
+.sampleLink:hover{
+
+  color: #F0AF65;
 }
