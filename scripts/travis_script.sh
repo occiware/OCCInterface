@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+while read p; do
+  echo $p
+done <../conf.js
+
+pwd
+ls ../
+
 #setting the variable integrated to false
 sed -i -e 's/integratedVersion = true/integratedVersion = false/g' ../conf.js
 
