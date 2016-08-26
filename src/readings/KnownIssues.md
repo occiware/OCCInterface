@@ -2,7 +2,7 @@
 
 ### Post on malmo
 
-Here is a simple POST which should create a blog entry (test on malmo.lizenn) %{
+* Here is a simple POST which should create a blog entry (test on malmo.lizenn) %{
   "label": "post",
   "post":
     {
@@ -11,11 +11,11 @@ Here is a simple POST which should create a blog entry (test on malmo.lizenn) %{
           "kind":"example.org/occi/test#blog"
         }
     }
-}%
+}% 
 
 ### Deleting storage link
 
-You need to have occi-infra on your server. The following link will post a compute resource, a storage and a linkstorage: %{
+* You need to have occi-infra on your server. The following link will post a compute resource, a storage and a linkstorage: %{
   "label": "click",
   "post": [
     {
@@ -57,11 +57,11 @@ You need to have occi-infra on your server. The following link will post a compu
 }%
 
 
-You can then check if this resources has been created : [/categories/compute](/categories/compute), [/categories/storage](/categories/storage), [/categories/storagelink](/categories/storagelink).
+* You can then check if this resources has been created : [/categories/compute](/categories/compute), [/categories/storage](/categories/storage), [/categories/storagelink](/categories/storagelink).
 
-Now delete the storagelink by clicking %{
+* Now delete the storagelink by clicking %{
   "label": "here",
   "del": "/6df690d2-3158-40c4-88fb-d1c41584d6e7"
 }%
 
-Try again to access [/categories/compute](/categories/compute) or [/categories/storage](/categories/storage).
+* Try again to access [/categories/compute](/categories/compute) or [/categories/storage](/categories/storage).

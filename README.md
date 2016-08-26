@@ -110,6 +110,10 @@ If you want your sample link to post to different categories, just put an array 
   ]
 }%
 ```
+
+### Warning
+*The label attribute must be unique !*
+
 - Can I delete datas with a sample link ?  
 Yes, you can, with the followin format :
 

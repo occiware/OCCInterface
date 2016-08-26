@@ -1,6 +1,5 @@
 var marked = require('marked');
 
-
 export function getRenderer(){
   var renderer = new marked.Renderer();
   renderer.paragraph = function (text) {
@@ -9,7 +8,7 @@ export function getRenderer(){
   }
   renderer.listitem = function(text) {
     var parsedText = replaceLinkSample(text).html();
-    return '<li><p>'+parsedText+'</p></li>';
+    return '<li>'+parsedText+'</li>';
   }
   return renderer;
 }

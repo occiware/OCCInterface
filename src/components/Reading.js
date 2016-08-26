@@ -6,7 +6,7 @@ import marked from 'marked';
 // import * as actions from '../actions/actionIndex.js';
 import {compute, storage, storagelink} from '../../samples/occi-infra.js';
 
-import {callAPI} from '../utils.js';
+import {callAPI, sanitizeSampleLinks} from '../utils.js';
 import * as actions from '../actions/actionIndex.js';
 import {getRenderer} from '../createRendererMarked.js';
 
@@ -155,7 +155,8 @@ class Reading extends React.Component{
         return window.hljs.highlightAuto(code).value;
       }
     });
-    return {__html: marked(this.props.reading)};
+
+    return {__html: marked(sanitizeSampleLinks(this.props.reading))};
   }
 
   render() {

@@ -122,3 +122,50 @@ export function toolify(json, sharedProps) {
 
   return json;
 }
+
+export function sanitizeSampleLinks(content){
+  var sampleLink = '';
+  var textBefore = '';
+  var finalContent = '';
+
+  var copyTextBefore = true;
+  var copySampleLink = false;
+
+  for(var i=0; i<content.length; i++){
+    //specific case. Last iteration, we didn't copy the %
+    if(!copyTextBefore && !copySampleLink){
+      copyTextBefore = true;
+    }
+    if(i !== content.lenght-1 && content[i] === '%' && content[i+1] === '{'){
+      copyTextBefore = false;
+      copySampleLink = true;
+    }
+    else if(i > 0 && content[i-1] === '}' && content[i] === '%'){
+      copySampleLink = false;
+      copyTextBefore = false;
+
+      sampleLink += '%';
+      
+      //we replace new lines into the content part
+      sampleLink = sampleLink.replace(/(\r\n|\n|\r)/gm, ' ');
+
+      finalContent += textBefore+sampleLink;
+
+      //re init
+      textBefore = '';
+      sampleLink = '';
+    }
+
+    if(copySampleLink){
+      sampleLink += content[i];
+    }
+    if(copyTextBefore){
+      textBefore += content[i]
+    }
+  }
+
+  finalContent += textBefore+sampleLink;
+
+  return finalContent;
+
+}
