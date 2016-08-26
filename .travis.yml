@@ -19,7 +19,7 @@ before_install:
   - npm prune
 
 #we use travis to generate the build, then to add the dist/ (the build) to heroku
-script: ./travis_script.sh
+script: ./scripts/travis_script.sh
 
 #we deploy onto heroku
 #the secure is the hash of the api key of the herokuapp (owner is Marc)

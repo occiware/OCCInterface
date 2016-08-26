@@ -16,7 +16,7 @@ A demo is avalaible here : http://occinterface.herokuapp.com/
 
 Requirement :
 (some versions bellow should work too but have not been tested)
-- nodeJS: >=6.2.0
+- nodeJS: >=6
 - npm: >=3.8.9
 
 
