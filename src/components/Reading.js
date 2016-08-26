@@ -134,6 +134,7 @@ class Reading extends React.Component{
       //before posting we ask for confirmation
       $('.confirmationPost').modal({
           onApprove: function() {
+            //a link can potentially post and del
             if('post' in content){
               reactElement.postSample(content.post);
             }
