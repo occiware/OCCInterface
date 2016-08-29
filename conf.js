@@ -26,6 +26,6 @@ const initialState =  {
 };
 
 //this const will be changed when deploying on standalone. Must be true by default
-const integratedVersion = false;
+const integratedVersion = true;
 
 module.exports = {initialState: initialState, proxyURL: proxyURL, backendURL: backendURL, serverPaths: serverPaths, integratedVersion: integratedVersion};
