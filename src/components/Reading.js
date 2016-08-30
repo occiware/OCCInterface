@@ -10,6 +10,8 @@ import {callAPI, sanitizeSampleLinks} from '../utils.js';
 import * as actions from '../actions/actionIndex.js';
 import {getRenderer} from '../createRendererMarked.js';
 
+import ModalConfirmationPost from './ModalConfirmationPost.js';
+
 class Reading extends React.Component{
   componentWillUpdate = (nextProps) => {
     //we make the animation only if we have a new reading
@@ -118,7 +120,6 @@ class Reading extends React.Component{
     }
   }
 
-
   clickLinkSample = (label) => {
     //we search into the current window.sampleDatas the correct json
     var content = '' ;
@@ -131,8 +132,16 @@ class Reading extends React.Component{
 
     if(content !== ''){
       var reactElement = this;
+
       //before posting we ask for confirmation
+
+      //we give datas to the modal before it shows
+      this.refs.ModalConfirmationPost.setState({'post': content.post, 'del': content.del});
+      var modalConfirmationPost = this.refs.ModalConfirmationPost;
+
+      //we show the modal
       $('.confirmationPost').modal({
+          observeChanges: true,
           onApprove: function() {
             //a link can potentially post and del
             if('post' in content){
@@ -141,6 +150,9 @@ class Reading extends React.Component{
             if('del' in content){
               reactElement.deleteResources(content.del);
             }
+          },
+          onHidden: function(){
+            modalConfirmationPost.setState({seeDetails: false});
           }
       }).modal('show');
     }
@@ -165,23 +177,7 @@ class Reading extends React.Component{
       <div>
         <div className="reading segmentpadding" dangerouslySetInnerHTML={this.createMarkup()}></div>
 
-        <div className="ui basic modal confirmationPost">
-            <div className="description myCentering">
-              <p>You are going to create or delete datas into the current server, are you sure?</p>
-            </div>
-
-          <div className="actions">
-              <div className="ui ok green basic right inverted button">
-                <i className="checkmark icon"></i>
-                Yes
-              </div>
-              <div className="ui cancel red basic right inverted button">
-                <i className="remove icon"></i>
-                No
-              </div>
-          </div>
-
-        </div>
+        <ModalConfirmationPost ref="ModalConfirmationPost" />
       </div>
     );
   }

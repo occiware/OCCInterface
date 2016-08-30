@@ -38,7 +38,7 @@
   width: 100% !important;
 }
 
-.segmentpadding{
+.adding{
   padding: 20px !important;
 }
 
@@ -179,6 +179,24 @@ blockquote {
 }
 
 .sampleLink:hover{
-
   color: #F0AF65;
+}
+
+.datasPost{
+  height: 200px;
+  width: 100%;
+}
+
+.datasDel{
+  height: 100px;
+  width: 100%;
+}
+
+.segmentpadding{
+  padding: 20px;
+}
+
+.segmentDataPost{
+  text-align: left;
+  color: black;
 }
