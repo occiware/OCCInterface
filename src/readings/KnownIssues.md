@@ -1,18 +1,5 @@
 ## Known issues
 
-### Post on malmo
-
-* Here is a simple POST which should create a blog entry (test on malmo.lizenn) %{
-  "label": "post",
-  "post":
-    {
-        "adress": "/categories/blog",
-        "datas": {
-          "kind":"example.org/occi/test#blog"
-        }
-    }
-}% 
-
 ### Deleting storage link
 
 * You need to have occi-infra on your server. The following link will post a compute resource, a storage and a linkstorage: %{

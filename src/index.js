@@ -10,6 +10,7 @@ import App from './App';
 import GettingStarted from 'raw!./readings/GettingStarted.md';
 import OCCIProject from 'raw!./readings/OCCIProject.md';
 import knownissues from 'raw!./readings/KnownIssues.md';
+import postdatas from 'raw!./readings/PostDatas.md';
 
 import conf from '../conf.js';
 
@@ -21,7 +22,8 @@ let store = createStore(reducer, conf.initialState);
 const readings = [
     {'title':'Getting started', 'path': 'gettingstarted', 'component': GettingStarted},
     {'title':'The OCCIware Project', 'path': 'OCCIProject', 'component': OCCIProject},
-    {'title':'Known issues', 'path': 'knownissues', 'component': knownissues}
+    {'title':'Known issues', 'path': 'knownissues', 'component': knownissues},
+    {'title':'Post datas', 'path': 'postdatas', 'component': postdatas}
   ]
 ;
 

@@ -25,7 +25,7 @@ const initialState =  {
   schemes: {schemeName: [{title: '', term: ''}]}
 };
 
-//this const will be changed when deploying on standalone. Must be true by default
+//this const will be changed when deploying on standalone. Must be false by default
 const integratedVersion = false;
 
 module.exports = {initialState: initialState, proxyURL: proxyURL, backendURL: backendURL, serverPaths: serverPaths, integratedVersion: integratedVersion};
