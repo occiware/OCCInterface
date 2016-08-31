@@ -54,7 +54,8 @@ A sample link is a link that post datas onto the current server when clicking on
 
 ``` JSON
 text before %{
-  "label": "sampleLink",
+  "text": "sampleLink",
+  "label": "postCompute",
   "post": {
     "adress": "/categories/compute",
     "datas": {
@@ -78,7 +79,8 @@ If you want your sample link to post to different categories, just put an array 
 
 ``` JSON
 %{
-  "label": "sampleLink",
+  "text": "sampleLink",
+  "label": "postMultipleCompute",
   "post": [
     {
         "adress": "/categories/compute",
@@ -115,11 +117,12 @@ If you want your sample link to post to different categories, just put an array 
 *The label attribute must be unique !*
 
 - Can I delete datas with a sample link ?  
-Yes, you can, with the followin format :
+Yes, you can, with the following format :
 
 ``` JSON
 %{
-  "label": "my sample link",
+  "text": "my sample link",
+  "label": "deleteLink",
   "del": "/6df690d2-3158-40c4-88fb-d1c41584d6e7"
 }%
 ```

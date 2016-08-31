@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#setting the variable integrated to false
+#setting the variable integrated to false (to be sure)
 sed -i -e 's/integratedVersion = true/integratedVersion = false/g' ./conf.js
 
 #we package to deploy to heroku

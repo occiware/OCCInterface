@@ -41,7 +41,7 @@ class Reading extends React.Component{
   replaceLinkSample = () => {
     var reactComponent = this;
     $('.sampleLink').each(function() {
-      $(this).click((e) => {e.preventDefault();reactComponent.clickLinkSample($(this).text());});
+      $(this).click((e) => {e.preventDefault();reactComponent.clickLinkSample($(this).attr('href'));});
     });
   }
 

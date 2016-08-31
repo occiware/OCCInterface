@@ -23,7 +23,7 @@ const readings = [
     {'title':'Getting started', 'path': 'gettingstarted', 'component': GettingStarted},
     {'title':'The OCCIware Project', 'path': 'OCCIProject', 'component': OCCIProject},
     {'title':'Known issues', 'path': 'knownissues', 'component': knownissues},
-    {'title':'Post datas', 'path': 'postdatas', 'component': postdatas}
+    {'title':'Samples', 'path': 'samples', 'component': postdatas}
   ]
 ;
 

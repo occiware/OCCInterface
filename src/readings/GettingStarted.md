@@ -13,7 +13,8 @@ a *Link*. More informations [here](http://occi-wg.org/about/specification/)
 You can explore the API by clicking on the [links](/categories/compute), in the JSON or in this text, or by entering a target URL and clicking on the GET button.
 
 You can post a sample of data by clicking %{
-  "label": "here",
+  "text": "here",
+  "label": "datas",
   "post": [
     {
         "adress": "/categories/compute",

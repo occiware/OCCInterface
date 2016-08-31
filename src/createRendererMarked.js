@@ -73,7 +73,7 @@ function replaceLinkSampleParagraph(fullText){
     }
 
     //we replace with a green link + icon
-    var link = $('<a class="sampleLink" href="">'+content.label+'</a>');
+    var link = $('<a class="sampleLink" href="'+content.label+'">'+content.text+'</a>');
     var p = $('<p></p>');
 
     // var before = $('<span>'+ beforeString +' </span>');
