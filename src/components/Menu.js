@@ -9,7 +9,7 @@ export default class Menu  extends React.Component{
     this.state= {
       hidden: false,
       onButton: false
-    };
+    }; 
   }
 
   render(){

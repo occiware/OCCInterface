@@ -55,6 +55,9 @@ class Content extends React.Component{
       link,
       (data) => {
         this.props.dispatch(actions.setCurrentJson(data));
+
+        //we go up into the textArea
+        $('.mydata').scrollTop(0);
       },
       (xhr) => {
         this.setErrorMessage('Impossible to access this resource', xhr.status+' '+xhr.responseText);
