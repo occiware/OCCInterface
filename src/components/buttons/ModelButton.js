@@ -34,8 +34,6 @@ class ModelButton extends React.Component{
           var regex = /\/categories\/(.*)/;
           var matchRegex = regex.exec(this.props.currentPath);
 
-          console.log(matchRegex);
-
           if(matchRegex !== null){
             currentKind = matchRegex[1];
           }
