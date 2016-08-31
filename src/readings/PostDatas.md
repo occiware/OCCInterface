@@ -46,15 +46,21 @@
         },
         "source": {
           "location": "6df690d2-3158-40c4-88fb-d1c41584d6"
-        }
+        },
+        "id": "6df690d2-3158-40c4-88fb-d1c41584d8"
       }
     }
   }%
 
 * You can get the entry you posted before (for instance) by clicking [here](/6df690d2-3158-40c4-88fb-d1c41584d7)
 
-* Finally, you can delete the entry by clicking %{
+* Finally, you can delete what you posted by clicking %{
   "text": "here",
   "label": "deleteBlog",
-  "del": "/6df690d2-3158-40c4-88fb-d1c41584d7"
+  "del": [
+    "/6df690d2-3158-40c4-88fb-d1c41584d7",
+    "/6df690d2-3158-40c4-88fb-d1c41584d6",
+    "/6df690d2-3158-40c4-88fb-d1c41584d8",
+    "/6df690d2-3158-40c4-88fb-d1c41584d6e5"
+  ]
 }%

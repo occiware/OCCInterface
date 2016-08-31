@@ -70,7 +70,9 @@ class Reading extends React.Component{
         callAPI(
           'POST',
           data.adress,
-          null,
+          (data) => {
+            this.props.dispatch(actions.setOkMessage('Datas have been posted'));
+          },
           (xhr) => {
             this.props.setErrorMessage('Impossible to access this resource', xhr.status+' '+xhr.responseText);
           },
@@ -84,6 +86,7 @@ class Reading extends React.Component{
         datas.adress,
         (data) => {
           this.props.dispatch(actions.setCurrentJson(data));
+          this.props.dispatch(actions.setOkMessage('Datas have been posted'));
         },
         (xhr) => {
           this.props.setErrorMessage('Impossible to access this resource', xhr.status+' '+xhr.responseText);
@@ -100,7 +103,9 @@ class Reading extends React.Component{
         callAPI(
           'DELETE',
           data,
-          null,
+          (data) => {
+            this.props.dispatch(actions.setOkMessage('Resources have been deleted'));
+          },
           (xhr) => {
             this.props.setErrorMessage('Impossible to access this resource', xhr.status+' '+xhr.responseText);
           }
@@ -112,6 +117,7 @@ class Reading extends React.Component{
         datas,
         (data) => {
           this.props.dispatch(actions.setCurrentJson(''));
+          this.props.dispatch(actions.setOkMessage('Resource have been deleted'));
         },
         (xhr) => {
           this.props.setErrorMessage('Impossible to access this resource', xhr.status+' '+xhr.responseText);
