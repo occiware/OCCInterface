@@ -145,7 +145,7 @@ export function sanitizeSampleLinks(content){
       copyTextBefore = false;
 
       sampleLink += '%';
-      
+
       //we replace new lines into the content part
       sampleLink = sampleLink.replace(/(\r\n|\n|\r)/gm, ' ');
 

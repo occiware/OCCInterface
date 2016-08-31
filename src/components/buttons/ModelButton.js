@@ -29,6 +29,20 @@ class ModelButton extends React.Component{
             }
           }
         }
+        //if it is not the query interface, we have a /categories/{categorie}
+        else if(this.props.currentPath !== '/-/'){
+          var regex = /\/categories\/(.*)/;
+          var matchRegex = regex.exec(this.props.currentPath);
+
+          console.log(matchRegex);
+
+          if(matchRegex !== null){
+            currentKind = matchRegex[1];
+          }
+          else{
+            this.props.setErrorMessage('Impossible to go to the model of this resource');
+          }
+        }
         else{
           this.props.setErrorMessage('Impossible to go to the model of this resource');
         }
