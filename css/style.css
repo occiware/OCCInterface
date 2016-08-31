@@ -108,7 +108,7 @@ blockquote {
 
 /*Color for highlighting JSON code */
 
-.string { color: green; }
+.string { color: #A37C05 ; }
 .number { color: darkorange; }
 .boolean { color: blue; }
 .null { color: magenta; }
