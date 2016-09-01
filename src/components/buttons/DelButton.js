@@ -8,6 +8,9 @@ class DelButton extends React.Component{
   deleteData = () => {
     //we delete the error message
     this.props.setErrorMessage('', '');
+
+    //we delete the ok message
+    this.props.dispatch(actions.setOkMessage(''));
     
     var reactElement = this;
 

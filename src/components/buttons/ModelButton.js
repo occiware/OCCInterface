@@ -10,6 +10,8 @@ class ModelButton extends React.Component{
   getModel = () => {
     //we delete the error message
     this.props.setErrorMessage('', '');
+    //we delete the ok message
+    this.props.dispatch(actions.setOkMessage(''));
 
     //first we get the kind of the requested resource
     var currentKind = '';

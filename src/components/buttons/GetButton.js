@@ -8,6 +8,9 @@ class GetButton extends React.Component{
   getResource = () => {
     //we delete the error message
     this.props.setErrorMessage('', '');
+    //we delete the ok message
+    this.props.dispatch(actions.setOkMessage(''));
+    
     this.props.dispatch(actions.setReadableCode());
 
     callAPI(

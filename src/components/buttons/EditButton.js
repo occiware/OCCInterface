@@ -8,6 +8,9 @@ class EditButton extends React.Component{
   editButton = () => {
     //we delete the error message
     this.props.setErrorMessage('', '');
+
+    //we delete the ok message
+    this.props.dispatch(actions.setOkMessage(''));
     
     var relativeUrl = this.props.currentPath;
     //we make a call in order to get the datas without the html formating

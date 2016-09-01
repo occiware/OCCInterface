@@ -44,6 +44,9 @@ class Content extends React.Component{
     //we delete the error message
     this.setErrorMessage('', '');
 
+    //we delete the ok message
+    this.props.dispatch(actions.setOkMessage(''));
+
     //we remove the backendURL of the link
     link = link.replace(window.backendURL, '');
 
