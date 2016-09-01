@@ -115,7 +115,8 @@ class Content extends React.Component{
 
           <CodeView tools={this.tools}/>
 
-          <Reading reading={this.props.reading} setErrorMessage={this.setErrorMessage} clickLinkPlaygroundEvent={this.clickLinkPlaygroundEvent}/>
+          <Reading reading={this.props.reading} setErrorMessage={this.setErrorMessage} clickLinkPlaygroundEvent={this.clickLinkPlaygroundEvent}
+            goToTop={this.props.goToTop}/>
 
         </div>
       </div>
