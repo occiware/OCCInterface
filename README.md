@@ -12,7 +12,7 @@ Its aims are multiple:
 
 A demo is avalaible here : http://occinterface.herokuapp.com/
 
-![./assets/occinterfaceShow.png](./assets/occinterfaceShow.png)
+![./assets/screenOccinterface.png](./assets/screenOccinterface.png)
 
 ## How to use it
 
