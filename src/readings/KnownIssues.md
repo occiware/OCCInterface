@@ -3,7 +3,7 @@
 ### Deleting storage link
 
 * You need to have occi-infra on your server. The following link will post a compute resource, a storage and a linkstorage: %{
-  "label": "click",
+  "text": "click",
   "post": [
     {
         "adress": "/categories/compute",
@@ -44,11 +44,11 @@
 }%
 
 
-* You can then check if this resources has been created : [/categories/compute](/categories/compute), [/categories/storage](/categories/storage), [/categories/storagelink](/categories/storagelink).
+* You can then check if this resources has been created : [/categories/compute](/categories/compute), [/categories/storage](/categories/storage), [/categories/storagelink](/categories/storagelink).    
 
 * Now delete the storagelink by clicking %{
-  "label": "here",
+  "text": "here",
   "del": "/6df690d2-3158-40c4-88fb-d1c41584d6e7"
-}%
+}%    
 
-* Try again to access [/categories/compute](/categories/compute) or [/categories/storage](/categories/storage).
+* Try again to access [/categories/compute](/categories/compute) or [/categories/storage](/categories/storage).    

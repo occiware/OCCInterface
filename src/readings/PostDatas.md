@@ -2,7 +2,6 @@
 
 * Here is a simple POST which should create a blog entry, a blog entry and a user (you can test on malmo.lizenn) %{
   "text": "post",
-  "label": "postBlog",
   "post":
   [
     {
@@ -37,7 +36,6 @@
 
 * Now let's create a link between entry and user : it is a qualified association, named %{
     "text": "author",
-    "label": "postAuthor",
     "post": {
       "adress": "/categories/author",
       "datas": {
@@ -56,7 +54,6 @@
 
 * Finally, you can delete what you posted by clicking %{
   "text": "here",
-  "label": "deleteBlog",
   "del": [
     "/6df690d2-3158-40c4-88fb-d1c41584d7",
     "/6df690d2-3158-40c4-88fb-d1c41584d6",

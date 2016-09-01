@@ -126,12 +126,12 @@ class Reading extends React.Component{
     }
   }
 
-  clickLinkSample = (label) => {
+  clickLinkSample = (uuid) => {
     this.props.goToTop();
     //we search into the current window.sampleDatas the correct json
     var content = '' ;
     for(var i=0; i<window.sampleDatas.length; i++){
-      if(window.sampleDatas[i].label === label){
+      if(window.sampleDatas[i].uuid === uuid){
         content = window.sampleDatas[i];
         break;
       }

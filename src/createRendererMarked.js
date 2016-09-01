@@ -64,6 +64,13 @@ function replaceLinkSampleParagraph(fullText){
 
     content = JSON.parse(content.slice(1, -1));
 
+    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+        return v.toString(16);
+    });
+
+    content.uuid = uuid;
+
     //we expose this data into the global context, so that we can recover it when clicking
     if(!window.sampleDatas){
       window.sampleDatas = [content];
@@ -73,7 +80,7 @@ function replaceLinkSampleParagraph(fullText){
     }
 
     //we replace with a green link + icon
-    var link = $('<a class="sampleLink" href="'+content.label+'">'+content.text+'</a>');
+    var link = $('<a class="sampleLink" href="'+content.uuid+'">'+content.text+'</a>');
     var p = $('<p></p>');
 
     // var before = $('<span>'+ beforeString +' </span>');

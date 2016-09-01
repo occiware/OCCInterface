@@ -14,7 +14,6 @@ You can explore the API by clicking on the [links](/categories/compute), in the 
 
 You can post a sample of data by clicking %{
   "text": "here",
-  "label": "datas",
   "post": [
     {
         "adress": "/categories/compute",
