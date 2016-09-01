@@ -15,7 +15,10 @@ class NavBar extends React.Component{
     .dropdown({
       allowAdditions: true
     });
-    this.updateBackendURL();
+
+    if(!window.integratedVersion){
+      this.updateBackendURL();
+    }
   }
 
   /*look for schemes and their corresponding kinds, and dispatch to the store the correct datas*/
