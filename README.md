@@ -21,6 +21,15 @@ Requirement :
 - nodeJS: >=6
 - npm: >=3.8.9
 
+NB. an easy way to install both, whatever the version of node you already have, is to install [nvm](https://github.com/creationix/nvm) :
+``` bash
+sudo apt-get update
+sudo apt-get install build-essential libssl-dev
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.0/install.sh | bash
+nvm install v6.2.0
+```
+
+Build and run :
 
 ``` bash
 git clone https://github.com/occiware/OCCInterface.git
