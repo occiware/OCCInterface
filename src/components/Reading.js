@@ -6,7 +6,7 @@ import marked from 'marked';
 // import * as actions from '../actions/actionIndex.js';
 import {compute, storage, storagelink} from '../../samples/occi-infra.js';
 
-import {callAPI, sanitizeSampleLinks} from '../utils.js';
+import {callAPI, sanitizeSampleLinks, addressToCategoriesUrl} from '../utils.js';
 import * as actions from '../actions/actionIndex.js';
 import {getRenderer} from '../createRendererMarked.js';
 
@@ -69,7 +69,7 @@ class Reading extends React.Component{
       for(var data of datas){
         callAPI(
           'POST',
-          data.adress,
+          addressToCategoriesUrl(data.address),
           (data) => {
             this.props.dispatch(actions.setOkMessage('Datas have been posted'));
           },
@@ -83,7 +83,7 @@ class Reading extends React.Component{
     }else{
       callAPI(
         'POST',
-        datas.adress,
+        addressToCategoriesUrl(datas.address),
         (data) => {
           this.props.dispatch(actions.setCurrentJson(data));
           this.props.dispatch(actions.setOkMessage('Datas have been posted'));
@@ -102,7 +102,7 @@ class Reading extends React.Component{
       for(var data of datas){
         callAPI(
           'DELETE',
-          data,
+          data, // NB. NOT addressToCategoriesUrl(data) because can't delete a collection !
           (data) => {
             this.props.dispatch(actions.setOkMessage('Resources have been deleted'));
           },
@@ -114,7 +114,7 @@ class Reading extends React.Component{
     }else{
       callAPI(
         'DELETE',
-        datas,
+        datas, // NB. NOT addressToCategoriesUrl(data) because can't delete a collection !
         (data) => {
           this.props.dispatch(actions.setCurrentJson(''));
           this.props.dispatch(actions.setOkMessage('Resource have been deleted'));

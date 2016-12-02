@@ -10,6 +10,21 @@ export function getRenderer(){
     var parsedText = replaceLinkSample(text).html();
     return '<li>'+parsedText+'</li>';
   }
+  renderer.link = function(href, title, text) {
+    if (href.includes('#')) {
+      return text; // DON'T render link in case of 'http://'-prefixed OCCI kind URLs within JSON samples
+      // else SyntaxError: JSON.parse: expected ',' or '}' after property value in object at line 1 column 116 of the JSON data
+      // NB. HACK, not yet found a better way to detect OCCI kinds (would require to hack a visit state in marked ?)
+      // NB. old erocci infra samples had schemes and kinds that started by www. rather than http://
+      // ex. www.schemas.ogf.org/occi/infrastructure#storagelink rather than http://schemas.ogf.org/occi/infrastructure#storagelink
+    }
+    var link = '<a href="' + href + "'";
+    if (title) {
+      link += ' title="' + title + '"';
+    }
+    link += '>' + text + '</a>';
+    return link;
+  }
   return renderer;
 }
 
@@ -61,8 +76,14 @@ function replaceLinkSampleParagraph(fullText){
   //if there is no content, there is no %{}% and only a beforeString
   if(content !== ''){
     afterString = afterString.slice(2);
-
-    content = JSON.parse(content.slice(1, -1));
+    
+    try {
+      content = JSON.parse(content.slice(1, -1));
+    } catch (syntaxError) {
+      console.log('error', syntaxError, 'while parsing', content.slice(1, -1));
+      throw syntaxError;
+    }
+    
 
     var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
         var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);

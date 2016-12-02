@@ -23,12 +23,14 @@ const readings = [
     {'title':'Getting started', 'path': 'gettingStarted', 'component': GettingStarted},
     {'title':'The OCCIware Project', 'path': 'OCCIProject', 'component': OCCIProject},
     {'title':'Known issues', 'path': 'knownIssues', 'component': knownissues},
-    {'title':'Samples', 'path': 'postingSamples', 'component': postdatas}
+    {'title':'Samples with erocci', 'path': 'postingSamples', 'component': postdatas}
   ]
 ;
 
 window.proxyURL = conf.proxyURL; //redirection to make ajax calls
 window.backendURL = conf.backendURL;
+window.backendCategoriesPrefix = conf.backendCategoriesPrefix_mart;
+window.conf = conf; // to access backendCategoriesPrefix constants
 window.rootURL = window.location.host;
 
 //by default, the playground is an integrated version. If it is served by node,

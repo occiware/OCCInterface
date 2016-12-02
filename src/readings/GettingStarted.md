@@ -10,14 +10,15 @@ a *Link*. More informations [here](http://occi-wg.org/about/specification/)
 
 ## Getting started
 
-You can explore the API by clicking on the [links](/categories/compute), in the JSON or in this text, or by entering a target URL and clicking on the GET button.
+You can explore the API by clicking on the [links](/compute), in the JSON or in this text, or by entering a target URL and clicking on the GET button.
 
 You can post a sample of data by clicking %{
   "text": "here",
   "post": [
     {
-        "adress": "/categories/compute",
+        "address": "/compute",
         "datas": {
+          "kind":"http://schemas.ogf.org/occi/infrastructure#compute",
           "attributes": {
             "occi.compute.hostname" : "test",
             "occi.compute.state" : "inactive"
@@ -26,8 +27,9 @@ You can post a sample of data by clicking %{
         }
     },
     {
-        "adress": "/categories/storage",
+        "address": "/storage",
         "datas": {
+          "kind":"http://schemas.ogf.org/occi/infrastructure#storage",
           "attributes": {
             "occi.storage.size" : 1000
           },
@@ -35,9 +37,9 @@ You can post a sample of data by clicking %{
         }
     },
     {
-      "adress": "/categories/storagelink",
+      "address": "/storagelink",
       "datas": {
-         "kind":"www.schemas.ogf.org/occi/infrastructure#storagelink",
+         "kind":"http://schemas.ogf.org/occi/infrastructure#storagelink",
          "attributes": {
            "occi.core.id":"6df690d2-3158-40c4-88fb-d1c41584d6e7",
            "occi.storagelink.deviceid":"/dev/vdc"
@@ -57,7 +59,7 @@ You can post a sample of data by clicking %{
 It gives you the configuration of the OCCI server, list the **actions** you can do, and the **kinds** of resources you can interact with.
 You can also discover the **kinds** of the current OCCI server by clicking on "Select Kind" at the top of the page.      
 
-* To access a categorie, use URLs of this type : [/categories/storagelink](/categories/storagelink)  
+* To access a categorie, use URLs of this type : [/storagelink](/storagelink)  
 
 * Each resource has an unique id. To access a resource, click on a link pointing to it, or use an URL of this type :
 [/6df690d2-3158-40c4-88fb-d1c41584d6e5](/6df690d2-3158-40c4-88fb-d1c41584d6e5)<br><br>

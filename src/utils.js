@@ -169,3 +169,43 @@ export function sanitizeSampleLinks(content){
   return finalContent;
 
 }
+
+// functions for handling #10 prefixed by /categories/ in case of erocci only :
+export function kindToCategoriesUrl(kind) {
+  return window.backendCategoriesPrefix + kind;
+}
+export function addressToCategoriesUrl(address) {
+  var addressPathElements = address.split('/').filter(function(elt) {return elt.length != 0});
+  return addressPathElements.length == 1 && !address.includes('-') ? // then assumed to be a category
+    window.backendCategoriesPrefix + addressPathElements[0] : address;
+}
+export function isErocciBackendCategoriesPrefix(kind) {
+  return window.backendCategoriesPrefix === window.conf.backendCategoriesPrefix_erocci;
+}
+
+// visits QI in order to fill
+// - supported OCCI schemes containing kinds and mixins
+// - a map that also contain actions, allowing to put them back in kinds and mixins later
+// NB. recursive because erocci and MART do not have the same QI top level structure,
+// see https://github.com/cgourdin/MartServer/issues/44
+export function visitMetamodel(json, kindAndMixinSchemes, uriToCategoryMap) {
+  for (var key in json){
+    var definition = json[key];
+    if (typeof definition !== 'object') { // even arrays
+      continue;
+    }
+    if ('scheme' in definition){
+      uriToCategoryMap[definition.scheme + definition.term] = definition;
+      if (!definition.scheme.endsWith('/action#')) {
+        if (definition.scheme in kindAndMixinSchemes){
+          kindAndMixinSchemes[definition.scheme].push(definition); // {title: definition.title, term: definition.term}
+        }
+        else{
+          kindAndMixinSchemes[definition.scheme] = [definition]; // {title: definition.title, term: definition.term}
+        }
+      }
+    } else {
+      visitMetamodel(definition, kindAndMixinSchemes, uriToCategoryMap);
+    }
+  }
+}

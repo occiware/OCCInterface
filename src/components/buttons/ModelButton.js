@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import {callAPI} from '../../utils.js';
+import {callAPI, isErocciBackendCategoriesPrefix} from '../../utils.js';
 import * as actions from '../../actions/actionIndex.js';
 
 //deactivate when not on a resource?
@@ -31,9 +31,10 @@ class ModelButton extends React.Component{
             }
           }
         }
-        //if it is not the query interface, we have a /categories/{categorie}
+        //if it is not the query interface, we may have a /categories/{categorie} IF conf'd for erocci
         else if(this.props.currentPath !== '/-/'){
-          var regex = /\/categories\/(.*)/;
+          var regex = isErocciBackendCategoriesPrefix() ?
+              /\/categories\/(.*)/ : /\/(.*)/;
           var matchRegex = regex.exec(this.props.currentPath);
 
           if(matchRegex !== null){

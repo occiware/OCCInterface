@@ -11,6 +11,10 @@ const proxyURL = '/proxiedOCCIServer';
 //the adress of the initial backend Server
 const backendURL = serverPaths[0];
 
+//the prefix to append to categories queries
+const backendCategoriesPrefix_erocci = '/categories/';
+const backendCategoriesPrefix_mart = '/';
+
 const initialState =  {
   currentPath: '/-/',
   currentJson: {},
@@ -28,4 +32,4 @@ const initialState =  {
 //this const will be changed when deploying on standalone. Must be false by default
 const integratedVersion = false;
 
-module.exports = {initialState: initialState, proxyURL: proxyURL, backendURL: backendURL, serverPaths: serverPaths, integratedVersion: integratedVersion};
+module.exports = {initialState: initialState, proxyURL: proxyURL, backendURL: backendURL, serverPaths: serverPaths, integratedVersion: integratedVersion, backendCategoriesPrefix_erocci: backendCategoriesPrefix_erocci, backendCategoriesPrefix_mart: backendCategoriesPrefix_mart};

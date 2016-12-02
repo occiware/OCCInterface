@@ -6,8 +6,9 @@
   "text": "click",
   "post": [
     {
-        "adress": "/categories/compute",
+        "address": "/compute",
         "datas": {
+         "kind":"http://schemas.ogf.org/occi/infrastructure#compute",
           "attributes": {
             "occi.compute.hostname" : "test",
             "occi.compute.state" : "inactive"
@@ -16,8 +17,9 @@
         }
     },
     {
-        "adress": "/categories/storage",
+        "address": "/storage",
         "datas": {
+         "kind":"http://schemas.ogf.org/occi/infrastructure#storage",
           "attributes": {
             "occi.storage.size" : 1000
           },
@@ -25,9 +27,9 @@
         }
     },
     {
-      "adress": "/categories/storagelink",
+      "address": "/storagelink",
       "datas": {
-         "kind":"www.schemas.ogf.org/occi/infrastructure#storagelink",
+         "kind":"http://schemas.ogf.org/occi/infrastructure#storagelink",
          "attributes": {
            "occi.core.id":"6df690d2-3158-40c4-88fb-d1c41584d6e7",
            "occi.storagelink.deviceid":"/dev/vdc"
@@ -44,11 +46,11 @@
 }%
 
 
-* You can then check if this resources has been created : [/categories/compute](/categories/compute), [/categories/storage](/categories/storage), [/categories/storagelink](/categories/storagelink).    
+* You can then check if this resources has been created : [/compute](/compute), [/storage](/storage), [/storagelink](/storagelink).    
 
 * Now delete the storagelink by clicking %{
   "text": "here",
   "del": "/6df690d2-3158-40c4-88fb-d1c41584d6e7"
 }%    
 
-* Try again to access [/categories/compute](/categories/compute) or [/categories/storage](/categories/storage).    
+* Try again to access [/compute](/compute) or [/storage](/storage).    

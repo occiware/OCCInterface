@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import {callAPI} from '../utils.js';
+import {callAPI, kindToCategoriesUrl, visitMetamodel} from '../utils.js';
 
 import * as actions from '../actions/actionIndex.js';
 
@@ -23,16 +23,28 @@ class NavBar extends React.Component{
 
   /*look for schemes and their corresponding kinds, and dispatch to the store the correct datas*/
   getSchemes = (data) => {
-    var schemes = {};
-    for(var i=0; i<data.kinds.length; i++){
-      if(data.kinds[i].scheme in schemes){
-        schemes[data.kinds[i].scheme].push({title: data.kinds[i].title, term: data.kinds[i].term});
-      }
-      else{
-        schemes[data.kinds[i].scheme] = [{title: data.kinds[i].title, term: data.kinds[i].term}];
+    var kindAndMixinSchemes = {};
+    var uriToCategoryMap = {}; // TODO LATER for actions
+    
+    // parse metamodel from QI response :
+    visitMetamodel(data, kindAndMixinSchemes, uriToCategoryMap);
+    
+    // replace action URIs by their definitions :
+    for (var scheme in kindAndMixinSchemes) {
+      var kindAndMixins = kindAndMixinSchemes[scheme];
+      for (var uri in kindAndMixins) {
+        if ('actions' in kindAndMixins[uri]) {
+          for (var i in kindAndMixins[uri].actions) {
+            var actionDef = uriToCategoryMap[kindAndMixins[uri].actions[i]];
+            if (actionDef) {
+              kindAndMixins[uri].actions[i] = actionDef;
+            }
+          }
+        }
       }
     }
-    this.props.dispatch(actions.setCurrentSchemes(schemes));
+    
+    this.props.dispatch(actions.setCurrentSchemes(kindAndMixinSchemes));
   }
 
   updateBackendURL = () => {
@@ -57,8 +69,15 @@ class NavBar extends React.Component{
           callAPI(
             'GET',
             '/-/',
-            (data) => {
+            (data, textStatus, request) => {
               window.backendURL = backendURL;
+              var serverHeader = request.getResponseHeader('server');
+              if (serverHeader.startsWith('erocci')) {
+                window.backendCategoriesPrefix = window.conf.backendCategoriesPrefix_erocci; // #10 prefix queries by /categories/ in case of erocci only
+              } else {
+                window.backendCategoriesPrefix = window.conf.backendCategoriesPrefix_mart;
+              }
+
               navbar.props.dispatch(actions.setOkMessage('You are now using '+backendURL));
               navbar.props.dispatch(actions.setCurrentQueryPath('/-/'));
               navbar.props.dispatch(actions.setCurrentJson(data));
@@ -76,7 +95,7 @@ class NavBar extends React.Component{
   }
 
   displayKind = (kind) => {
-    var link = '/categories/'+kind;
+    var link = kindToCategoriesUrl(kind); // #10 prefixed by /categories/ in case of erocci only
     this.props.dispatch(actions.setCurrentQueryPath(link));
     this.props.dispatch(actions.setReadableCode());
 
@@ -98,7 +117,23 @@ class NavBar extends React.Component{
         <span className="text">{scheme}</span>
           <div className="menu">
             {this.props.schemes[scheme].map((kind, i) => {
-              return <div className="item" onClick={() => this.displayKind(kind.term)} key={kind.term}>{kind.title}</div>
+              //if (!('actions' in kind)) {
+                return <div className="item" onClick={() => this.displayKind(kind.term)} key={kind.term}>
+                  {kind.term + (kind.title && kind.title.length != 0 ? ' - ' + kind.title : '')}
+                </div>
+              /*} else { // NOO actions have to be done ON A GIVEN RESOURCE so rather in data button
+                return <div className="item" onClick={() => this.displayKind(kind.term)} key={kind.term}>
+                  <i className="dropdown icon"></i>
+                  <span className="text">{kind.term + ' - ' + kind.title}</span>
+                  <div className="menu">
+                    {kind.actions.map((action, j) => {
+                      return <div className="item" onClick={() => this.displayKind(kind.term)} key={action.term}>
+                        {action.term + (action.title && action.title.length != 0 ? ' - ' + action.title : '')}
+                      </div>
+                    })}
+                  </div>
+                </div>
+              }*/
             })}
           </div>
         </div>);
@@ -138,7 +173,7 @@ class NavBar extends React.Component{
             {serverSelection}
           </div>
           <div className="ui item">
-            <a href="https://github.com/Romathonat/OCCInterface" ><i className="big github icon"></i></a>
+            <a href="https://github.com/occiware/OCCInterface" ><i className="big github icon"></i></a>
           </div>
         </div>
       </div>
