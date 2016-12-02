@@ -15,7 +15,7 @@ export function callAPI(operation, relativeUrl, currentSuccess, currentError, ad
 
   var headers = {
     // 'If-None-Match': -1,
-    'Accept' : 'application/json'
+    'Accept' : 'application/json' // NB. 'application/occi+json' also works
   };
   headers = $.extend(headers, additionalHeaders);
 

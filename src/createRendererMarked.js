@@ -11,14 +11,14 @@ export function getRenderer(){
     return '<li>'+parsedText+'</li>';
   }
   renderer.link = function(href, title, text) {
-    if (href.includes('#')) {
+    if (href.includes('#') && href === text) {
       return text; // DON'T render link in case of 'http://'-prefixed OCCI kind URLs within JSON samples
       // else SyntaxError: JSON.parse: expected ',' or '}' after property value in object at line 1 column 116 of the JSON data
       // NB. HACK, not yet found a better way to detect OCCI kinds (would require to hack a visit state in marked ?)
       // NB. old erocci infra samples had schemes and kinds that started by www. rather than http://
       // ex. www.schemas.ogf.org/occi/infrastructure#storagelink rather than http://schemas.ogf.org/occi/infrastructure#storagelink
     }
-    var link = '<a href="' + href + "'";
+    var link = '<a href="' + href + '"';
     if (title) {
       link += ' title="' + title + '"';
     }

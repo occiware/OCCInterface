@@ -54,6 +54,7 @@ You can post a sample of data by clicking %{
     }
   ]
 }%(you need to have occi-infra on your server)
+**DOESN'T WORK ON MART YET because of [wrong POST semantics](https://github.com/cgourdin/MartServer/issues/47#issuecomment-264481977)**
 
 * The first URL you should know is [/-/](/-/).
 It gives you the configuration of the OCCI server, list the **actions** you can do, and the **kinds** of resources you can interact with.
@@ -74,3 +75,80 @@ Morevover, the use of the four buttons are quite simple :
 ### Switching server
 
 You can switch the current OCCI server you are working on with the editable dropdown at the top of the page.
+
+### PUT sample - infra (works on MART)
+
+Here's the same sample as above but using PUT methods to the full URLs of the methods (works with MART) :
+
+You can post a sample of data by clicking %{
+  "text": "here",
+  "put": [
+    {
+        "address": "/compute/6df690d2-3158-40c4-88fb-d1c41584d6e5",
+        "datas": {
+          "kind":"http://schemas.ogf.org/occi/infrastructure#compute",
+          "attributes": {
+            "occi.compute.hostname" : "test",
+            "occi.compute.state" : "inactive"
+          },
+          "id": "6df690d2-3158-40c4-88fb-d1c41584d6e5"
+        }
+    },
+    {
+        "address": "/storage/6df690d2-3158-40c4-88fb-d1c41584d6e6",
+        "datas": {
+          "kind":"http://schemas.ogf.org/occi/infrastructure#storage",
+          "attributes": {
+            "occi.storage.size" : 1000
+          },
+          "id": "6df690d2-3158-40c4-88fb-d1c41584d6e6"
+        }
+    },
+    {
+      "address": "/storagelink/6df690d2-3158-40c4-88fb-d1c41584d6e7",
+      "datas": {
+         "kind":"http://schemas.ogf.org/occi/infrastructure#storagelink",
+         "attributes": {
+           "occi.core.id":"6df690d2-3158-40c4-88fb-d1c41584d6e7",
+           "occi.storagelink.deviceid":"/dev/vdc"
+         },
+         "target": {
+           "location": "6df690d2-3158-40c4-88fb-d1c41584d6e6"
+         },
+         "source": {
+           "location": "6df690d2-3158-40c4-88fb-d1c41584d6e5"
+         }
+      }
+    }
+  ]
+}%(you need to have occi-infra on your server)
+
+### action sample - infra
+Doing an action is as simple as doing a POST to the resource with an action=actionName query parameter (you need to have created the previous infra sample resources first). First try to %{
+  "text": "start the previously created VM",
+  "post": [
+    {
+        "address": "/compute/6df690d2-3158-40c4-88fb-d1c41584d6e5?action=start",
+        "datas": {
+          "action":"http://schemas.ogf.org/occi/infrastructure/compute/action#start",
+          "attributes": {
+          }
+        }
+    }
+  ]
+}%
+
+Then try to %{
+  "text": "stop it",
+  "post": [
+    {
+        "address": "/compute/6df690d2-3158-40c4-88fb-d1c41584d6e5?action=stop",
+        "datas": {
+          "action":"http://schemas.ogf.org/occi/infrastructure/compute/action#stop",
+          "attributes": {
+            "method": "graceful"
+          }
+        }
+    }
+  ]
+}%.

@@ -64,11 +64,19 @@ class Reading extends React.Component{
     });
   }
 
-  postSample = (datas) => {
+  postSample = (content) => {
+    var datas, putOrPostMethod;
+    if (content.put) {
+      datas = content.put;
+      putOrPostMethod = 'PUT'
+    } else {
+      datas = content.post;
+      putOrPostMethod = 'POST'
+    }
     if(datas instanceof Array){
       for(var data of datas){
         callAPI(
-          'POST',
+          putOrPostMethod,
           addressToCategoriesUrl(data.address),
           (data) => {
             this.props.dispatch(actions.setOkMessage('Datas have been posted'));
@@ -82,7 +90,7 @@ class Reading extends React.Component{
       }
     }else{
       callAPI(
-        'POST',
+        putOrPostMethod,
         addressToCategoriesUrl(datas.address),
         (data) => {
           this.props.dispatch(actions.setCurrentJson(data));
@@ -143,7 +151,7 @@ class Reading extends React.Component{
       //before posting we ask for confirmation
 
       //we give datas to the modal before it shows
-      this.refs.ModalConfirmationPost.setState({'post': content.post, 'del': content.del});
+      this.refs.ModalConfirmationPost.setState({'post': content.post, 'put': content.put, 'del': content.del});
       var modalConfirmationPost = this.refs.ModalConfirmationPost;
 
       //we show the modal
@@ -151,8 +159,8 @@ class Reading extends React.Component{
           observeChanges: true,
           onApprove: function() {
             //a link can potentially post and del
-            if('post' in content){
-              reactElement.postSample(content.post);
+            if('post' in content || 'put' in content){
+              reactElement.postSample(content);
             }
             if('del' in content){
               reactElement.deleteResources(content.del);
