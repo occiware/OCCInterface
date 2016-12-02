@@ -9,6 +9,7 @@ Its aims are multiple:
 - give a productivity tool to developers calling the OCCI API
 - manage and explore resources of an OCCI server easily
 - vulgarize, explain OCCI to newcomers, diffuse the OCCI way of thinking
+- be an (executable) reference documentation of capabilities of an OCCI implementation or of an integration of OCCI clouds.
 
 A demo is avalaible here : http://occinterface.herokuapp.com/
 
@@ -67,8 +68,9 @@ A sample link is a link that post datas onto the current server when clicking on
 text before %{
   "text": "sampleLink",
   "post": {
-    "adress": "/categories/compute",
+    "address": "/compute",
     "datas": {
+      "kind":"http://schemas.ogf.org/occi/infrastructure#compute",
       "attributes": {
         "occi.compute.hostname" : "test",
         "occi.compute.state" : "inactive"
@@ -79,12 +81,15 @@ text before %{
 }% text after
 ```
 
-It will result into a clickable link, which post datas on click:
+It will result into a clickable link, which will post or put datas on click:
 
 ``` HTML
 <p>text before <a>sampleLink</a> text after</p>
 ```
+
 You can post an array instead of an object (in the "datas" attribute).
+It can be put instead of posted, by using the "put" key instead of the "post" one.
+
 If you want your sample link to post to different categories, just put an array instead of an object inside the "post" attribute. Example :
 
 ``` JSON
@@ -92,7 +97,8 @@ If you want your sample link to post to different categories, just put an array 
   "text": "sampleLink",
   "post": [
     {
-        "adress": "/categories/compute",
+        "address": "/compute",
+        "kind":"http://schemas.ogf.org/occi/infrastructure#compute",
         "datas": {
           "attributes": {
             "occi.compute.hostname" : "test",
@@ -102,15 +108,17 @@ If you want your sample link to post to different categories, just put an array 
         }
     },
     {
-        "adress": "/categories/storage",
+        "address": "/storage",
         "datas": [
             {
+              "kind":"http://schemas.ogf.org/occi/infrastructure#storage",
               "attributes": {
                 "occi.storage.size" : 1000
               },
               "id": "6df690d2-3158-40c4-88fb-d1c41584d6e6"
             },
             {
+              "kind":"http://schemas.ogf.org/occi/infrastructure#storage",
               "attributes": {
                 "occi.storage.size" : 500
               },
@@ -122,7 +130,6 @@ If you want your sample link to post to different categories, just put an array 
 }%
 ```
 
-
 - Can I delete datas with a sample link ?  
 Yes, you can, with the following format :
 
@@ -131,6 +138,24 @@ Yes, you can, with the following format :
   "text": "my sample link",
   "del": "/6df690d2-3158-40c4-88fb-d1c41584d6e7"
 }%
+```
+
+- can I execute an OCCI action with a sample link ?
+Yes, you can, with the following format :
+
+``` JSON
+text before %{
+  "text": "my sample action link",
+  "post": {
+    "address": "/compute/6df690d2-3158-40c4-88fb-d1c41584d6e5?action=stop",
+    "datas": {
+      "action":"http://schemas.ogf.org/occi/infrastructure/compute/action#stop",
+      "attributes": {
+        "method": "graceful"
+      }
+    }
+  }
+}% text after
 ```
 
 - How to deploy on Heroku ?  
@@ -152,8 +177,21 @@ git push heroku master
 You need to have the same domain policy between your OCCI server and your OCCInterface server. For instance http with http, or https with https.
 
 
-## How to configure your Erocci Server
-(TODO temporarly here, remove later)
+## OCCInterface with the MART server
+
+Follow the instructions of the [MART server](https://github.com/cgourdin/MartServer/blob/master/doc/server.md) : check it out, then do
+
+```
+mvn initialize
+mvn clean install
+mvn exec:java
+```
+
+Beware, there are [several differences between MART and erocci](https://github.com/occiware/OCCInterface/issues/13), though OCCInterface does its best to work with both.
+
+## OCCInterface with the erocci server
+
+**How to configure your Erocci Server :**
 
 Follow the instructions of [erocci](https://github.com/erocci/erocci/blob/master/doc/README.md)
 
