@@ -7,14 +7,14 @@ When you send it to an erocci server, it should create a blog entry, a blog entr
   [
     {
         "address": "/blog",
-        "datas": {
+        "data": {
           "kind":"example.org/occi/test#blog",
           "id": "6df690d2-3158-40c4-88fb-d1c41584d6e5"
         }     
     },
     {
         "address": "/user",
-        "datas": {
+        "data": {
           "kind":"example.org/occi/test#user",
           "attributes": {
             "blog.user.email": "romain@gmail.com",
@@ -25,7 +25,7 @@ When you send it to an erocci server, it should create a blog entry, a blog entr
     },
     {
         "address": "/entry",
-        "datas": {
+        "data": {
           "kind":"example.org/occi/test#entry",
           "attributes":{
             "blog.entry.title": "Develop React Application",
@@ -41,7 +41,7 @@ When you send it to an erocci server, it should create a blog entry, a blog entr
     "text": "author",
     "post": {
       "address": "/author",
-      "datas": {
+      "data": {
         "kind":"example.org/occi/test#author",
         "target": {
           "location": "6df690d2-3158-40c4-88fb-d1c41584d7"

@@ -13,7 +13,7 @@ class EditButton extends React.Component{
     this.props.dispatch(actions.setOkMessage(''));
     
     var relativeUrl = this.props.currentPath;
-    //we make a call in order to get the datas without the html formating
+    //we make a call in order to get the data without the html formating
     callAPI(
       'GET',
       relativeUrl,

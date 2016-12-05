@@ -7,7 +7,7 @@
   "post": [
     {
         "address": "/compute",
-        "datas": {
+        "data": {
          "kind":"http://schemas.ogf.org/occi/infrastructure#compute",
           "attributes": {
             "occi.compute.hostname" : "test",
@@ -18,7 +18,7 @@
     },
     {
         "address": "/storage",
-        "datas": {
+        "data": {
          "kind":"http://schemas.ogf.org/occi/infrastructure#storage",
           "attributes": {
             "occi.storage.size" : 1000
@@ -28,7 +28,7 @@
     },
     {
       "address": "/storagelink",
-      "datas": {
+      "data": {
          "kind":"http://schemas.ogf.org/occi/infrastructure#storagelink",
          "attributes": {
            "occi.core.id":"6df690d2-3158-40c4-88fb-d1c41584d6e7",

@@ -21,7 +21,7 @@ class NavBar extends React.Component{
     }
   }
 
-  /*look for schemes and their corresponding kinds, and dispatch to the store the correct datas*/
+  /*look for schemes and their corresponding kinds, and dispatch to the store the correct data*/
   getSchemes = (data) => {
     var kindAndMixinSchemes = {};
     var uriToCategoryMap = {}; // TODO LATER for actions
@@ -82,7 +82,7 @@ class NavBar extends React.Component{
               navbar.props.dispatch(actions.setCurrentQueryPath('/-/'));
               navbar.props.dispatch(actions.setCurrentJson(data));
 
-              //we use that datas to extract the schemes and their kinds
+              //we use that data to extract the schemes and their kinds
               getSchemes(data);
             },
             (xhr) => {

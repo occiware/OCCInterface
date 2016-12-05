@@ -17,7 +17,7 @@ You can post a sample of data by clicking %{
   "post": [
     {
         "address": "/compute",
-        "datas": {
+        "data": {
           "kind":"http://schemas.ogf.org/occi/infrastructure#compute",
           "attributes": {
             "occi.compute.hostname" : "test",
@@ -28,7 +28,7 @@ You can post a sample of data by clicking %{
     },
     {
         "address": "/storage",
-        "datas": {
+        "data": {
           "kind":"http://schemas.ogf.org/occi/infrastructure#storage",
           "attributes": {
             "occi.storage.size" : 1000
@@ -38,7 +38,7 @@ You can post a sample of data by clicking %{
     },
     {
       "address": "/storagelink",
-      "datas": {
+      "data": {
          "kind":"http://schemas.ogf.org/occi/infrastructure#storagelink",
          "attributes": {
            "occi.core.id":"6df690d2-3158-40c4-88fb-d1c41584d6e7",
@@ -68,7 +68,7 @@ You can also discover the **kinds** of the current OCCI server by clicking on "S
 Morevover, the use of the four buttons are quite simple :
 
 * GET: make a GET request with the target URL
-* EDIT: switch the JSON view to editable, then you can make a POST or PUT to edit or create datas
+* EDIT: switch the JSON view to editable, then you can make a POST or PUT to edit or create data
 * DEL: make a DELETE request with the target URL
 * M: Go to the kind (the Model) of a resource. You need to have a target URL pointing to a resource.  
 
@@ -85,7 +85,7 @@ You can post a sample of data by clicking %{
   "put": [
     {
         "address": "/compute/6df690d2-3158-40c4-88fb-d1c41584d6e5",
-        "datas": {
+        "data": {
           "kind":"http://schemas.ogf.org/occi/infrastructure#compute",
           "attributes": {
             "occi.compute.hostname" : "test",
@@ -96,7 +96,7 @@ You can post a sample of data by clicking %{
     },
     {
         "address": "/storage/6df690d2-3158-40c4-88fb-d1c41584d6e6",
-        "datas": {
+        "data": {
           "kind":"http://schemas.ogf.org/occi/infrastructure#storage",
           "attributes": {
             "occi.storage.size" : 1000
@@ -106,7 +106,7 @@ You can post a sample of data by clicking %{
     },
     {
       "address": "/storagelink/6df690d2-3158-40c4-88fb-d1c41584d6e7",
-      "datas": {
+      "data": {
          "kind":"http://schemas.ogf.org/occi/infrastructure#storagelink",
          "attributes": {
            "occi.core.id":"6df690d2-3158-40c4-88fb-d1c41584d6e7",
@@ -129,7 +129,7 @@ Doing an action is as simple as doing a POST to the resource with an action=acti
   "post": [
     {
         "address": "/compute/6df690d2-3158-40c4-88fb-d1c41584d6e5?action=start",
-        "datas": {
+        "data": {
           "action":"http://schemas.ogf.org/occi/infrastructure/compute/action#start",
           "attributes": {
           }
@@ -143,7 +143,7 @@ Then try to %{
   "post": [
     {
         "address": "/compute/6df690d2-3158-40c4-88fb-d1c41584d6e5?action=stop",
-        "datas": {
+        "data": {
           "action":"http://schemas.ogf.org/occi/infrastructure/compute/action#stop",
           "attributes": {
             "method": "graceful"

@@ -10,7 +10,7 @@ import App from './App';
 import GettingStarted from 'raw!./readings/GettingStarted.md';
 import OCCIProject from 'raw!./readings/OCCIProject.md';
 import knownissues from 'raw!./readings/KnownIssues.md';
-import postdatas from 'raw!./readings/PostDatas.md';
+import postdata from 'raw!./readings/PostData.md';
 
 import conf from '../conf.js';
 
@@ -23,7 +23,7 @@ const readings = [
     {'title':'Getting started', 'path': 'gettingStarted', 'component': GettingStarted},
     {'title':'The OCCIware Project', 'path': 'OCCIProject', 'component': OCCIProject},
     {'title':'Known issues', 'path': 'knownIssues', 'component': knownissues},
-    {'title':'Samples with erocci', 'path': 'postingSamples', 'component': postdatas}
+    {'title':'Samples with erocci', 'path': 'postingSamples', 'component': postdata}
   ]
 ;
 
