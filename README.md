@@ -53,6 +53,9 @@ TODO
 
 ## FAQ
 
+- How to know the exact requests (and responses) sent by OCCInterface to the Cloud backend ?  
+Simple : use an in-browser Javascript debug tool. If your browser is Firefox for instance, you can install Firebug, start it and then go in its Console (or Network) tab, where you can right-click on requests and see everything - and even "copy for curl".
+
 - What is the syntax of executable REST samples ?  
 Short answer : see examples in [src/readings](https://github.com/occiware/OCCInterface/blob/master/src/readings) such as [GettingStarted.md](https://github.com/occiware/OCCInterface/blob/master/src/readings/GettingStarted.md). Long answer : read below.
 

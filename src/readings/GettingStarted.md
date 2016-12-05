@@ -65,12 +65,14 @@ You can also discover the **kinds** of the current OCCI server by clicking on "S
 * Each resource has an unique id. To access a resource, click on a link pointing to it, or use an URL of this type :
 [/6df690d2-3158-40c4-88fb-d1c41584d6e5](/6df690d2-3158-40c4-88fb-d1c41584d6e5)<br><br>
 
-Morevover, the use of the four buttons are quite simple :
+Moreover, the use of the four buttons are quite simple :
 
 * GET: make a GET request with the target URL
 * EDIT: switch the JSON view to editable, then you can make a POST or PUT to edit or create data
 * DEL: make a DELETE request with the target URL
 * M: Go to the kind (the Model) of a resource. You need to have a target URL pointing to a resource.  
+
+See further doc and tips in the [README](https://github.com/occiware/OCCInterface/blob/master/README.md).
 
 ### Switching server
 
