@@ -82,6 +82,8 @@ class Reading extends React.Component{
         addressToCategoriesUrl(datum.address),
         (resData) => {
           this.props.dispatch(actions.setOkMessage('Data have been posted'));
+          this.props.dispatch(actions.setCurrentQueryPath('/' + resData.id));
+          this.props.dispatch(actions.setCurrentJson(resData));
         },
         (xhr) => {
           this.props.setErrorMessage('Unable to access this resource', xhr.status+' '+xhr.responseText);
@@ -102,6 +104,8 @@ class Reading extends React.Component{
         datum, // NB. NOT addressToCategoriesUrl(data) because can't delete a collection !
         (resData) => {
           this.props.dispatch(actions.setOkMessage('Resources have been deleted'));
+          this.props.dispatch(actions.setCurrentQueryPath(datum));
+          this.props.dispatch(actions.setCurrentJson({}));
         },
         (xhr) => {
           this.props.setErrorMessage('Unable to access this resource', xhr.status+' '+xhr.responseText);
