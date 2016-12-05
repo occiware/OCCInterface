@@ -28,7 +28,7 @@ export default class ModalConfirmationPost extends React.Component{
 
     var delInfos = typeof this.state.del !== 'undefined' && this.state.seeDetails ? <div className="ui segment segmentDataPost">
                       <p><strong>DEL:</strong></p>
-                      <pre className="segmentpadding datasDel">{this.state.del}</pre>
+                      <pre className="segmentpadding datasDel">{this.state.del.join('\n')}</pre>
                     </div> : null;
     return(
       <div className="ui basic modal confirmationPost">
