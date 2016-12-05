@@ -9,7 +9,7 @@ Its aims are multiple:
 - give a productivity tool to developers calling the OCCI API
 - manage and explore resources of an OCCI server easily
 - vulgarize, explain OCCI to newcomers, diffuse the OCCI way of thinking
-- be an (executable) reference documentation of capabilities of an OCCI implementation or of an integration of OCCI clouds.
+- be an (executable) reference documentation of capabilities of an OCCI implementation or of an integration of OCCI clouds, thanks to [executable REST samples](https://github.com/occiware/OCCInterface/blob/master/src/readings/GettingStarted.md).
 
 A demo is avalaible here : http://occinterface.herokuapp.com/
 
@@ -52,6 +52,9 @@ Then, you need to enter the URL of the OCCI server on the input at the top of th
 TODO
 
 ## FAQ
+
+- What is the syntax of executable REST samples ?  
+Short answer : see examples in [src/readings](https://github.com/occiware/OCCInterface/blob/master/src/readings) such as [GettingStarted.md](https://github.com/occiware/OCCInterface/blob/master/src/readings/GettingStarted.md). Long answer : read below.
 
 - What is a **playground link** and how to create it ?  
 A playground link is a clickable link that make a GET request on the API and displays its content in the codeview.
