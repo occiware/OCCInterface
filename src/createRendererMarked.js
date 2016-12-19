@@ -11,8 +11,9 @@ export function getRenderer(){
     return '<li>'+parsedText+'</li>';
   }
   renderer.link = function(href, title, text) {
-    if (href.includes('#') && href === text) {
-      return text; // DON'T render link in case of 'http://'-prefixed OCCI kind URLs within JSON samples
+    if (href === text) {
+      return text; // DON'T render link in case of 'http://'-prefixed OCCI kind URLs
+      // (or any other URL values of OCCI attributes !) within JSON samples
       // else SyntaxError: JSON.parse: expected ',' or '}' after property value in object at line 1 column 116 of the JSON data
       // NB. HACK, not yet found a better way to detect OCCI kinds (would require to hack a visit state in marked ?)
       // NB. old erocci infra samples had schemes and kinds that started by www. rather than http://
@@ -78,10 +79,22 @@ function replaceLinkSampleParagraph(fullText){
     afterString = afterString.slice(2);
     
     try {
-      content = JSON.parse(content.slice(1, -1));
+      content = content.slice(1, -1); // remove %
+      content = JSON.parse(content);
+      
     } catch (syntaxError) {
       console.log('error', syntaxError, 'while parsing', content.slice(1, -1));
-      throw syntaxError;
+      // we return html that displays the error
+      // (but DON'T rethrow it else it'll cause reloading the page and the error won't be displayed)
+      var escapedContent = $('<div/>').text(content).html(); // escape ex. double quotes else not displayed
+      var p = $('<p></p>');
+      p.append($.parseHTML(beforeString));
+      p.append('<p></p>');
+      p.append('<span class="error"><b>ERROR PARSING JSON: </b><br/>' + syntaxError
+          + '</span><br/><code>' + escapedContent + '</code>');
+      p.append('<p></p>');
+      p.append($.parseHTML(afterString));
+      return {element: p, finish: false};
     }
     
 

@@ -200,3 +200,7 @@ blockquote {
   text-align: left;
   color: black;
 }
+
+.error{
+  color: red;
+}
