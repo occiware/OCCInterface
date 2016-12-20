@@ -1,4 +1,6 @@
 const querystring = require('querystring');
+const url = require('url');
+var extend = require('util')._extend;
 var session = require('express-session');
 
 const conf = require('./conf.js');
@@ -14,27 +16,38 @@ var proxyDefaultTarget = conf.backendURL;
 var proxyOptions = {
   path : '/proxiedOCCIServer/**',
   target: proxyDefaultTarget,
+  targetPath: '',
   rewrite: function(req) {
-    req.url = req.url.replace(new RegExp('^\/proxiedOCCIServer'), '');
+    req.url = req.url.replace(new RegExp('^\/proxiedOCCIServer'), this.targetPath);
+    console.log('proxying to url', req.url, this)
   },
   changeOrigin: true
 };
+proxyOptions.rewrite.bind(proxyOptions); // to be able to access this.targetPath within itself
+
+function updateProxyConf(myProxyOptions, req) {
+  var target = querystring.parse(req._parsedUrl.query).proxyTarget;
+  var targetPath = url.parse(target).pathname;
+  if (proxyOptions.targetPath.endsWith('/')) {
+    targetPath = targetPath.slice(0, -1);
+  }
+
+  myProxyOptions.target = target;
+  myProxyOptions.targetPath = targetPath;
+}
 
 function setupProd(app) {
   // update the proxied target URL :
   // test using ex. http://localhost:3000/conf?proxyTarget=http://malmo.lizenn.net:8080 then http://localhost:3000/proxiedOCCIServer/-/
   app.all('/conf', function(req, res) {
-    var target = querystring.parse(req._parsedUrl.query).proxyTarget;
-
     //if the proxyOptions does not exist yet, we create it
     if(!req.session.proxyOptions){
-      req.session.proxyOptions = proxyOptions;
+      req.session.proxyOptions = extend(proxyOptions); // (deep) clone
     }
-    req.session.proxyOptions.target = target;
+    updateProxyConf(req.session.proxyOptions, req);
 
-    req.session.proxyOptions.target = querystring.parse(req._parsedUrl.query).proxyTarget;
     console.log('updated proxyOptions via current session', req.session.proxyOptions);
-    console.log('id of session: '+req.session.id);
+    console.log('  id of session: '+req.session.id);
     res.setHeader('Content-Type', 'application/javascript');
     res.end('{}');
   });
@@ -44,7 +57,7 @@ function setupDev(app) {
   // update the proxied target URL :
   // test using ex. http://localhost:3000/conf?proxyTarget=http://malmo.lizenn.net:8080 then http://localhost:3000/proxiedOCCIServer/-/
   app.all('/conf', function(req, res) { // TODO only post ?
-    proxyOptions.target = querystring.parse(req._parsedUrl.query).proxyTarget;
+    updateProxyConf(proxyOptions, req);
     console.log('updated proxyOptions', proxyOptions);
     res.setHeader('Content-Type', 'application/javascript');
     res.end('{}');
