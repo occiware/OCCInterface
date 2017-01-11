@@ -9,6 +9,7 @@ import Reading from './Reading.js';
 
 import GetButton from './buttons/GetButton.js';
 import EditButton from './buttons/EditButton.js';
+import ActionButton from './buttons/ActionButton.js';
 import DelButton from './buttons/DelButton.js';
 import ModelButton from './buttons/ModelButton.js';
 
@@ -106,6 +107,7 @@ class Content extends React.Component{
           <div className="row ui centered">
             <GetButton setErrorMessage={this.setErrorMessage} />
             <EditButton setErrorMessage={this.setErrorMessage} />
+            <ActionButton setErrorMessage={this.setErrorMessage} />
             <DelButton setErrorMessage={this.setErrorMessage} />
             <ModelButton setErrorMessage={this.setErrorMessage} />
           </div>
