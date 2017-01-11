@@ -3,14 +3,23 @@ import ArrayJSON from './components/reactifyJSON/ArrayJSON.js';
 import ObjectJSON from './components/reactifyJSON/ObjectJSON.js';
 import KeyValueJSON from './components/reactifyJSON/KeyValueJSON.js';
 import ValueJSON from './components/reactifyJSON/ValueJSON.js';
-
+curl 'http://localhost:3000/proxiedOCCIServer/compute/6df690d2-3158-40c4-88fb-d1c41584d6e5?action=stop' -X POST -H 'Accept: application/json'  -H 'Content-Type: application/json' -d '{"action" : "http://schemas.ogf.org/occi/infrastructure/compute/action#start"}'
+curl 'http://localhost:8080/compute/6df690d2-3158-40c4-88fb-d1c41584d6e5?action=stop' -X POST -H 'Accept: application/json'  -H 'Content-Type: application/json' -d '{"action" : "http://schemas.ogf.org/occi/infrastructure/compute/action#start"}'
 
 export function callAPI(operation, relativeUrl, currentSuccess, currentError, additionalHeaders, data, asynchronous, timeout){
+  var absoluteUrlMadeRelative = relativeUrl.replace(/.+:\/\/.+\/+/g, "/"); // in case is still absolute ex. resource location
+  if (replacedAbsoluteUrl !== relativeUrl) { // erocci ex. http://localhost:8080/compute/6df690d2-3158-40c4-88fb-d1c41584d6e5
+    relativeUrl = absoluteUrlMadeRelative;
+  } else {
+  if (!relativeUrl.startsWith('/')) { // Mart ex. compute/6df690d2-3158-40c4-88fb-d1c41584d6e5
+    relativeUrl = '/' + relativeUrl;
+  }
   if(window.integratedVersion){
     var url = 'http://localhost:8080'+relativeUrl;
   }
   else{
     var url = window.proxyURL+relativeUrl;
+  }
   }
 
   var headers = {
@@ -28,7 +37,12 @@ export function callAPI(operation, relativeUrl, currentSuccess, currentError, ad
     type: operation,
     headers: headers,
     data: data,
-    success: currentSuccess,
+    success: (data, textStatus, jqXHR) => {
+      if (data['resources']) {
+        data = data['resources']; // erocci list result
+      }
+      return currentSuccess(data, textStatus, jqXHR);
+    },
     error: currentError,
     async: asynchronous
   });
