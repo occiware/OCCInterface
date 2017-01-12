@@ -2,6 +2,7 @@
 const serverPaths = [
   'http://malmo.lizenn.net:8080',
   'http://localhost:8080',
+  'http://localhost:8081',
   'http://malmo.lizenn.net:8082',
 ]
 

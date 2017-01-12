@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import {callAPI} from '../../utils.js';
+import {callAPI, toRelativeUrl} from '../../utils.js';
 import * as actions from '../../actions/actionIndex.js';
 
 class ActionButton extends React.Component{
@@ -28,17 +28,17 @@ class ActionButton extends React.Component{
       var resource = resources[resourceInd];
       // action location :
       // has to be ex. /compute/uuid per OCCI spec and for Mart
-      var actionLocation = resource.location;
-      if (!actionLocation.startsWith('/')) {
-        actionLocation = '/' + actionLocation
+      var relativeActionLocation = toRelativeUrl(resource.location);
+      if (!relativeActionLocation.startsWith('/')) {
+        relativeActionLocation = '/' + relativeActionLocation
       }
       var term = resource['kind'].split('#')[1];
-      if (!actionLocation.startsWith('/' + term + '/')) {
-        actionLocation = '/' + term + actionLocation;
+      if (!relativeActionLocation.startsWith('/' + term + '/')) {
+        relativeActionLocation = '/' + term + relativeActionLocation;
       }
       callAPI(
         'POST',
-        actionLocation + actionQuery,
+        relativeActionLocation + actionQuery,
         (data) => {
           this.props.dispatch(actions.setCurrentJson(data));
         },

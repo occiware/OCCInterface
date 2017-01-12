@@ -4,20 +4,41 @@ import ObjectJSON from './components/reactifyJSON/ObjectJSON.js';
 import KeyValueJSON from './components/reactifyJSON/KeyValueJSON.js';
 import ValueJSON from './components/reactifyJSON/ValueJSON.js';
 
-export function callAPI(operation, relativeUrl, currentSuccess, currentError, additionalHeaders, data, asynchronous, timeout){
+function occiProxyRewrite(resources) {
+  for (var rInd in resources) {
+    var resource = resources[rInd];
+    if (resource['location']) { // resource
+      var location = resource['location'];
+      if (!location.includes('://')) {
+        if (!location.startsWith('/')) { // Mart ex. 6df690d2-3158-40c4-88fb-d1c41584d6e5 or compute/6df690d2-3158-40c4-88fb-d1c41584d6e5
+          location = '/' + location;
+        }
+        resource['location'] = window.backendURL + location;
+      }
+    } else if (resource[0]) { // list
+      occiProxyRewrite(resource);
+    }
+  }
+}
+
+export function toRelativeUrl(relativeUrl) {
   var absoluteUrlMadeRelative = relativeUrl.replace(/.+:\/\/.+\/+/g, "/"); // in case is still absolute ex. resource location
+  console.log('absoluteUrlMadeRelative',absoluteUrlMadeRelative);
   if (absoluteUrlMadeRelative !== relativeUrl) { // erocci ex. http://localhost:8080/compute/6df690d2-3158-40c4-88fb-d1c41584d6e5
     relativeUrl = absoluteUrlMadeRelative;
-  } else {
-  if (!relativeUrl.startsWith('/')) { // Mart ex. compute/6df690d2-3158-40c4-88fb-d1c41584d6e5
+  } else if (!relativeUrl.startsWith('/')) { // Mart ex. compute/6df690d2-3158-40c4-88fb-d1c41584d6e5
     relativeUrl = '/' + relativeUrl;
   }
+  return relativeUrl;
+}
+
+export function callAPI(operation, relativeUrl, currentSuccess, currentError, additionalHeaders, data, asynchronous, timeout){
+  relativeUrl = toRelativeUrl(relativeUrl);
   if(window.integratedVersion){
     var url = 'http://localhost:8080'+relativeUrl;
   }
   else{
     var url = window.proxyURL+relativeUrl;
-  }
   }
 
   var headers = {
@@ -39,6 +60,7 @@ export function callAPI(operation, relativeUrl, currentSuccess, currentError, ad
       if (data['resources']) {
         data = data['resources']; // erocci list result
       }
+      occiProxyRewrite(data[0] ? data : [data]);
       return currentSuccess(data, textStatus, jqXHR);
     },
     error: currentError,
