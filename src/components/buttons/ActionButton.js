@@ -25,9 +25,20 @@ class ActionButton extends React.Component{
     console.log('resources', resources, actionQuery, actionParams);
 
     for (var resourceInd in resources) {
+      var resource = resources[resourceInd];
+      // action location :
+      // has to be ex. /compute/uuid per OCCI spec and for Mart
+      var actionLocation = resource.location;
+      if (!actionLocation.startsWith('/')) {
+        actionLocation = '/' + actionLocation
+      }
+      var term = resource['kind'].split('#')[1];
+      if (!actionLocation.startsWith('/' + term + '/')) {
+        actionLocation = '/' + term + actionLocation;
+      }
       callAPI(
         'POST',
-        resources[resourceInd].location + actionQuery,
+        actionLocation + actionQuery,
         (data) => {
           this.props.dispatch(actions.setCurrentJson(data));
         },
