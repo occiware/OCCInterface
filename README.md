@@ -22,8 +22,8 @@ A demo is avalaible here : http://occinterface.herokuapp.com/
 If you have Docker installed (if not, you can find how to do so [here](https://docs.docker.com/engine/installation/)), and don't want to mess with your pre-existing dev environment, you may prefer this to the next section ("How to build and run it locally").
 
 ``` bash
-git clone https://github.com/occiware/OCCInterface.git
-cd OCCInterface
+git clone https://github.com/occiware/occiware-ozwillo.git
+cd occiware-ozwillo/docker/occinterface
 sudo docker build -t occinterface .
 sudo docker run -p 3000:3000 occinterface
 ```
