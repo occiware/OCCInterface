@@ -4,6 +4,7 @@ const serverPaths = [
   'http://localhost:8080',
   'http://localhost:8081',
   'http://malmo.lizenn.net:8082',
+  'http://martserver-linkeddata-1:8081'
 ]
 
 //the adress used internally in the application to proxy
