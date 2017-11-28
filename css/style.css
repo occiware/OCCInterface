@@ -138,8 +138,17 @@ blockquote {
   margin-left: 20px !important;
 }
 
+.headertag{
+  margin-left: 20px !important;
+  height: 39px !important;
+}
+
 .playgroundButton {
-  width: 70px !important;
+  width: 80px !important;
+}
+
+.doitButton {
+  width: 80px !important;
 }
 
 .link{

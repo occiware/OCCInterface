@@ -14,6 +14,10 @@ class EditButton extends React.Component{
     
     var relativeUrl = this.props.currentPath;
     //we make a call in order to get the data without the html formating
+    
+    //window.alert("edit !!: "+relativeUrl);
+    console.log("edit button: relativeUrl: ",relativeUrl);
+
     callAPI(
       'GET',
       relativeUrl,
@@ -41,6 +45,7 @@ class EditButton extends React.Component{
 
     //we need to send a string
     var json = (typeof this.props.currentJson === 'string' || this.props.currentJson instanceof String) ? this.props.currentJson : JSON.stringify(this.props.currentJson);
+
 
     callAPI(
       operationType,

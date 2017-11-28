@@ -20,6 +20,12 @@ const reducer = (state, action) => {
                 ...state,
                 codeRights: 'read'
             }
+        case 'SET_ACTION':
+            return {
+                ...state,
+                codeRights: 'action',
+                actionQ: action.actionQ
+            }
         case 'SET_ERROR_MESSAGE':
             return {
                 ...state,

@@ -34,6 +34,9 @@ export function toRelativeUrl(relativeUrl) {
 
 export function callAPI(operation, relativeUrl, currentSuccess, currentError, additionalHeaders, data, asynchronous, timeout){
   relativeUrl = toRelativeUrl(relativeUrl);
+  
+  //window.alert("additionalHeaders: "+additionalHeaders);
+
   if(window.integratedVersion){
     var url = 'http://localhost:8080'+relativeUrl;
   }

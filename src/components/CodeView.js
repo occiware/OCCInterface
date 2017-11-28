@@ -26,7 +26,7 @@ class CodeView extends React.Component{
   }
 
   render() {
-    if(this.props.codeRights === 'write'){
+    if(this.props.codeRights === 'write' || this.props.codeRights === 'action'){
       var value;
       if (typeof this.props.currentJson === 'string' || this.props.currentJson instanceof String){
         value = this.props.currentJson;

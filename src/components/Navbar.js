@@ -51,6 +51,46 @@ class NavBar extends React.Component{
     //we first reset the eventual previous message
     this.props.dispatch(actions.setOkMessage(''));
 
+    // We retrieve the header tag and the header value
+    var headtag = document.getElementById("header_tag").value; 
+    var headval = document.getElementById("header_val").value; 
+    //var heardersoptions='christophe';
+
+    var heardersoptions;
+
+    if (headtag.length==0 || headtag=="") {
+     heardersoptions={};
+    }
+    else
+    // Check if Basic Authorization
+    if(headtag.indexOf("Authorization")>-1){
+      if(headval.indexOf("Basic")>-1)
+      {
+        // Encode username:password in base64
+        var userpaswd=headval.substring(headval.indexOf("Basic")+6);
+        var base64encodedData = new Buffer(userpaswd).toString('base64');
+
+        //var heardersoptions="Authorization : Basic "+base64encodedData;
+        heardersoptions={'Authorization' : 'Basic '+base64encodedData};
+
+      }
+    }
+    else
+    {
+      heardersoptions={headtag:headval};      
+    }
+
+    //var myval="test: ";
+    //var chaine1=myval.concat(headtag).concat(" / ").concat(headval);
+
+    
+    //var user = 'admin';
+    //var password = '1234';
+
+    //var base64encodedData = new Buffer(user + ':' + password).toString('base64');
+
+    //window.alert(heardersoptions);
+
     //we define this to auto toolify hyperlinks on the code view
     var navbar = this;
 
@@ -87,7 +127,8 @@ class NavBar extends React.Component{
             },
             (xhr) => {
               navbar.props.dispatch(actions.setErrorMessage('Error connecting to '+backendURL));
-            }
+            },
+            heardersoptions
           );
         }
       });
@@ -126,7 +167,7 @@ class NavBar extends React.Component{
                   <i className="dropdown icon"></i>
                   <span className="text">{kind.term + ' - ' + kind.title}</span>
                   <div className="menu">
-                    {kind.actions.map((action, j) => {
+                    {kind.mcnactions.map((action, j) => {
                       return <div className="item" onClick={() => this.displayKind(kind.term)} key={action.term}>
                         {action.term + (action.title && action.title.length != 0 ? ' - ' + action.title : '')}
                       </div>
@@ -151,6 +192,9 @@ class NavBar extends React.Component{
               <select className="ui fluid search dropdown backendURL" name="backendURL"onChange={() => {}}>
                 {options}
               </select>
+		<input className="ui input headertag" placeholder="Header Tag" type="text" id="header_tag"></input>
+		<input className="ui input headertag" placeholder="Header Value" type="text" id="header_val"></input>
+
             <button className="ui button useButton" onClick={this.updateBackendURL}>Use</button>
           </div>;
     }
@@ -172,7 +216,7 @@ class NavBar extends React.Component{
           <div className="ui item right navBarRight">
             {serverSelection}
           </div>
-          <div className="ui item">
+      <div className="ui item">
             <a href="https://github.com/occiware/OCCInterface" ><i className="big github icon"></i></a>
           </div>
         </div>

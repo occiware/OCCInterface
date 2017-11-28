@@ -24,6 +24,14 @@ export function setReadableCode() {
   }
 }
 
+export function setAction(actionQ) {
+  return {
+    type: 'SET_ACTION',
+    actionQ: actionQ
+  }
+}
+
+
 export function setErrorMessage(simple, detailed) {
   return {
     type: 'SET_ERROR_MESSAGE',
